@@ -1,4 +1,14 @@
-function OtherCategoriesSection({ categories }) {
+import ProductCard from './ProductCard.jsx';
+import { PLACEHOLDER_CATALOG, normalizeProduct } from '../data/siteData.js';
+
+function OtherCategoriesSection({ categories, onFlavorClick }) {
+  const categoryCards = (category) => {
+    const actual = category.items.map(normalizeProduct).slice(0, 5);
+    const placeholders = PLACEHOLDER_CATALOG[category.title] || [];
+    const needed = Math.max(0, 5 - actual.length);
+    return [...actual, ...placeholders.slice(0, needed)];
+  };
+
   return (
     <section className="section-pad">
       <div className="container">
@@ -13,13 +23,9 @@ function OtherCategoriesSection({ categories }) {
               <h3>{category.title}</h3>
               <div className="line" />
             </div>
-            <div className="other-cats-grid stagger">
-              {category.items.map((item) => (
-                <article key={item.name} className="coming-card">
-                  <img className="food-thumb" src={item.img} alt={item.name} />
-                  <h4>{item.name}</h4>
-                  <p>{item.description}</p>
-                </article>
+            <div className="flavor-grid stagger">
+              {categoryCards(category).map((item) => (
+                <ProductCard key={item.name} product={item} onFlavorClick={onFlavorClick} />
               ))}
             </div>
           </div>

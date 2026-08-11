@@ -1,4 +1,4 @@
-function ProductModal({ isOpen, state, sizes, onClose, onSizeChange, onQtyChange, onAdd }) {
+function ProductModal({ isOpen, state, sizes, onClose, onSizeChange, onQtyChange, onAdd, onBuyNow }) {
   return (
     <>
       <div className={`modal-overlay${isOpen ? ' open' : ''}`} onClick={onClose} />
@@ -18,7 +18,7 @@ function ProductModal({ isOpen, state, sizes, onClose, onSizeChange, onQtyChange
                   className={`opt-chip${state.size.label === size.label ? ' active' : ''}`}
                   onClick={() => onSizeChange(size)}
                 >
-                  {size.label} 
+                  {size.label}
                 </button>
               ))}
             </div>
@@ -33,7 +33,10 @@ function ProductModal({ isOpen, state, sizes, onClose, onSizeChange, onQtyChange
           </div>
           <div className="pm-foot">
             <div className="price">Rs. {state.size.price * state.qty}</div>
-            <button className="btn btn-gold" onClick={onAdd}>Add to Cart</button>
+            <div className="pm-actions">
+              <button className="btn btn-gold" onClick={onAdd}>Add to Cart</button>
+              <button className="btn btn-outline" onClick={onBuyNow}>Buy Now</button>
+            </div>
           </div>
         </div>
       </div>

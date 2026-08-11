@@ -1,15 +1,15 @@
-import { useMemo, useState } from 'react';
-import { OTHER_CATEGORIES } from '../data/siteData.js';
+﻿import { useMemo, useState } from 'react';
+import { OTHER_CATEGORIES, PLACEHOLDER_CATALOG, normalizeProduct } from '../data/siteData.js';
+import ProductCard from './ProductCard.jsx';
 
 function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
-  const special = specialFlavors || [];
-  const regular = regularFlavors || [];
+  const special = (specialFlavors || []).map(normalizeProduct);
+  const regular = (regularFlavors || []).map(normalizeProduct);
   const otherCats = OTHER_CATEGORIES || [];
 
   const categoryList = useMemo(() => {
     const cats = ['Popular', 'Pizza'];
     otherCats.forEach((c) => {
-      // use the displayed title
       if (!cats.includes(c.title)) cats.push(c.title);
     });
     return cats;
@@ -19,17 +19,23 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
 
   const itemsForCategory = useMemo(() => {
     if (activeCategory === 'Popular') {
-      // prefer signature/special then regular - pick up to 5
-      const combined = [...special, ...regular];
-      return combined.slice(0, 5);
+      return [...special, ...regular].slice(0, 5);
     }
+
     if (activeCategory === 'Pizza') {
       return [...special, ...regular];
     }
-    const cat = otherCats.find((c) => c.title === activeCategory || c.id === activeCategory);
-    if (cat) return cat.items;
-    return [];
-  }, [activeCategory, special, regular, otherCats]);
+
+    const category = otherCats.find((c) => c.title === activeCategory || c.id === activeCategory);
+    if (!category) {
+      return [];
+    }
+
+    const actualItems = category.items.map(normalizeProduct).slice(0, 5);
+    const placeholders = PLACEHOLDER_CATALOG[category.title] || [];
+    const needed = Math.max(0, 5 - actualItems.length);
+    return [...actualItems, ...placeholders.slice(0, needed)];
+  }, [activeCategory, otherCats, regular, special]);
 
   return (
     <section className="section-pad" id="menu-nav">
@@ -74,39 +80,11 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
           <div className="line" />
         </div>
 
-        {/* Render pizza/popular as flavor-cards to preserve compact 3-column layout */}
-        {(activeCategory === 'Popular' || activeCategory === 'Pizza') && (
-          <div className="flavor-grid stagger">
-            {itemsForCategory.map((flavor) => (
-              <button
-                type="button"
-                key={flavor.name}
-                className="flavor-card"
-                onClick={() => onFlavorClick(flavor.name, flavor.desc, flavor.img)}
-              >
-                <img src={flavor.img} alt={flavor.name} />
-                <div className="info">
-                  <h4>{flavor.name}</h4>
-                  <p>{flavor.desc}</p>
-                  <div className="from">From Rs. 595</div>
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Render other categories using the existing coming-card grid */}
-        {!(activeCategory === 'Popular' || activeCategory === 'Pizza') && (
-          <div className="other-cats-grid stagger">
-            {itemsForCategory.map((item) => (
-              <article key={item.name} className="coming-card">
-                <img className="food-thumb" src={item.img} alt={item.name} />
-                <h4>{item.name}</h4>
-                <p>{item.description}</p>
-              </article>
-            ))}
-          </div>
-        )}
+        <div className="flavor-grid stagger">
+          {itemsForCategory.map((product) => (
+            <ProductCard key={product.name} product={product} onFlavorClick={onFlavorClick} />
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -189,6 +189,19 @@ function App() {
     showToast('Added to cart');
   };
 
+  const buyProductModalNow = () => {
+    addToCart({
+      name: `${productModalState.name} (${productModalState.size.label})`,
+      price: productModalState.size.price,
+      qty: productModalState.qty,
+      img: productModalState.img,
+    });
+    setProductModalOpen(false);
+    setCartOpen(true);
+    setCheckoutMode(true);
+    showToast('Proceeding to checkout');
+  };
+
   const openLightbox = (src) => setLightboxImage(src);
   const closeLightbox = () => setLightboxImage('');
 
@@ -282,6 +295,7 @@ function App() {
         onSizeChange={(size) => setProductModalState((prev) => ({ ...prev, size }))}
         onQtyChange={(qty) => setProductModalState((prev) => ({ ...prev, qty: Math.max(1, qty) }))}
         onAdd={addProductModalToCart}
+        onBuyNow={buyProductModalNow}
       />
       <Lightbox src={lightboxImage} onClose={closeLightbox} />
       <Toast message={toastMessage} />
