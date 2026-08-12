@@ -8,31 +8,46 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
   const otherCats = OTHER_CATEGORIES || [];
 
   const categoryList = useMemo(() => {
-    const cats = ['Popular', 'Pizza'];
-    otherCats.forEach((c) => {
-      if (!cats.includes(c.title)) cats.push(c.title);
-    });
-    return cats;
+    const scrollButtons = [
+      { label: 'Special Square', targetId: 'special-square', kind: 'scroll' },
+      { label: 'Traditional Square', targetId: 'traditional-square', kind: 'scroll' },
+      { label: 'CnC Signature', targetId: 'signature', kind: 'scroll' },
+    ];
+
+    const categoryButtons = otherCats.reduce((acc, c) => {
+      if (!acc.some((item) => item.label === c.title)) {
+        acc.push({ label: c.title, kind: 'category' });
+      }
+      return acc;
+    }, []);
+
+    return [...scrollButtons, ...categoryButtons];
   }, [otherCats]);
 
-  const [activeCategory, setActiveCategory] = useState('Popular');
+  const [activeCategory, setActiveCategory] = useState(() => {
+    return otherCats[0]?.title || 'Burgers';
+  });
+
+  const handleNavClick = (item) => {
+    if (item.kind === 'scroll' && item.targetId) {
+      const target = document.getElementById(item.targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      return;
+    }
+
+    setActiveCategory(item.label);
+  };
 
   const itemsForCategory = useMemo(() => {
-    if (activeCategory === 'Popular') {
-      return [...special, ...regular].slice(0, 5);
-    }
-
-    if (activeCategory === 'Pizza') {
-      return [...special, ...regular];
-    }
-
     const category = otherCats.find((c) => c.title === activeCategory || c.id === activeCategory);
     if (!category) {
       return [];
     }
 
-    return category.items.map(normalizeProduct).slice(0, 5);
-  }, [activeCategory, otherCats, regular, special]);
+    return category.items.map(normalizeProduct);
+  }, [activeCategory, otherCats]);
 
   return (
     <section className="section-pad" id="menu-nav">
@@ -47,14 +62,14 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
 
         <div className="cat-nav-wrap reveal">
           <div className="cat-nav">
-            {categoryList.map((cat) => (
+            {categoryList.map((item) => (
               <button
-                key={cat}
+                key={item.label}
                 type="button"
-                className={`btn ${activeCategory === cat ? 'active' : ''}`}
-                onClick={() => setActiveCategory(cat)}
+                className={`btn ${item.kind === 'category' && activeCategory === item.label ? 'active' : ''}`}
+                onClick={() => handleNavClick(item)}
               >
-                {cat}
+                {item.label}
               </button>
             ))}
           </div>

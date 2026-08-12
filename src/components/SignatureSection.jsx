@@ -30,7 +30,7 @@ function SignatureSection({ onAdd, onShowToast }) {
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">Kring Crust</span>
-          <h2>C'n <em>Signature</em></h2>
+          <h2>C'n C <em>Signature</em></h2>
           <p>Our house-original ring-crust pizza — golden, cheesy edge, every slice.</p>
         </div>
         <div className="panel-grid stagger">

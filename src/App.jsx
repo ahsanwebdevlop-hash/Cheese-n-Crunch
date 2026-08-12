@@ -210,8 +210,9 @@ function App() {
 
   const addProductModalToCart = () => {
     const v = productModalState.selectedVariant;
-    const variantLabel = v ? ` (${v.size})` : '';
-    const name = v ? `${v.name}${variantLabel}` : productModalState.name;
+    const baseName = v?.name || productModalState.name;
+    const variantLabel = v?.size ? ` (${v.size})` : '';
+    const name = `${baseName}${variantLabel}`;
     const price = v ? v.price : productModalState.price || 0;
     addToCart({ name, price, qty: productModalState.qty, img: productModalState.img });
     setProductModalOpen(false);
@@ -220,8 +221,9 @@ function App() {
 
   const buyProductModalNow = () => {
     const v = productModalState.selectedVariant;
-    const variantLabel = v ? ` (${v.size})` : '';
-    const name = v ? `${v.name}${variantLabel}` : productModalState.name;
+    const baseName = v?.name || productModalState.name;
+    const variantLabel = v?.size ? ` (${v.size})` : '';
+    const name = `${baseName}${variantLabel}`;
     const price = v ? v.price : productModalState.price || 0;
     addToCart({ name, price, qty: productModalState.qty, img: productModalState.img });
     setProductModalOpen(false);
