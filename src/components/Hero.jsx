@@ -10,7 +10,7 @@ function Hero() {
           <div className="sub">"Say yes to pizza..."</div>
           <p className="desc">Fresh flavors, loaded pizzas, irresistible deals and fast food made to satisfy every craving.</p>
           <div className="hero-ctas">
-            <Link to="/deals" className="btn btn-gold">Hot Deals</Link>
+            <Link to="/about" className="btn btn-gold">About C'n C</Link>
             <Link to="/menu" className="btn btn-outline">Explore Menu</Link>
           </div>
           <div className="hero-free"><span className="dot" /> Free Delivery in Chiniot</div>

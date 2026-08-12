@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function MobileNav({ isOpen, onClose }) {
   return (
@@ -12,9 +12,10 @@ function MobileNav({ isOpen, onClose }) {
       <ul>
         {['Home', 'Hot Deals', 'Menu', 'Reviews', 'About', 'Contact'].map((label) => {
           const to = label === 'Home' ? '/' : label === 'Hot Deals' ? '/deals' : label === 'Menu' ? '/menu' : `/${label.toLowerCase()}`;
+          const isHome = label === 'Home';
           return (
             <li key={label}>
-              <Link to={to} className="mnav-link" onClick={onClose}>{label}</Link>
+              <NavLink to={to} className="mnav-link" onClick={onClose} end={isHome}>{label}</NavLink>
             </li>
           );
         })}

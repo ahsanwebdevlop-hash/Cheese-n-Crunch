@@ -1,4 +1,5 @@
 ﻿import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { OTHER_CATEGORIES, normalizeProduct } from '../data/siteData.js';
 import ProductCard from './ProductCard.jsx';
 
@@ -7,21 +8,20 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
   const regular = (regularFlavors || []).map(normalizeProduct);
   const otherCats = OTHER_CATEGORIES || [];
 
-  const categoryList = useMemo(() => {
-    const scrollButtons = [
-      { label: 'Special Square', targetId: 'special-square', kind: 'scroll' },
-      { label: 'Traditional Square', targetId: 'traditional-square', kind: 'scroll' },
-      { label: 'CnC Signature', targetId: 'signature', kind: 'scroll' },
-    ];
+  const premiumStrip = useMemo(() => [
+    { label: 'Special Square', targetId: 'special-square', kind: 'scroll' },
+    { label: 'Traditional Square', targetId: 'traditional-square', kind: 'scroll' },
+    { label: 'CnC Signature', targetId: 'signature', kind: 'scroll' },
+    { label: 'Hot Deals', to: '/deals', kind: 'link' },
+  ], []);
 
-    const categoryButtons = otherCats.reduce((acc, c) => {
+  const categoryList = useMemo(() => {
+    return otherCats.reduce((acc, c) => {
       if (!acc.some((item) => item.label === c.title)) {
         acc.push({ label: c.title, kind: 'category' });
       }
       return acc;
     }, []);
-
-    return [...scrollButtons, ...categoryButtons];
   }, [otherCats]);
 
   const [activeCategory, setActiveCategory] = useState(() => {
@@ -37,7 +37,9 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
       return;
     }
 
-    setActiveCategory(item.label);
+    if (item.kind === 'category') {
+      setActiveCategory(item.label);
+    }
   };
 
   const itemsForCategory = useMemo(() => {
@@ -60,13 +62,40 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
 
         {/* Per-product variants are defined in `siteData.js` on each product. */}
 
+        {/* Premium Strips */}
+        <div className="cat-nav-wrap reveal">
+          <div className="cat-nav premium-nav">
+            {premiumStrip.map((item) => (
+              item.kind === 'link' ? (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  className="btn"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <button
+                  key={item.label}
+                  type="button"
+                  className="btn"
+                  onClick={() => handleNavClick(item)}
+                >
+                  {item.label}
+                </button>
+              )
+            ))}
+          </div>
+        </div>
+
+        {/* Main Category Strip */}
         <div className="cat-nav-wrap reveal">
           <div className="cat-nav">
             {categoryList.map((item) => (
               <button
                 key={item.label}
                 type="button"
-                className={`btn ${item.kind === 'category' && activeCategory === item.label ? 'active' : ''}`}
+                className={`btn ${activeCategory === item.label ? 'active' : ''}`}
                 onClick={() => handleNavClick(item)}
               >
                 {item.label}
