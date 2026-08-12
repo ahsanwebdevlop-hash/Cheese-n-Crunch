@@ -61,10 +61,10 @@ function HalfHalfSection({ onAdd, onShowToast }) {
               <label htmlFor="hhSize">Size</label>
               <select id="hhSize" value={size} onChange={(e) => setSize(Number(e.target.value))}>
                 {[
-                  { label: 'Small', price: 595 },
-                  { label: 'Medium', price: 895 },
-                  { label: 'Large', price: 1295 },
-                  { label: 'X-Large', price: 1795 },
+                  { label: 'Small', price: 495 },
+                  { label: 'Medium', price: 1095 },
+                  { label: 'Large', price: 1545 },
+                  { label: 'X-Large', price: 1995 },
                 ].map((option) => (
                   <option key={option.price} value={option.price}>
                     {option.label} — Rs. {option.price}

@@ -2,7 +2,7 @@ function SquareSection({ onAdd, onShowToast }) {
   const tiers = [
     {
       name: 'Special Square - Personal',
-      price: 595,
+      price: 645,
       label: 'Personal',
       img: 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?q=80&w=800&auto=format&fit=crop',
     },
@@ -14,7 +14,7 @@ function SquareSection({ onAdd, onShowToast }) {
     },
     {
       name: 'Special Square - Grand',
-      price: 1895,
+      price: 1945,
       label: 'Grand',
       img: 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=800&auto=format&fit=crop',
     },
@@ -66,7 +66,7 @@ function SquareSection({ onAdd, onShowToast }) {
             },
             {
               name: 'Traditional Square - Grand',
-              price: 1795,
+              price: 1845,
               label: 'Grand',
               img: 'https://images.unsplash.com/photo-1590534247854-e97d5e3feef6?q=80&w=800&auto=format&fit=crop',
             },

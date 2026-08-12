@@ -1,5 +1,5 @@
 ﻿import { useMemo, useState } from 'react';
-import { OTHER_CATEGORIES, PLACEHOLDER_CATALOG, normalizeProduct } from '../data/siteData.js';
+import { OTHER_CATEGORIES, normalizeProduct } from '../data/siteData.js';
 import ProductCard from './ProductCard.jsx';
 
 function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
@@ -31,10 +31,7 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
       return [];
     }
 
-    const actualItems = category.items.map(normalizeProduct).slice(0, 5);
-    const placeholders = PLACEHOLDER_CATALOG[category.title] || [];
-    const needed = Math.max(0, 5 - actualItems.length);
-    return [...actualItems, ...placeholders.slice(0, needed)];
+    return category.items.map(normalizeProduct).slice(0, 5);
   }, [activeCategory, otherCats, regular, special]);
 
   return (
@@ -48,10 +45,10 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
 
         <div className="menu-sizes reveal">
           {[
-            { label: 'Small', price: 595 },
-            { label: 'Medium', price: 895 },
-            { label: 'Large', price: 1295 },
-            { label: 'X-Large', price: 1795 },
+            { label: 'Small', price: 495 },
+            { label: 'Medium', price: 1095 },
+            { label: 'Large', price: 1545 },
+            { label: 'X-Large', price: 1995 },
           ].map((size) => (
             <div key={size.label} className="size-pill">
               <div className="lbl">{size.label}</div>

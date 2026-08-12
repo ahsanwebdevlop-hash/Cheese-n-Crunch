@@ -3,6 +3,8 @@ function CartDrawer({
   onClose,
   items,
   subtotal,
+  deliveryFee,
+  total,
   onRemove,
   onChangeQty,
   onCheckout,
@@ -48,6 +50,19 @@ function CartDrawer({
                 />
               </div>
               <div className="field">
+                <label htmlFor="custArea">Area</label>
+                <select
+                  id="custArea"
+                  value={checkoutData.area}
+                  onChange={(e) => onCheckoutFieldChange('area', e.target.value)}
+                >
+                  <option value="">Select area</option>
+                  <option value="Deen Garden">Deen Garden</option>
+                  <option value="Raichand">Raichand</option>
+                  <option value="Chahnbagar">Chahnbagar</option>
+                </select>
+              </div>
+              <div className="field">
                 <label htmlFor="custAddress">Delivery Address</label>
                 <textarea
                   id="custAddress"
@@ -55,6 +70,7 @@ function CartDrawer({
                   value={checkoutData.address}
                   onChange={(e) => onCheckoutFieldChange('address', e.target.value)}
                   placeholder="House / Street / Area, Chiniot"
+                  disabled={!checkoutData.area}
                 />
               </div>
               <div className="field">
@@ -98,14 +114,14 @@ function CartDrawer({
           </div>
           <div className="sum-row free-tag">
             <span>Delivery</span>
-            <span>FREE</span>
+            <span>{checkoutData.area ? `Rs. ${deliveryFee}` : 'FREE'}</span>
           </div>
           <div className="sum-row total">
             <span>Total</span>
-            <span className="amt">Rs. {subtotal}</span>
+            <span className="amt">Rs. {total}</span>
           </div>
           {checkoutMode ? (
-            <button className="btn btn-gold" onClick={() => onCheckout(checkoutData)}>
+            <button className="btn btn-gold" disabled={!checkoutData.area} onClick={() => onCheckout(checkoutData)}>
               Place Order on WhatsApp
             </button>
           ) : (

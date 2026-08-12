@@ -1,13 +1,8 @@
 import ProductCard from './ProductCard.jsx';
-import { PLACEHOLDER_CATALOG, normalizeProduct } from '../data/siteData.js';
+import { normalizeProduct } from '../data/siteData.js';
 
 function OtherCategoriesSection({ categories, onFlavorClick }) {
-  const categoryCards = (category) => {
-    const actual = category.items.map(normalizeProduct).slice(0, 5);
-    const placeholders = PLACEHOLDER_CATALOG[category.title] || [];
-    const needed = Math.max(0, 5 - actual.length);
-    return [...actual, ...placeholders.slice(0, needed)];
-  };
+  const categoryCards = (category) => category.items.map(normalizeProduct).slice(0, 5);
 
   return (
     <section className="section-pad">

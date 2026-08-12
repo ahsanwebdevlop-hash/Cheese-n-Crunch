@@ -19,11 +19,22 @@ import Contact from './pages/Contact.jsx';
 import { DEALS, SIZES, SPECIAL_FLAVORS, REGULAR_FLAVORS } from './data/siteData.js';
 import placeholderImg from './assets/placeholder-food.svg';
 
+const DELIVERY_AREAS = [
+  { name: 'Deen Garden', fee: 80 },
+  { name: 'Raichand', fee: 50 },
+  { name: 'Chahnbagar', fee: 100 },
+];
+
+const getAreaDeliveryFee = (area) => {
+  const match = DELIVERY_AREAS.find((item) => item.name === area);
+  return match ? match.fee : 0;
+};
+
 function App() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const [isCartOpen, setCartOpen] = useState(false);
   const [isCheckoutMode, setCheckoutMode] = useState(false);
-  const [checkoutData, setCheckoutData] = useState({ name: '', phone: '', address: '', notes: '' });
+  const [checkoutData, setCheckoutData] = useState({ name: '', phone: '', area: '', address: '', notes: '' });
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [toastMessage, setToastMessage] = useState('');
@@ -39,6 +50,8 @@ function App() {
 
   const cartCount = useMemo(() => cartItems.reduce((sum, item) => sum + item.qty, 0), [cartItems]);
   const cartSubtotal = useMemo(() => cartItems.reduce((sum, item) => sum + item.qty * item.price, 0), [cartItems]);
+  const deliveryFee = useMemo(() => getAreaDeliveryFee(checkoutData.area), [checkoutData.area]);
+  const cartTotal = useMemo(() => cartSubtotal + deliveryFee, [cartSubtotal, deliveryFee]);
 
   useEffect(() => {
     // globally catch broken/empty <img> loads and replace with a harmless placeholder
@@ -149,7 +162,7 @@ function App() {
   };
 
   const resetCheckoutForm = () => {
-    setCheckoutData({ name: '', phone: '', address: '', notes: '' });
+    setCheckoutData({ name: '', phone: '', area: '', address: '', notes: '' });
   };
 
   const addToCart = (item) => {
@@ -205,9 +218,13 @@ function App() {
   const openLightbox = (src) => setLightboxImage(src);
   const closeLightbox = () => setLightboxImage('');
 
-  const placeOrder = ({ name, phone, address, notes }) => {
-    if (!name || !phone || !address) {
-      showToast('Please fill in your name, phone & address');
+  const placeOrder = ({ name, phone, area, address, notes }) => {
+    if (!name || !phone || !area) {
+      showToast('Please select a delivery area');
+      return;
+    }
+    if (!address) {
+      showToast('Please fill in your address');
       return;
     }
     const msgLines = [
@@ -215,14 +232,16 @@ function App() {
       '',
       `Customer: ${name}`,
       `Phone: ${phone}`,
+      `Delivery Area: ${area}`,
+      `Delivery Fee: Rs. ${getAreaDeliveryFee(area)}`,
       `Address: ${address}`,
       '',
       'ORDER:',
       ...cartItems.map((item) => `${item.qty} x ${item.name} — Rs. ${item.price * item.qty}`),
       '',
       `Subtotal: Rs. ${cartSubtotal}`,
-      'Delivery: FREE',
-      `TOTAL: Rs. ${cartSubtotal}`,
+      `Delivery: Rs. ${getAreaDeliveryFee(area)}`,
+      `TOTAL: Rs. ${cartTotal}`,
     ];
     if (notes) msgLines.push('', `Notes: ${notes}`);
     const url = `https://wa.me/923110992288?text=${encodeURIComponent(msgLines.join('\n'))}`;
@@ -279,6 +298,8 @@ function App() {
         }}
         items={cartItems}
         subtotal={cartSubtotal}
+        deliveryFee={deliveryFee}
+        total={cartTotal}
         onRemove={removeFromCart}
         onChangeQty={changeItemQty}
         onCheckout={placeOrder}

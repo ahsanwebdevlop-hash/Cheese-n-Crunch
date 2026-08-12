@@ -1,20 +1,20 @@
 function SignatureSection({ onAdd, onShowToast }) {
   const tiers = [
     {
-      name: "C'n Signature - Regular",
-      price: 1295,
-      label: 'Regular',
+      name: "C'n Signature - Med",
+      price: 1345,
+      label: 'Med',
       img: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=800&auto=format&fit=crop',
     },
     {
       name: "C'n Signature - Large",
-      price: 1695,
+      price: 1945,
       label: 'Large',
       img: 'https://images.unsplash.com/photo-1600628421066-f6bda6a7b976?q=80&w=800&auto=format&fit=crop',
     },
     {
       name: "C'n Signature - X-Large",
-      price: 2395,
+      price: 2445,
       label: 'X-Large',
       img: 'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?q=80&w=800&auto=format&fit=crop',
     },

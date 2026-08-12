@@ -1,4 +1,203 @@
-import placeholderImg from '../assets/placeholder-food.svg';
+// -----------------------------------------------------------------------------
+// Editable menu source of truth
+// Update this list to change category names and the product list shown on the Menu page.
+// Keep each category shape consistent: { id, title, items }.
+// The title is also used as the tab label in the menu filter.
+// -----------------------------------------------------------------------------
+export const MENU_BY_CATEGORY = [
+  // ---------------------------------------------------------------------------
+  // APPETIZERS & WINGS CATEGORY
+  // This array controls the cards shown under the "Appetizers & Wings" tab.
+  // Each item object = { name, description, price, img }
+  // - name: shows on the card as the product title
+  // - description: short product text under the title
+  // - price: numeric price in PKR
+  // - img: image URL for the product card
+  // Edit this block to change anything inside this category.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'appetizers-and-wings',
+    title: 'Appetizers & Wings',
+    items: [
+      { name: 'French Fries', description: 'Golden fries with a crisp finish.', price: 265, img: 'https://images.unsplash.com/photo-1573096108468-6c65d219e4f2?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Mayo Fries', description: 'Loaded fries with creamy mayo flavor.', price: 345, img: 'https://images.unsplash.com/photo-1573096108468-6c65d219e4f2?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Loaded Fries', description: 'A loaded, savory fries favorite.', price: 645, img: 'https://images.unsplash.com/photo-1573096108468-6c65d219e4f2?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Oven Baked Wings (6 pcs)', description: 'Crispy oven-baked wings.', price: 395, img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Oven Baked Wings (12 pcs)', description: 'Crispy oven-baked wings.', price: 695, img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Malai Boti Wings (6 pcs)', description: 'Creamy malai boti flavored wings.', price: 395, img: 'https://images.unsplash.com/photo-1608039755401-742074f0548d?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Malai Boti Wings (12 pcs)', description: 'Creamy malai boti flavored wings.', price: 695, img: 'https://images.unsplash.com/photo-1608039755401-742074f0548d?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Nuggets (6 pcs)', description: 'Crispy bite-size chicken nuggets.', price: 265, img: 'https://images.unsplash.com/photo-1562967916-eb82221dfb92?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Nuggets (12 pcs)', description: 'Crispy bite-size chicken nuggets.', price: 545, img: 'https://images.unsplash.com/photo-1562967916-eb82221dfb92?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Jalapeno Cheese Stick', description: 'Crispy cheesy jalapeno bites.', price: 545, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Fish & Chips', description: 'Hot shots classic platter.', price: 1195, img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Hot Shots (12 pcs)', description: 'Crispy hot shots.', price: 595, img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // FRIED CATEGORY
+  // This is the fried chicken section. Every item in this group is one card.
+  // Example: "Fried Chicken (Half)" -> name, price, image, description.
+  // Change the values here to update the card without touching the menu layout.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'fried',
+    title: 'Fried',
+    items: [
+      { name: 'Fried Wings (6 pcs)', description: 'Crispy fried chicken wings.', price: 395, img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Fried Wings (12 pcs)', description: 'Crispy fried chicken wings.', price: 745, img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Fried Chicken (Half)', description: 'Juicy fried chicken half portion.', price: 795, img: 'https://images.unsplash.com/photo-1626082927389-6cd097cee6a6?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Fried Chicken (Full)', description: 'Juicy fried chicken full portion.', price: 1545, img: 'https://images.unsplash.com/photo-1626082927389-6cd097cee6a6?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // WRAPS CATEGORY
+  // This block only controls the wrap cards.
+  // If you want to add/edit a wrap, update the object inside this category.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'wraps',
+    title: 'Wraps',
+    items: [
+      { name: 'Cocktail Wrap', description: 'Fresh, savory wrap.', price: 495, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Chatkhara Wrap', description: 'Fresh, savory wrap.', price: 495, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Hari Bhari Wrap', description: 'Fresh, savory wrap.', price: 495, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Malai Boti Wrap', description: 'Fresh, savory wrap.', price: 495, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Turkish Wrap', description: 'Fresh, savory wrap.', price: 495, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // ROLLS CATEGORY
+  // Add/edit roll cards here. The menu automatically picks up these objects.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'rolls',
+    title: 'Rolls',
+    items: [
+      { name: 'Spin Rolls', description: 'Crispy savory rolls.', price: 545, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Shawarma Roll', description: 'Classic shawarma roll.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Malai Boti Roll', description: 'Creamy malai boti roll.', price: 545, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Kabab Roll', description: 'Savory kabab roll.', price: 545, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // BURGERS CATEGORY
+  // This block is for the Burgers tab and burger product cards.
+  // To change a burger card, edit name, description, price, or img in this object.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'burgers',
+    title: 'Burgers',
+    items: [
+      { name: 'CnC Special Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 695, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Tower Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 795, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Zinger Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 495, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Patty Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 395, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Chappli Kabab Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 395, img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Peri Peri Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 545, img: 'https://images.unsplash.com/photo-1607013251379-e6eecfffe234?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Cheesy Beef Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 695, img: 'https://images.unsplash.com/photo-1607013251379-e6eecfffe234?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Grilled Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 645, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Pizza Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 745, img: 'https://images.unsplash.com/photo-1607013251379-e6eecfffe234?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Fish Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // SANDWICH CATEGORY
+  // This section controls the sandwich card list only.
+  // Each product object is independent and can be edited without affecting other tabs.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'sandwich',
+    title: 'Sandwich',
+    items: [
+      { name: 'Supreme Sandwich', description: 'Classic favorite from Cheese \'n Crunch.', price: 745, img: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Malai Boti Sandwich', description: 'Classic favorite from Cheese \'n Crunch.', price: 795, img: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Panini Tikka Sandwich', description: 'Classic favorite from Cheese \'n Crunch.', price: 545, img: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Panini Malai Boti Sandwich', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // BREAD CATEGORY
+  // This block contains bread card entries.
+  // Change the name, description, price, or img here to update each bread item.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'bread',
+    title: 'Bread',
+    items: [
+      { name: 'Garlic Bread', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Garlic Supreme Bread', description: 'Classic favorite from Cheese \'n Crunch.', price: 295, img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Chicken Supreme Bread', description: 'Classic favorite from Cheese \'n Crunch.', price: 395, img: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // PASTA CATEGORY
+  // This is the pasta tab and all product cards visible under it.
+  // Whatever is written inside this block appears as pasta cards on the menu.
+  // Fields inside each item:
+  // - name = pasta name shown on the card
+  // - description = short product line under the name
+  // - price = item price in PKR
+  // - img = photo URL for the card
+  // Edit this block when you want to update pasta items or add a new pasta card.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'pasta',
+    title: 'Pasta',
+    items: [
+      { name: 'CnC Special Pasta (L)', description: 'Classic favorite from Cheese \'n Crunch.', price: 745, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=400&auto=format&fit=crop' },
+      { name: 'CnC Special Pasta (S)', description: 'Classic favorite from Cheese \'n Crunch.', price: 445, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Lasagna Pasta', description: 'Classic favorite from Cheese \'n Crunch.', price: 695, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Fettuccine Pasta', description: 'Classic favorite from Cheese \'n Crunch.', price: 645, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Macaroni Pasta', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // PLATTER CATEGORY
+  // This block controls platter cards only.
+  // Edit the object values here to change platter names, prices, and descriptions.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'platter',
+    title: 'Platter',
+    items: [
+      { name: 'CnC Special Platter', description: 'House special platter.', price: 945, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Malai Boti Platter', description: 'Creamy malai boti platter.', price: 995, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // SALAD CATEGORY
+  // This array controls the salad cards shown on the menu.
+  // To update a salad item, edit its name, description, price, or image here.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'salad',
+    title: 'Salad',
+    items: [
+      { name: 'Russian Salad (Half)', description: 'Fresh and crisp salad.', price: 475, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Russian Salad (Full)', description: 'Fresh and crisp salad.', price: 795, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+  // ---------------------------------------------------------------------------
+  // BEVERAGES CATEGORY
+  // This block controls all beverage cards and their prices.
+  // Change the values here to update drink names, description, price, or image.
+  // ---------------------------------------------------------------------------
+  {
+    id: 'beverages',
+    title: 'Beverages',
+    items: [
+      { name: 'Drink (350ml - Dine in)', description: 'Available for dine in.', price: 75, img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Mineral Water (Small)', description: 'Classic favorite from Cheese \'n Crunch.', price: 85, img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Mineral Water (Large)', description: 'Classic favorite from Cheese \'n Crunch.', price: 130, img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Tin Pack', description: 'Classic favorite from Cheese \'n Crunch.', price: 130, img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Drink (500ml)', description: 'Classic favorite from Cheese \'n Crunch.', price: 130, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Drink (1000ml)', description: 'Classic favorite from Cheese \'n Crunch.', price: 190, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Drink (1.5 Liter)', description: 'Classic favorite from Cheese \'n Crunch.', price: 220, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
+    ],
+  },
+];
+
+export const OTHER_CATEGORIES = MENU_BY_CATEGORY;
 
 export const DEALS = [
   { n: 1, title: 'Deal 1', items: '1 Small Pizza, 1 Oven Baked Wings, 1 Reg Drink', price: 595, img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop' },
@@ -13,12 +212,17 @@ export const DEALS = [
   { n: 10, title: 'Deal 10', items: '2 Drinmilk, 1 Liter', price: 1950, img: 'https://images.unsplash.com/photo-1626082927389-6cd097cee6a6?q=80&w=800&auto=format&fit=crop' },
 ];
 
-export const SIZES = [
-  { label: 'Small', price: 595 },
-  { label: 'Medium', price: 895 },
-  { label: 'Large', price: 1295 },
-  { label: 'X-Large', price: 1795 },
-];
+// -----------------------------------------------------------------------------
+// PIZZA SIZE PRICING
+// This array controls the size selector used for pizza items.
+// Each object shape is: { label: 'Small', price: 495 }
+// - label = text shown in the UI (Small / Medium / Large / X-Large)
+// - price = numeric value in PKR for that size
+// To change available sizes or prices, edit this array only.
+// Example: if you want a different price for Large, update the Large object here.
+// -----------------------------------------------------------------------------
+// NOTE: Global SIZES removed. Variants are defined per-product via the
+// `variants` array on each product object. See normalizeProduct() below.
 
 export const SPECIAL_FLAVORS = [
   { name: 'CnC Special', desc: 'Our signature house blend of premium toppings.', img: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=600&auto=format&fit=crop' },
@@ -36,69 +240,29 @@ export const REGULAR_FLAVORS = [
   { name: 'Chicken Supreme', desc: 'Loaded chicken supreme, all the classics.', img: 'https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?q=80&w=600&auto=format&fit=crop' },
   { name: 'Euro', desc: 'European-style blend of savory toppings.', img: 'https://images.unsplash.com/photo-1552539618-7eec9b4d1796?q=80&w=600&auto=format&fit=crop' },
   { name: 'Fajita Sicilian', desc: 'Sicilian-inspired fajita chicken pizza.', img: 'https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?q=80&w=600&auto=format&fit=crop' },
-  { name: 'Bonefire', desc: 'Smoky bonefire chicken, bold and hearty.', img: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=600&auto=format&fit=crop' },
+  { name: 'Bonefire', desc: 'Smoky bonfire chicken, bold and hearty.', img: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=600&auto=format&fit=crop' },
   { name: 'Cheese Lover', desc: 'Extra cheese, for the true cheese lover.', img: 'https://images.unsplash.com/photo-1571066811602-716837d681de?q=80&w=600&auto=format&fit=crop' },
   { name: 'Veggie Lover', desc: 'Garden-fresh vegetable topping mix.', img: 'https://images.unsplash.com/photo-1511689660979-10d2b1aada49?q=80&w=600&auto=format&fit=crop' },
 ];
 
-export const PLACEHOLDER_CATALOG = {
-  Burgers: [
-    { name: 'Creamy Burger', desc: 'Juicy patty, melted cheese and special sauce.', price: 695, img: placeholderImg, isPlaceholder: true },
-    { name: 'Spicy Burger', desc: 'Fiery burger with crispy toppings and heat.', price: 745, img: placeholderImg, isPlaceholder: true },
-    { name: 'Cheese Burst Burger', desc: 'Extra cheesy burger with loaded flavor.', price: 725, img: placeholderImg, isPlaceholder: true },
-    { name: 'BBQ Burger', desc: 'Smoky BBQ sauce, onion rings and cheese.', price: 765, img: placeholderImg, isPlaceholder: true },
-    { name: 'Classic Burger', desc: 'A timeless burger with fresh vegetables.', price: 675, img: placeholderImg, isPlaceholder: true },
-  ],
-  'Fried Chicken': [
-    { name: 'Crispy Chicken', desc: 'Golden fried chicken with a crunchy bite.', price: 695, img: placeholderImg, isPlaceholder: true },
-    { name: 'Hot Wings', desc: 'Spicy wings with a tangy finish.', price: 725, img: placeholderImg, isPlaceholder: true },
-    { name: 'Garlic Chicken', desc: 'Garlic coated chicken with bold flavors.', price: 735, img: placeholderImg, isPlaceholder: true },
-    { name: 'Honey Chicken', desc: 'Sweet and savory glazed chicken pieces.', price: 745, img: placeholderImg, isPlaceholder: true },
-    { name: 'Crunchy Chicken', desc: 'Extra crispy fried chicken for sharing.', price: 755, img: placeholderImg, isPlaceholder: true },
-  ],
-  Wings: [
-    { name: 'Fiery Wings', desc: 'Hot wings with flame grilled spice.', price: 645, img: placeholderImg, isPlaceholder: true },
-    { name: 'Lemon Pepper Wings', desc: 'Zesty lemon pepper wing bites.', price: 655, img: placeholderImg, isPlaceholder: true },
-    { name: 'Honey Garlic Wings', desc: 'Sweet and savory glazed wings.', price: 675, img: placeholderImg, isPlaceholder: true },
-    { name: 'Classic Wings', desc: 'Crispy wings with signature seasoning.', price: 665, img: placeholderImg, isPlaceholder: true },
-    { name: 'BBQ Wings', desc: 'Smoky barbecue wings with rich sauce.', price: 685, img: placeholderImg, isPlaceholder: true },
-  ],
-  Sandwiches: [
-    { name: 'Club Sandwich', desc: 'Stacked sandwich with fresh fillings.', price: 595, img: placeholderImg, isPlaceholder: true },
-    { name: 'Grilled Sandwich', desc: 'Toasted sandwich with melted cheese.', price: 605, img: placeholderImg, isPlaceholder: true },
-    { name: 'Chicken Sandwich', desc: 'Tender chicken with crunchy salad.', price: 615, img: placeholderImg, isPlaceholder: true },
-    { name: 'Spicy Sandwich', desc: 'Bold flavors in every toasted bite.', price: 625, img: placeholderImg, isPlaceholder: true },
-    { name: 'Cheese Sandwich', desc: 'Extra cheese and fresh vegetables.', price: 635, img: placeholderImg, isPlaceholder: true },
-  ],
-  Pasta: [
-    { name: 'Creamy Alfredo Pasta', desc: 'Rich Alfredo sauce with tender pasta.', price: 595, img: placeholderImg, isPlaceholder: true },
-    { name: 'Chicken Pasta', desc: 'Savory chicken tossed with pasta.', price: 625, img: placeholderImg, isPlaceholder: true },
-    { name: 'Spicy Pasta', desc: 'Spicy tomato pasta with bold herbs.', price: 615, img: placeholderImg, isPlaceholder: true },
-    { name: 'Cheesy Pasta', desc: 'Loaded with melted cheese and herbs.', price: 605, img: placeholderImg, isPlaceholder: true },
-    { name: 'Special Pasta', desc: 'House special pasta with rich flavors.', price: 635, img: placeholderImg, isPlaceholder: true },
-  ],
-  Drinks: [
-    { name: 'Classic Cola', desc: 'Refreshing chilled cola drink.', price: 195, img: placeholderImg, isPlaceholder: true },
-    { name: 'Lemon Soda', desc: 'Zesty lemon soda with bubbles.', price: 195, img: placeholderImg, isPlaceholder: true },
-    { name: 'Mango Juice', desc: 'Sweet mango juice chilled to perfection.', price: 225, img: placeholderImg, isPlaceholder: true },
-    { name: 'Strawberry Shake', desc: 'Creamy strawberry drink delight.', price: 245, img: placeholderImg, isPlaceholder: true },
-    { name: 'Mint Cooler', desc: 'Cool mint refresher for every order.', price: 215, img: placeholderImg, isPlaceholder: true },
-  ],
-  Desserts: [
-    { name: 'Chocolate Brownie', desc: 'Warm brownie with rich chocolate.', price: 325, img: placeholderImg, isPlaceholder: true },
-    { name: 'Vanilla Cake', desc: 'Soft vanilla cake slice with frosting.', price: 345, img: placeholderImg, isPlaceholder: true },
-    { name: 'Caramel Brownie', desc: 'Brownie topped with caramel drizzle.', price: 335, img: placeholderImg, isPlaceholder: true },
-    { name: 'Nutty Cake', desc: 'Crunchy nuts with moist cake slice.', price: 355, img: placeholderImg, isPlaceholder: true },
-    { name: 'Berry Brownie', desc: 'Fruity brownie treat with berries.', price: 345, img: placeholderImg, isPlaceholder: true },
-  ],
-};
-
 export function normalizeProduct(item) {
+  const variantsRaw = item.variants || [];
+  const variants = Array.isArray(variantsRaw)
+    ? variantsRaw.map((v) => ({ label: v.size || v.label || '', price: v.price }))
+    : [];
+
+  const minVariantPrice = variants.length ? Math.min(...variants.map((v) => v.price || Infinity)) : undefined;
+
   return {
     name: item.name,
-    desc: item.desc || item.description || 'Delicious choice from Cheese ’n Crunch.',
+    desc: item.desc || item.description || "Delicious choice from Cheese ’n Crunch.",
     img: item.img || 'placeholder-food.svg',
-    price: item.price || 595,
+    // original single price (fallback for fixed-price items)
+    price: item.price,
+    // per-product variants (preserve labels and prices as authored)
+    variants,
+    // derived display price: minimum variant price when variants exist, otherwise use fixed price or undefined
+    displayPrice: minVariantPrice !== undefined ? minVariantPrice : item.price,
     isPlaceholder: item.isPlaceholder === true,
   };
 }
@@ -124,68 +288,3 @@ export const SAMPLE_REVIEWS = [
   { name: 'Fahad', loc: null, stars: 5, text: 'Overall bohat achi experience rahi, order se leke delivery tak sab smooth tha. Cheese \u2019n Crunch is now our regular Friday night order.' },
 ];
 
-export const OTHER_CATEGORIES = [
-  { id: 'appetizers', title: 'Appetizers', items: [
-    { name: 'Fried Wings', description: 'Crispy fried chicken wings', price: 195, img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Meatball', description: 'Classic favorite from Cheese \'n Crunch.', price: 245, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Loaded Wings', description: 'Classic favorite from Cheese \'n Crunch.', price: 345, img: 'https://images.unsplash.com/photo-1608039755401-742074f0548d?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Oven Baked Wings', description: 'Classic favorite from Cheese \'n Crunch.', price: 345, img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'fried', title: 'Fried', items: [
-    { name: 'Nuggets', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1562967916-eb82221dfb92?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'wraps', title: 'Wraps', items: [
-    { name: 'Cocktail Wrap', description: 'Fresh wrap with a savory bite.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Chacha Wrap', description: 'Fresh wrap with a savory bite.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Bihari Wrap', description: 'Fresh wrap with a savory bite.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Maal Boil Wrap', description: 'Fresh wrap with a savory bite.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Turkish Wrap', description: 'Fresh wrap with a savory bite.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'fish-and-chips', title: 'Fish & Chips', items: [
-    { name: 'Fish & Chips', description: 'Hot Shots | 12pcs pricing: 195, 195, 295, 395, 495, 595', price: 195, img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'burgers', title: 'Burgers', items: [
-    { name: 'CricSpecial Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Zinger Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Peppy Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Chapski Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Peri Peri Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1607013251379-e6eecfffe234?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Cheesy Beef Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1607013251379-e6eecfffe234?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Grilled Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Pizza Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1607013251379-e6eecfffe234?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Fish Burger', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'sandwiches', title: 'Sandwiches', items: [
-    { name: 'Supreme Sandwich', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'bread', title: 'Bread', items: [
-    { name: 'Garlic Bread', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Garlic Bread Supreme', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Chicken Supreme', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'salad', title: 'Salad', items: [
-    { name: 'Russian Salad', description: 'Half: 495 | Full: 795', price: 495, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'beverages', title: 'Beverages', items: [
-    { name: 'Tin Pack', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Drink Milk 300ml', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Drink Milk 600ml', description: 'Classic favorite from Cheese \'n Crunch.', price: 295, img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Mineral Water 1.5L', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'pasta', title: 'Pasta', items: [
-    { name: 'CricSpecial Pasta', description: 'Classic favorite from Cheese \'n Crunch.', price: 395, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Lasagna Pasta', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Fettucine Pasta', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Macromacian Pasta', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'pizza', title: 'Pizza', items: [
-    { name: 'CricSpecial Pizza', description: 'Classic favorite from Cheese \'n Crunch.', price: 595, img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=400&auto=format&fit=crop' },
-  ]},
-  { id: 'cheese-n-crunch', title: 'Cheese \'n Crunch', items: [
-    { name: 'Pin Cheese', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Bait Kabab', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Pepti', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Malli Boti', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-    { name: 'Shami Satilan', description: 'Classic favorite from Cheese \'n Crunch.', price: 195, img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop' },
-  ]},
-];
