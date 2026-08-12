@@ -44,7 +44,9 @@ function App() {
     img: '',
     // default to no variant / zero price until a product is opened
     variants: [],
-    size: { label: '', price: 0 },
+    selectedFlavor: null,
+    selectedVariant: null,
+    price: 0,
     qty: 1,
   });
   const [lightboxImage, setLightboxImage] = useState('');
@@ -191,31 +193,37 @@ function App() {
   const openProductModal = (product) => {
     // product is expected to be normalized (see normalizeProduct)
     const variants = product.variants || [];
-    const defaultSize = variants.length ? variants[0] : { label: '', price: product.price || 0 };
-    setProductModalState({ name: product.name, desc: product.desc, img: product.img, variants, size: defaultSize, qty: 1 });
+    const defaultVariant = variants.length ? variants[0] : null;
+    const defaultFlavor = defaultVariant ? defaultVariant.name : null;
+    setProductModalState({
+      name: product.name,
+      desc: product.desc,
+      img: product.img,
+      variants,
+      selectedFlavor: defaultFlavor,
+      selectedVariant: defaultVariant,
+      price: product.price,
+      qty: 1,
+    });
     setProductModalOpen(true);
   };
 
   const addProductModalToCart = () => {
-    const variantLabel = productModalState.size && productModalState.size.label ? ` (${productModalState.size.label})` : '';
-    addToCart({
-      name: `${productModalState.name}${variantLabel}`,
-      price: productModalState.size ? productModalState.size.price : productModalState.price || 0,
-      qty: productModalState.qty,
-      img: productModalState.img,
-    });
+    const v = productModalState.selectedVariant;
+    const variantLabel = v ? ` (${v.size})` : '';
+    const name = v ? `${v.name}${variantLabel}` : productModalState.name;
+    const price = v ? v.price : productModalState.price || 0;
+    addToCart({ name, price, qty: productModalState.qty, img: productModalState.img });
     setProductModalOpen(false);
     showToast('Added to cart');
   };
 
   const buyProductModalNow = () => {
-    const variantLabel = productModalState.size && productModalState.size.label ? ` (${productModalState.size.label})` : '';
-    addToCart({
-      name: `${productModalState.name}${variantLabel}`,
-      price: productModalState.size ? productModalState.size.price : productModalState.price || 0,
-      qty: productModalState.qty,
-      img: productModalState.img,
-    });
+    const v = productModalState.selectedVariant;
+    const variantLabel = v ? ` (${v.size})` : '';
+    const name = v ? `${v.name}${variantLabel}` : productModalState.name;
+    const price = v ? v.price : productModalState.price || 0;
+    addToCart({ name, price, qty: productModalState.qty, img: productModalState.img });
     setProductModalOpen(false);
     setCartOpen(true);
     setCheckoutMode(true);
@@ -319,7 +327,13 @@ function App() {
         isOpen={isProductModalOpen}
         state={productModalState}
         onClose={() => setProductModalOpen(false)}
-        onSizeChange={(size) => setProductModalState((prev) => ({ ...prev, size }))}
+        onFlavorChange={(flavor) =>
+          setProductModalState((prev) => {
+            const variant = (prev.variants || []).find((v) => v.name === flavor) || prev.selectedVariant || null;
+            return { ...prev, selectedFlavor: flavor, selectedVariant: variant };
+          })
+        }
+        onVariantChange={(variant) => setProductModalState((prev) => ({ ...prev, selectedVariant: variant }))}
         onQtyChange={(qty) => setProductModalState((prev) => ({ ...prev, qty: Math.max(1, qty) }))}
         onAdd={addProductModalToCart}
         onBuyNow={buyProductModalNow}

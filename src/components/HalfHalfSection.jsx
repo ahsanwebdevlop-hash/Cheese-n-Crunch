@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { SPECIAL_FLAVORS } from '../data/siteData.js';
 
 function HalfHalfSection({ onAdd, onShowToast }) {
   const flavors = [
@@ -20,7 +21,17 @@ function HalfHalfSection({ onAdd, onShowToast }) {
   ];
   const [half1, setHalf1] = useState(flavors[0]);
   const [half2, setHalf2] = useState(flavors[1]);
-  const [size, setSize] = useState(595);
+  // derive available sizes for half-half from the Pizza example product (if present)
+  const pizzaProduct = (SPECIAL_FLAVORS || []).find((p) => p.name === 'Pizza');
+  const pizzaVariants = pizzaProduct?.variants || [];
+
+  const sizeOptions = [];
+  pizzaVariants.forEach((v) => {
+    if (!sizeOptions.find((s) => s.size === v.size)) sizeOptions.push({ size: v.size, price: v.price });
+  });
+
+  const defaultSizePrice = sizeOptions.length ? sizeOptions[0].price : 595;
+  const [size, setSize] = useState(defaultSizePrice);
 
   const total = useMemo(() => size + 150, [size]);
 
@@ -60,16 +71,17 @@ function HalfHalfSection({ onAdd, onShowToast }) {
             <div className="field">
               <label htmlFor="hhSize">Size</label>
               <select id="hhSize" value={size} onChange={(e) => setSize(Number(e.target.value))}>
-                {[
-                  { label: 'Small', price: 495 },
-                  { label: 'Medium', price: 1095 },
-                  { label: 'Large', price: 1545 },
-                  { label: 'X-Large', price: 1995 },
-                ].map((option) => (
-                  <option key={option.price} value={option.price}>
-                    {option.label} — Rs. {option.price}
-                  </option>
-                ))}
+                {sizeOptions.length
+                  ? sizeOptions.map((option) => (
+                      <option key={option.price} value={option.price}>
+                        {option.size} — Rs. {option.price}
+                      </option>
+                    ))
+                  : [
+                      <option key={495} value={495}>
+                        Default — Rs. 495
+                      </option>,
+                    ]}
               </select>
             </div>
           </div>

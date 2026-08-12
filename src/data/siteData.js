@@ -225,6 +225,19 @@ export const DEALS = [
 // `variants` array on each product object. See normalizeProduct() below.
 
 export const SPECIAL_FLAVORS = [
+  {
+    name: 'Pizza',
+    description: "Our pizza selection.",
+    img: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=600&auto=format&fit=crop',
+    variants: [
+      { name: 'CnC Special', size: 'Half', price: 595 },
+      { name: 'CnC Special', size: 'Full', price: 995 },
+      { name: 'Behari Kabab', size: 'Half', price: 595 },
+      { name: 'Behari Kabab', size: 'Full', price: 995 },
+      { name: 'Peri Peri', size: 'Half', price: 595 },
+      { name: 'Peri Peri', size: 'Full', price: 995 },
+    ],
+  },
   { name: 'CnC Special', desc: 'Our signature house blend of premium toppings.', img: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=600&auto=format&fit=crop' },
   { name: 'Behari Kabab', desc: 'Smoky spiced kabab pieces on a loaded base.', img: 'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?q=80&w=600&auto=format&fit=crop' },
   { name: 'Peri Peri', desc: 'Fiery peri peri chicken with a tangy kick.', img: 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=600&auto=format&fit=crop' },
@@ -248,7 +261,7 @@ export const REGULAR_FLAVORS = [
 export function normalizeProduct(item) {
   const variantsRaw = item.variants || [];
   const variants = Array.isArray(variantsRaw)
-    ? variantsRaw.map((v) => ({ label: v.size || v.label || '', price: v.price }))
+    ? variantsRaw.map((v) => ({ name: v.name || v.flavor || item.name, size: v.size || v.label || '', price: v.price }))
     : [];
 
   const minVariantPrice = variants.length ? Math.min(...variants.map((v) => v.price || Infinity)) : undefined;
@@ -259,7 +272,7 @@ export function normalizeProduct(item) {
     img: item.img || 'placeholder-food.svg',
     // original single price (fallback for fixed-price items)
     price: item.price,
-    // per-product variants (preserve labels and prices as authored)
+    // per-product variants preserved exactly: { name, size, price }
     variants,
     // derived display price: minimum variant price when variants exist, otherwise use fixed price or undefined
     displayPrice: minVariantPrice !== undefined ? minVariantPrice : item.price,

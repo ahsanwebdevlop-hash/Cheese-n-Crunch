@@ -1,6 +1,15 @@
-function ProductModal({ isOpen, state, onClose, onSizeChange, onQtyChange, onAdd, onBuyNow }) {
+function ProductModal({ isOpen, state, onClose, onFlavorChange, onVariantChange, onQtyChange, onAdd, onBuyNow }) {
   const variants = state.variants || [];
   const hasVariants = variants.length > 0;
+
+  // derive flavor list preserving order
+  const flavorList = [];
+  variants.forEach((v) => {
+    if (!flavorList.includes(v.name)) flavorList.push(v.name);
+  });
+
+  const selectedFlavor = state.selectedFlavor || (flavorList.length ? flavorList[0] : null);
+  const sizesForFlavor = selectedFlavor ? variants.filter((v) => v.name === selectedFlavor) : [];
 
   return (
     <>
@@ -12,21 +21,39 @@ function ProductModal({ isOpen, state, onClose, onSizeChange, onQtyChange, onAdd
           <h3>{state.name}</h3>
           <p className="desc">{state.desc}</p>
           {hasVariants ? (
-            <div className="pm-group">
-              <label>Choose size</label>
-              <div className="opt-row">
-                {variants.map((v) => (
-                  <button
-                    type="button"
-                    key={v.label}
-                    className={`opt-chip${state.size && state.size.label === v.label ? ' active' : ''}`}
-                    onClick={() => onSizeChange(v)}
-                  >
-                    {v.label}
-                  </button>
-                ))}
+            <>
+              <div className="pm-group">
+                <label>Choose flavor</label>
+                <div className="opt-row">
+                  {flavorList.map((fl) => (
+                    <button
+                      type="button"
+                      key={fl}
+                      className={`opt-chip${selectedFlavor === fl ? ' active' : ''}`}
+                      onClick={() => onFlavorChange(fl)}
+                    >
+                      {fl}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+
+              <div className="pm-group">
+                <label>Choose size</label>
+                <div className="opt-row">
+                  {sizesForFlavor.map((v) => (
+                    <button
+                      type="button"
+                      key={v.size}
+                      className={`opt-chip${state.selectedVariant && state.selectedVariant.size === v.size ? ' active' : ''}`}
+                      onClick={() => onVariantChange(v)}
+                    >
+                      {v.size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
           ) : null}
           <div className="pm-group pm-qty">
             <label>Quantity</label>
@@ -37,7 +64,7 @@ function ProductModal({ isOpen, state, onClose, onSizeChange, onQtyChange, onAdd
             </div>
           </div>
           <div className="pm-foot">
-            <div className="price">Rs. {(state.size?.price || 0) * state.qty}</div>
+            <div className="price">Rs. {(state.selectedVariant?.price ?? state.price ?? 0) * state.qty}</div>
             <div className="pm-actions">
               <button className="btn btn-gold" onClick={onAdd}>Add to Cart</button>
               <button className="btn btn-outline" onClick={onBuyNow}>Buy Now</button>

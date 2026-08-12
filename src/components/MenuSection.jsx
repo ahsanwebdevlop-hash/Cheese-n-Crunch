@@ -43,8 +43,7 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
           <p>Fresh dough. Bold flavors. Serious cravings.</p>
         </div>
 
-        {/* Per-product variants are defined in `siteData.js` on each product.
-            Removed global hardcoded size pills to keep variants fully data-driven. */}
+        {/* Per-product variants are defined in `siteData.js` on each product. */}
 
         <div className="cat-nav-wrap reveal">
           <div className="cat-nav">
