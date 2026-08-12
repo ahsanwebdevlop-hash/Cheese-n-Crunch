@@ -16,7 +16,7 @@ import Menu from './pages/Menu.jsx';
 import Reviews from './pages/Reviews.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
-import { DEALS, SIZES, SPECIAL_FLAVORS, REGULAR_FLAVORS } from './data/siteData.js';
+import { DEALS, SPECIAL_FLAVORS, REGULAR_FLAVORS } from './data/siteData.js';
 import placeholderImg from './assets/placeholder-food.svg';
 
 const DELIVERY_AREAS = [
@@ -42,7 +42,9 @@ function App() {
     name: '',
     desc: '',
     img: '',
-    size: SIZES[0],
+    // default to no variant / zero price until a product is opened
+    variants: [],
+    size: { label: '', price: 0 },
     qty: 1,
   });
   const [lightboxImage, setLightboxImage] = useState('');
@@ -186,15 +188,19 @@ function App() {
         .filter((item) => item.qty > 0)
     );
 
-  const openProductModal = (name, desc, img) => {
-    setProductModalState({ name, desc, img, size: SIZES[0], qty: 1 });
+  const openProductModal = (product) => {
+    // product is expected to be normalized (see normalizeProduct)
+    const variants = product.variants || [];
+    const defaultSize = variants.length ? variants[0] : { label: '', price: product.price || 0 };
+    setProductModalState({ name: product.name, desc: product.desc, img: product.img, variants, size: defaultSize, qty: 1 });
     setProductModalOpen(true);
   };
 
   const addProductModalToCart = () => {
+    const variantLabel = productModalState.size && productModalState.size.label ? ` (${productModalState.size.label})` : '';
     addToCart({
-      name: `${productModalState.name} (${productModalState.size.label})`,
-      price: productModalState.size.price,
+      name: `${productModalState.name}${variantLabel}`,
+      price: productModalState.size ? productModalState.size.price : productModalState.price || 0,
       qty: productModalState.qty,
       img: productModalState.img,
     });
@@ -203,9 +209,10 @@ function App() {
   };
 
   const buyProductModalNow = () => {
+    const variantLabel = productModalState.size && productModalState.size.label ? ` (${productModalState.size.label})` : '';
     addToCart({
-      name: `${productModalState.name} (${productModalState.size.label})`,
-      price: productModalState.size.price,
+      name: `${productModalState.name}${variantLabel}`,
+      price: productModalState.size ? productModalState.size.price : productModalState.price || 0,
       qty: productModalState.qty,
       img: productModalState.img,
     });
@@ -311,7 +318,6 @@ function App() {
       <ProductModal
         isOpen={isProductModalOpen}
         state={productModalState}
-        sizes={SIZES}
         onClose={() => setProductModalOpen(false)}
         onSizeChange={(size) => setProductModalState((prev) => ({ ...prev, size }))}
         onQtyChange={(qty) => setProductModalState((prev) => ({ ...prev, qty: Math.max(1, qty) }))}

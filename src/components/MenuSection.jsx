@@ -43,19 +43,8 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
           <p>Fresh dough. Bold flavors. Serious cravings.</p>
         </div>
 
-        <div className="menu-sizes reveal">
-          {[
-            { label: 'Small', price: 495 },
-            { label: 'Medium', price: 1095 },
-            { label: 'Large', price: 1545 },
-            { label: 'X-Large', price: 1995 },
-          ].map((size) => (
-            <div key={size.label} className="size-pill">
-              <div className="lbl">{size.label}</div>
-              <div className="val">From Rs. {size.price}</div>
-            </div>
-          ))}
-        </div>
+        {/* Per-product variants are defined in `siteData.js` on each product.
+            Removed global hardcoded size pills to keep variants fully data-driven. */}
 
         <div className="cat-nav-wrap reveal">
           <div className="cat-nav">
