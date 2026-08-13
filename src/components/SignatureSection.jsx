@@ -58,7 +58,7 @@ function SignatureSection({ onAdd, onShowToast }) {
       toppingPrice = topping?.prices?.[sizeLabel] || 0;
     }
     
-    const toppingLabel = selectedTopping ? ` + ${selectedTopping}` : '';
+    const toppingLabel = selectedTopping ? ` + ${selectedTopping} (topping)` : '';
     const itemName = `${tier.name} (${crustLabel})${toppingLabel}`;
     const finalPrice = tier.price + toppingPrice;
     onAdd({ name: itemName, price: finalPrice, qty, img: tier.img });

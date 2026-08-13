@@ -11,6 +11,7 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
   const premiumStrip = useMemo(() => [
     { label: 'Hot Deals', to: '/deals', kind: 'link' },
     { label: 'Lunch & Mid Night Deals', to: '/lunch-mid-night-deals', kind: 'link' },
+    { label: 'Bar (Desserts & Beverages)', to: '/bar', kind: 'link' },
     { label: 'Pizza', targetId: 'pizza', kind: 'scroll' },
     { label: 'Special Square', targetId: 'special-square', kind: 'scroll' },
     { label: 'Traditional Square', targetId: 'traditional-square', kind: 'scroll' },

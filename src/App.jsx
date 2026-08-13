@@ -310,7 +310,7 @@ function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/bar" element={<Bar />} />
+          <Route path="/bar" element={<Bar onFlavorClick={openProductModal} />} />
           <Route path="/lunch-mid-night-deals" element={<LunchMidNightDeals />} />
         </Routes>
       </main>

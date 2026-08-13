@@ -107,7 +107,7 @@ function SquareSection({ onAdd, onShowToast }) {
     }
     
     const finalPrice = basePrice + toppingPrice;
-    const toppingLabel = selectedTopping ? ` + ${selectedTopping}` : '';
+    const toppingLabel = selectedTopping ? ` + ${selectedTopping} (topping)` : '';
     const itemName = `${tier.name} (${selectedFlavor})${toppingLabel}`;
     onAdd({ name: itemName, price: finalPrice, qty, img: tier.img });
     onShowToast(`Added ${tier.label} pizza to cart`);
