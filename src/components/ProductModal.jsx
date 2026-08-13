@@ -1,4 +1,4 @@
-function ProductModal({ isOpen, state, onClose, onFlavorChange, onVariantChange, onQtyChange, onAdd, onBuyNow }) {
+function ProductModal({ isOpen, state, onClose, onFlavorChange, onVariantChange, onQtyChange, onAdd, onBuyNow, onToppingChange, variantTitle = 'Choose size' }) {
   const variants = (state.variants || []).map((v) => ({
     ...v,
     name: v.name || v.flavor || state.name || 'Default',
@@ -6,10 +6,38 @@ function ProductModal({ isOpen, state, onClose, onFlavorChange, onVariantChange,
     price: Number(v.price ?? v.amount ?? 0),
   }));
   const hasVariants = variants.length > 0;
+  const flavorOptions = Array.isArray(state.flavorOptions) ? state.flavorOptions : [];
+  const toppings = Array.isArray(state.toppings) ? state.toppings : [];
+  const toppingPrices = Array.isArray(state.toppingPrices) ? state.toppingPrices : [];
 
   const sizesForFlavor = variants.length ? variants : [];
 
   const selectedVariant = state.selectedVariant || (sizesForFlavor[0] ?? null);
+  
+  // Calculate topping price based on selected size and topping
+  let toppingPrice = 0;
+  if (state.selectedTopping) {
+    const topping = toppingPrices.find((t) => t.name === state.selectedTopping);
+    // Priority: tierSize (for CnC Signature) > variant size (for pizzas with sizes) > default
+    let sizeKey = state.toppingDefaultSize || 'Medium';
+    if (state.tierSize) {
+      // CnC Signature - use tierSize (Medium, Large, X-Large)
+      sizeKey = state.tierSize;
+    } else if (hasVariants && selectedVariant?.size) {
+      // Regular pizzas with size variants - use variant size
+      sizeKey = selectedVariant.size;
+    }
+    toppingPrice = Number(topping?.prices?.[sizeKey] ?? 0);
+  }
+  
+  // Determine base price
+  let basePrice = Number(state.price ?? 0);
+  if (hasVariants && Number(selectedVariant?.price ?? 0) > 0) {
+    // Use variant price only if it's greater than 0
+    basePrice = Number(selectedVariant.price);
+  }
+  
+  const displayPrice = basePrice + toppingPrice;
 
   return (
     <>
@@ -22,7 +50,7 @@ function ProductModal({ isOpen, state, onClose, onFlavorChange, onVariantChange,
           <p className="desc">{state.desc}</p>
           {hasVariants ? (
             <div className="pm-group">
-              <label>Choose size</label>
+              <label>{variantTitle}</label>
               <div className="opt-row">
                 {sizesForFlavor.map((v) => (
                   <button
@@ -37,6 +65,35 @@ function ProductModal({ isOpen, state, onClose, onFlavorChange, onVariantChange,
               </div>
             </div>
           ) : null}
+          {flavorOptions.length > 0 ? (
+            <div className="pm-group">
+              <label>Choose flavor</label>
+              <select
+                className="pm-select"
+                value={state.selectedFlavor ?? flavorOptions[0]}
+                onChange={(e) => onFlavorChange?.(e.target.value)}
+              >
+                {flavorOptions.map((flavor) => (
+                  <option key={flavor} value={flavor}>{flavor}</option>
+                ))}
+              </select>
+            </div>
+          ) : null}
+          {toppings.length > 0 ? (
+            <div className="pm-group">
+              <label>Choose topping (optional)</label>
+              <select
+                className="pm-select"
+                value={state.selectedTopping ?? ''}
+                onChange={(e) => onToppingChange?.(e.target.value || null)}
+              >
+                <option value="">No Topping</option>
+                {toppings.map((topping) => (
+                  <option key={topping} value={topping}>{topping}</option>
+                ))}
+              </select>
+            </div>
+          ) : null}
           <div className="pm-group pm-qty">
             <label>Quantity</label>
             <div className="pm-qty">
@@ -46,7 +103,7 @@ function ProductModal({ isOpen, state, onClose, onFlavorChange, onVariantChange,
             </div>
           </div>
           <div className="pm-foot">
-            <div className="price">Rs. {(selectedVariant?.price ?? state.price ?? 0) * state.qty}</div>
+            <div className="price">Rs. {displayPrice * state.qty}</div>
             <div className="pm-actions">
               <button className="btn btn-gold" onClick={onAdd}>Add to Cart</button>
               <button className="btn btn-outline" onClick={onBuyNow}>Buy Now</button>

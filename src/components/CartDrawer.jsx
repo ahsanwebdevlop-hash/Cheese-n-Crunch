@@ -89,8 +89,12 @@ function CartDrawer({
               <div key={item.key} className="cart-line">
                 <img src={item.img} alt={item.name} />
                 <div className="info">
-                  <h5>{item.name}</h5>
-                  <div className="meta">Rs. {item.price} x {item.qty}</div>
+                  <h5>{item.is_deal ? `Deal ${item.dealId || ''}`.trim() : item.name}</h5>
+                  {item.is_deal ? (
+                    <div className="meta">{item.name} x {item.qty}</div>
+                  ) : (
+                    <div className="meta">Rs. {item.price} x {item.qty}</div>
+                  )}
                   <div className="qty-ctrl">
                     <button type="button" onClick={() => onChangeQty(item.key, -1)}>-</button>
                     <span>{item.qty}</span>

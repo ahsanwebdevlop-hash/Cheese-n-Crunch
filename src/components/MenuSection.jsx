@@ -9,10 +9,12 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
   const otherCats = OTHER_CATEGORIES || [];
 
   const premiumStrip = useMemo(() => [
+    { label: 'Hot Deals', to: '/deals', kind: 'link' },
+    { label: 'Lunch & Mid Night Deals', to: '/lunch-mid-night-deals', kind: 'link' },
+    { label: 'Pizza', targetId: 'pizza', kind: 'scroll' },
     { label: 'Special Square', targetId: 'special-square', kind: 'scroll' },
     { label: 'Traditional Square', targetId: 'traditional-square', kind: 'scroll' },
     { label: 'CnC Signature', targetId: 'signature', kind: 'scroll' },
-    { label: 'Hot Deals', to: '/deals', kind: 'link' },
   ], []);
 
   const categoryList = useMemo(() => {

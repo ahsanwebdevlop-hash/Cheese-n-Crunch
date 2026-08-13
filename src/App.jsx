@@ -16,6 +16,8 @@ import Menu from './pages/Menu.jsx';
 import Reviews from './pages/Reviews.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
+import Bar from './pages/Bar.jsx';
+import LunchMidNightDeals from './pages/LunchMidNightDeals.jsx';
 import { DEALS, SPECIAL_FLAVORS, REGULAR_FLAVORS } from './data/siteData.js';
 import placeholderImg from './assets/placeholder-food.svg';
 
@@ -171,7 +173,13 @@ function App() {
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
-      const key = `${item.name}|${item.price}`;
+      // For deals with selectedFlavors, include flavor data in the key to differentiate
+      let key = `${item.name}|${item.price}`;
+      if (item.is_deal && item.selectedFlavors) {
+        const flavorStr = JSON.stringify(item.selectedFlavors);
+        key = `${key}|${flavorStr}`;
+      }
+      
       const existing = prevItems.find((cartItem) => cartItem.key === key);
       if (existing) {
         return prevItems.map((cartItem) =>
@@ -302,6 +310,8 @@ function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/bar" element={<Bar />} />
+          <Route path="/lunch-mid-night-deals" element={<LunchMidNightDeals />} />
         </Routes>
       </main>
       <Footer />

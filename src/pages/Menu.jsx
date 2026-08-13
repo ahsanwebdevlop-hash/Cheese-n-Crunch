@@ -2,10 +2,9 @@ import MenuSection from '../components/MenuSection.jsx';
 import SquareSection from '../components/SquareSection.jsx';
 import HalfHalfSection from '../components/HalfHalfSection.jsx';
 import SignatureSection from '../components/SignatureSection.jsx';
-import GallerySection from '../components/GallerySection.jsx';
-import { GALLERY, SPECIAL_FLAVORS, REGULAR_FLAVORS } from '../data/siteData.js';
+import { SPECIAL_FLAVORS, REGULAR_FLAVORS } from '../data/siteData.js';
 
-function Menu({ specialFlavors, regularFlavors, onFlavorClick, onAdd, onShowToast, onImageClick }) {
+function Menu({ specialFlavors, regularFlavors, onFlavorClick, onAdd, onShowToast }) {
   const special = specialFlavors || SPECIAL_FLAVORS;
   const regular = regularFlavors || REGULAR_FLAVORS;
 
@@ -15,7 +14,6 @@ function Menu({ specialFlavors, regularFlavors, onFlavorClick, onAdd, onShowToas
       <SquareSection onAdd={onAdd} onShowToast={onShowToast} />
       <HalfHalfSection onAdd={onAdd} onShowToast={onShowToast} />
       <SignatureSection onAdd={onAdd} onShowToast={onShowToast} />
-      <GallerySection images={GALLERY} onImageClick={onImageClick} />
     </>
   );
 }
