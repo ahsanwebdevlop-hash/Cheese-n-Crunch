@@ -5,6 +5,36 @@ import ProductCard from './ProductCard.jsx';
 function BarSection({ onFlavorClick }) {
   // Sample data for beverages and desserts
   const barCategories = useMemo(() => [
+     {
+      id: 'brownie',
+      title: 'Brownies',
+      items: [
+        {
+          name: 'Fudge Brownie',
+          description: 'Flaky pastry with rich chocolate filling',
+          price: 250,
+          img: 'https://images.unsplash.com/photo-1560080876-daf2d34e00a1?q=80&w=600&auto=format&fit=crop',
+        },
+        {
+          name: 'Caramel Brownie',
+          description: 'Classic French butter croissant, crispy and golden',
+          price: 250,
+          img: 'https://images.unsplash.com/photo-1585518119820-8f71d1de1da3?q=80&w=600&auto=format&fit=crop',
+        },
+        {
+          name: 'Red Velvet Brownie',
+          description: 'Delicate pastry with roasted almonds',
+          price: 155,
+          img: 'https://images.unsplash.com/photo-1599599810694-b5ac4dd86b83?q=80&w=600&auto=format&fit=crop',
+        }
+        // {
+        //   name: 'Danish Pastry',
+        //   description: 'Sweet Danish with fruit and cream',
+        //   price: 165,
+        //   img: 'https://images.unsplash.com/photo-1560080876-daf2d34e00a1?q=80&w=600&auto=format&fit=crop',
+        // },
+      ],
+    },
     {
       id: 'cold-coffee',
       title: 'Cold Coffee',

@@ -1,8 +1,23 @@
 import { useState } from 'react';
-import { SPECIAL_FLAVORS, REGULAR_FLAVORS, DRINK_FLAVORS, BROWNIE_FLAVORS, WRAP_FLAVORS } from '../data/siteData.js';
+import { SPECIAL_FLAVORS, REGULAR_FLAVORS, DRINK_FLAVORS, BROWNIE_FLAVORS, WRAP_FLAVORS, PIZZA_TOPPINGS } from '../data/siteData.js';
+
+// Helper functions for pizza topping system
+function extractPizzaSize(itemName) {
+  if (itemName.includes('Small')) return 'Small';
+  if (itemName.includes('Regular')) return 'Medium';
+  if (itemName.includes('Large')) return 'Large';
+  if (itemName.includes('XL') || itemName.includes('X-Large')) return 'X-Large';
+  if (itemName.includes('Grand')) return 'Large';
+  return 'Medium'; // default
+}
+
+function isPizzaItem(itemType) {
+  return itemType === 'pizza';
+}
 
 function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
   const [selectedFlavors, setSelectedFlavors] = useState({});
+  const [selectedToppings, setSelectedToppings] = useState({});
   const [qty, setQty] = useState(1);
   const [fieldErrors, setFieldErrors] = useState({});
   const [validationMessage, setValidationMessage] = useState('');
@@ -16,6 +31,12 @@ function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
     if (itemType === 'brownie') return BROWNIE_FLAVORS;
     if (itemType === 'wrap') return WRAP_FLAVORS;
     return [...SPECIAL_FLAVORS, ...REGULAR_FLAVORS]; // Default for pizza
+  };
+
+  const shouldRequireFlavorSelection = (item, itemIndex) => {
+    if (!item || !item.hasFlavorOption) return false;
+    if (item.type !== 'wrap') return true;
+    return deal?.n === 2 && deal?.title === 'Deal 2';
   };
 
   // Group duplicate items and format display
@@ -41,7 +62,7 @@ function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
     if (!deal?.items) return {};
     const initial = {};
     deal.items.forEach((item, idx) => {
-      if (item.hasFlavorOption && allFlavors.length > 0) {
+      if (shouldRequireFlavorSelection(item, idx) && allFlavors.length > 0) {
         initial[idx] = allFlavors[0].name || '';
       }
     });
@@ -56,11 +77,18 @@ function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
     clearFieldError(`single-${itemIndex}`);
   };
 
+  const handleToppingChange = (itemIndex, toppingName) => {
+    setSelectedToppings((prev) => ({
+      ...prev,
+      [itemIndex]: toppingName || null,
+    }));
+  };
+
   const getMissingFlavorIndexes = (flavorsToValidate = selectedFlavors) => {
     if (!deal?.items) return [];
 
     return deal.items.reduce((missing, item, index) => {
-      if (item.hasFlavorOption && (!flavorsToValidate[index] || flavorsToValidate[index] === '')) {
+      if (shouldRequireFlavorSelection(item, index) && (!flavorsToValidate[index] || flavorsToValidate[index] === '')) {
         missing.push(index);
       }
       return missing;
@@ -98,6 +126,27 @@ function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
     setValidationMessage('');
   };
 
+  // Calculate topping price (total for all toppings, before qty)
+  const calculateToppingPrice = () => {
+    let toppingPrice = 0;
+    
+    deal.items.forEach((item, idx) => {
+      if (isPizzaItem(item.type) && selectedToppings[idx]) {
+        const toppingSize = extractPizzaSize(item.name);
+        const topping = PIZZA_TOPPINGS.find((t) => t.name === selectedToppings[idx]);
+        if (topping) {
+          toppingPrice += topping.prices[toppingSize] || 0;
+        }
+      }
+    });
+    
+    return toppingPrice;
+  };
+
+  const calculateTotalPrice = () => {
+    return (deal.price + calculateToppingPrice()) * qty;
+  };
+
   const handleAddToCart = () => {
     const missingIndexes = getMissingFlavorIndexes();
     if (missingIndexes.length > 0) {
@@ -109,7 +158,7 @@ function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
       return;
     }
 
-    onAdd(deal, qty, selectedFlavors);
+    onAdd(deal, qty, selectedFlavors, selectedToppings);
     handleClose();
   };
 
@@ -125,12 +174,13 @@ function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
       return;
     }
 
-    onBuyNow?.(deal);
+    onBuyNow?.(deal, qty, selectedFlavors, selectedToppings);
     handleClose();
   };
 
   const handleClose = () => {
     setSelectedFlavors(initializeFlavorSelections());
+    setSelectedToppings({});
     setQty(1);
     setFieldErrors({});
     setValidationMessage('');
@@ -140,6 +190,9 @@ function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
   if (!isOpen || !deal) return null;
 
   const itemCount = deal.items?.length || 0;
+  const toppingPrice = calculateToppingPrice();
+  const basePrice = deal.price * qty;
+  const totalPrice = calculateTotalPrice();
 
   return (
     <>
@@ -171,35 +224,59 @@ function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
             ).join(', ')}
           </p>
 
-          {/* Flavor Selection (Conditional) */}
+          {/* Flavor Selection & Topping Selection (Combined) */}
           <div className="flavor-selectors">
             {deal.items.map((item, idx) => {
               const flavorOptions = getFlavorsByType(item.type);
               return (
-                <div key={idx} className="flavor-selector-item">
-                  <label>{item.name}</label>
-                  {item.hasFlavorOption ? (
-                    <>
+                <div key={idx}>
+                  {/* Flavor Selector */}
+                  {shouldRequireFlavorSelection(item, idx) ? (
+                    <div className="flavor-selector-item">
+                      <label>{item.name}</label>
+                      <>
+                        <select
+                          className={fieldErrors[`single-${idx}`] ? 'has-error' : ''}
+                          value={selectedFlavors[idx] || ''}
+                          onChange={(e) => handleFlavorChange(idx, e.target.value)}
+                        >
+                          <option value="">Select Flavor</option>
+                          {flavorOptions.map((flavor) => (
+                            <option key={flavor.name} value={flavor.name}>
+                              {flavor.name}
+                            </option>
+                          ))}
+                        </select>
+                        {fieldErrors[`single-${idx}`] && (
+                          <div className="field-error">Please select a flavor</div>
+                        )}
+                      </>
+                    </div>
+                  ) : (
+                    <div className="flavor-selector-item">
+                      <label>{item.name}</label>
+                      <button className="btn-no-flavor" disabled>
+                        Fixed Flavor
+                      </button>
+                    </div>
+                  )}
+                  
+                  {/* Topping Selector - Show right after flavor if pizza and flavor selected */}
+                  {isPizzaItem(item.type) && selectedFlavors[idx] && (
+                    <div className="flavor-selector-item">
+                      <label>Add Topping (optional) - {item.name}</label>
                       <select
-                        className={fieldErrors[`single-${idx}`] ? 'has-error' : ''}
-                        value={selectedFlavors[idx] || ''}
-                        onChange={(e) => handleFlavorChange(idx, e.target.value)}
+                        value={selectedToppings[idx] || ''}
+                        onChange={(e) => handleToppingChange(idx, e.target.value || null)}
                       >
-                        <option value="">Select Flavor</option>
-                        {flavorOptions.map((flavor) => (
-                          <option key={flavor.name} value={flavor.name}>
-                            {flavor.name}
+                        <option value="">No Topping</option>
+                        {PIZZA_TOPPINGS.map((topping) => (
+                          <option key={topping.name} value={topping.name}>
+                            {topping.name} (+Rs. {topping.prices[extractPizzaSize(item.name)] || 0})
                           </option>
                         ))}
                       </select>
-                      {fieldErrors[`single-${idx}`] && (
-                        <div className="field-error">Please select a flavor</div>
-                      )}
-                    </>
-                  ) : (
-                    <button className="btn-no-flavor" disabled>
-                      No Special Flavour
-                    </button>
+                    </div>
                   )}
                 </div>
               );
@@ -216,9 +293,15 @@ function DealsModal({ isOpen, deal, onClose, onAdd, onBuyNow }) {
             </div>
           </div>
 
-          {/* Price Display */}
+          {/* Price Display with Breakdown */}
           <div className="modal-price">
-            Rs. {(deal.price * qty).toLocaleString()}
+            {toppingPrice > 0 ? (
+              <>
+                Rs. {(deal.price * qty).toLocaleString()} + {toppingPrice} = <strong>{totalPrice.toLocaleString()}</strong>
+              </>
+            ) : (
+              <>Rs. {totalPrice.toLocaleString()}</>
+            )}
           </div>
 
           {/* Action Buttons */}

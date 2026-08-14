@@ -8,6 +8,7 @@ import WhatsAppButton from './components/WhatsAppButton.jsx';
 import StickyOrderBar from './components/StickyOrderBar.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
 import ProductModal from './components/ProductModal.jsx';
+import OrderReviewModal from './components/OrderReviewModal.jsx';
 import Lightbox from './components/Lightbox.jsx';
 import Toast from './components/Toast.jsx';
 import Home from './pages/Home.jsx';
@@ -22,9 +23,13 @@ import { DEALS, SPECIAL_FLAVORS, REGULAR_FLAVORS } from './data/siteData.js';
 import placeholderImg from './assets/placeholder-food.svg';
 
 const DELIVERY_AREAS = [
-  { name: 'Deen Garden', fee: 80 },
-  { name: 'Raichand', fee: 50 },
-  { name: 'Chahnbagar', fee: 100 },
+  { name: 'Chanab Nagar', fee: 200 },
+  { name: 'Deen Garden', fee: 200 },
+  { name: 'Kimz College', fee: 200 },
+  { name: 'GC University', fee: 350 },
+  { name: 'Chanab College', fee: 100 },
+  { name: 'Talab', fee: 200 },
+  { name: 'Iqbal Rice', fee: 100 },
 ];
 
 const getAreaDeliveryFee = (area) => {
@@ -39,6 +44,7 @@ function App() {
   const [checkoutData, setCheckoutData] = useState({ name: '', phone: '', area: '', address: '', notes: '' });
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [buyNowItem, setBuyNowItem] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
   const [productModalState, setProductModalState] = useState({
     name: '',
@@ -53,11 +59,20 @@ function App() {
   });
   const [lightboxImage, setLightboxImage] = useState('');
   const [isHeaderScrolled, setHeaderScrolled] = useState(false);
+  const [customCakeData, setCustomCakeData] = useState(null);
+  const [orderReview, setOrderReview] = useState(null);
 
   const cartCount = useMemo(() => cartItems.reduce((sum, item) => sum + item.qty, 0), [cartItems]);
   const cartSubtotal = useMemo(() => cartItems.reduce((sum, item) => sum + item.qty * item.price, 0), [cartItems]);
   const deliveryFee = useMemo(() => getAreaDeliveryFee(checkoutData.area), [checkoutData.area]);
   const cartTotal = useMemo(() => cartSubtotal + deliveryFee, [cartSubtotal, deliveryFee]);
+
+  const checkoutItems = buyNowItem ? [buyNowItem] : cartItems;
+  const checkoutSubtotal = useMemo(
+    () => checkoutItems.reduce((sum, item) => sum + item.qty * item.price, 0),
+    [checkoutItems]
+  );
+  const checkoutTotal = useMemo(() => checkoutSubtotal + deliveryFee, [checkoutSubtotal, deliveryFee]);
 
   useEffect(() => {
     // globally catch broken/empty <img> loads and replace with a harmless placeholder
@@ -66,7 +81,7 @@ function App() {
       if (!t || t.tagName !== 'IMG') return;
       try {
         if (!t.src || t.src.endsWith('placeholder-food.svg')) return;
-      } catch (err) {}
+      } catch (err) { }
       t.src = placeholderImg;
     };
 
@@ -179,7 +194,7 @@ function App() {
         const flavorStr = JSON.stringify(item.selectedFlavors);
         key = `${key}|${flavorStr}`;
       }
-      
+
       const existing = prevItems.find((cartItem) => cartItem.key === key);
       if (existing) {
         return prevItems.map((cartItem) =>
@@ -188,6 +203,15 @@ function App() {
       }
       return [...prevItems, { ...item, key }];
     });
+  };
+
+  const buyNow = (item) => {
+    const key = `${item.name}|${item.price}|${Date.now()}`;
+    setBuyNowItem({ ...item, key });
+    resetCheckoutForm();
+    setCartOpen(true);
+    setCheckoutMode(true);
+    showToast('Proceeding to checkout');
   };
 
   const removeFromCart = (key) => setCartItems((prevItems) => prevItems.filter((item) => item.key !== key));
@@ -233,15 +257,155 @@ function App() {
     const variantLabel = v?.size ? ` (${v.size})` : '';
     const name = `${baseName}${variantLabel}`;
     const price = v ? v.price : productModalState.price || 0;
-    addToCart({ name, price, qty: productModalState.qty, img: productModalState.img });
     setProductModalOpen(false);
-    setCartOpen(true);
-    setCheckoutMode(true);
-    showToast('Proceeding to checkout');
+    buyNow({ name, price, qty: productModalState.qty, img: productModalState.img });
   };
 
   const openLightbox = (src) => setLightboxImage(src);
   const closeLightbox = () => setLightboxImage('');
+
+  const buildReviewOrder = (customerOverride = null) => {
+    const customer = customerOverride
+      ? { ...checkoutData, ...customerOverride }
+      : { ...checkoutData };
+
+    const customCake = customCakeData
+      ? {
+          name: customCakeData.name,
+          price: customCakeData.price,
+          qty: 1,
+          key: customCakeData.key || `custom-cake-${Date.now()}`,
+          img: customCakeData.img,
+          isCustomCake: true,
+          cakeWeight: customCakeData.cakeWeight,
+          originalImage: customCakeData.originalImage,
+        }
+      : null;
+
+    const items = customCake
+      ? [customCake]
+      : (buyNowItem ? [buyNowItem] : cartItems).map((item) => ({ ...item }));
+
+    const subtotal = items.reduce((sum, item) => sum + item.qty * item.price, 0);
+    const deliveryFeeValue = getAreaDeliveryFee(customer.area);
+    const total = subtotal + deliveryFeeValue;
+
+    return {
+      items,
+      subtotal,
+      deliveryFee: deliveryFeeValue,
+      total,
+      customer,
+      isCustomCake: Boolean(customCake),
+      customCake,
+    };
+  };
+
+  const handleCustomCakeBuyNow = (cakeItem) => {
+    // Store custom cake temporarily
+    setCustomCakeData(cakeItem);
+    // Open checkout directly for custom cakes
+    setCheckoutMode(false);
+    setCartOpen(true);
+    // After cart is open, move to checkout
+    setTimeout(() => {
+      setCheckoutMode(true);
+      // Set buyNowItem for checkout
+      setBuyNowItem({ ...cakeItem, key: `custom-cake-${Date.now()}` });
+    }, 100);
+  };
+
+  const openOrderReview = (customerOverride = null) => {
+    const review = buildReviewOrder(customerOverride);
+
+    if (!review.items.length) {
+      showToast('Your cart is empty');
+      return;
+    }
+
+    if (!review.customer.name || !review.customer.phone || !review.customer.area || !review.customer.address) {
+      showToast('Please complete your details');
+      return;
+    }
+
+    setOrderReview(review);
+  };
+
+  const handleConfirmOrderReview = () => {
+    if (!orderReview) return;
+
+    const customer = orderReview.customer;
+    const { items, subtotal, deliveryFee, total, isCustomCake } = orderReview;
+
+    if (isCustomCake) {
+      const customCakeMessage = [
+        "CUSTOM CAKE ORDER — CHEESE 'n CRUNCH",
+        '',
+        `Cake: ${orderReview.customCake.name}`,
+        `Weight: ${orderReview.customCake.cakeWeight} Pound${orderReview.customCake.cakeWeight > 1 ? 's' : ''}`,
+        `Price: Rs. ${orderReview.customCake.price.toLocaleString()}`,
+        '',
+        'Customer Information:',
+        `Name: ${customer.name}`,
+        `Phone: ${customer.phone}`,
+        `Delivery Area: ${customer.area}`,
+        `Delivery Fee: Rs. ${deliveryFee}`,
+        `Address: ${customer.address}`,
+        '',
+        `Subtotal: Rs. ${subtotal}`,
+        `Delivery: Rs. ${deliveryFee}`,
+        `TOTAL: Rs. ${total}`,
+      ];
+
+      if (customer.notes) customCakeMessage.push('', `Notes: ${customer.notes}`);
+      customCakeMessage.push('', '⚠️ IMPORTANT ⚠️');
+      customCakeMessage.push('[ PLEASE SELECT AND ATTACH YOUR CAKE DESIGN IMAGE ]');
+      customCakeMessage.push('After WhatsApp opens, please select the same cake design image from your device and send it with your order.');
+
+      const url = `https://wa.me/923110992288?text=${encodeURIComponent(customCakeMessage.join('\n'))}`;
+      window.open(url, '_blank');
+
+      setOrderReview(null);
+      setCartOpen(false);
+      setCheckoutMode(false);
+      setBuyNowItem(null);
+      setCustomCakeData(null);
+      resetCheckoutForm();
+      showToast('Order sent to WhatsApp');
+      return;
+    }
+
+    const msgLines = [
+      "NEW ORDER — CHEESE 'n CRUNCH",
+      '',
+      `Customer: ${customer.name}`,
+      `Phone: ${customer.phone}`,
+      `Delivery Area: ${customer.area}`,
+      `Delivery Fee: Rs. ${deliveryFee}`,
+      `Address: ${customer.address}`,
+      '',
+      'ORDER:',
+      ...items.map((item) => `${item.qty} x ${item.name} — Rs. ${item.price * item.qty}`),
+      '',
+      `Subtotal: Rs. ${subtotal}`,
+      `Delivery: Rs. ${deliveryFee}`,
+      `TOTAL: Rs. ${total}`,
+    ];
+
+    if (customer.notes) msgLines.push('', `Notes: ${customer.notes}`);
+
+    const url = `https://wa.me/923110992288?text=${encodeURIComponent(msgLines.join('\n'))}`;
+    window.open(url, '_blank');
+
+    setOrderReview(null);
+    setCartOpen(false);
+    setCheckoutMode(false);
+    if (buyNowItem) {
+      setBuyNowItem(null);
+    }
+    resetCheckoutForm();
+    showToast('Order opened in WhatsApp');
+  };
 
   const placeOrder = ({ name, phone, area, address, notes }) => {
     if (!name || !phone || !area) {
@@ -252,28 +416,14 @@ function App() {
       showToast('Please fill in your address');
       return;
     }
-    const msgLines = [
-      "NEW ORDER — CHEESE 'n CRUNCH",
-      '',
-      `Customer: ${name}`,
-      `Phone: ${phone}`,
-      `Delivery Area: ${area}`,
-      `Delivery Fee: Rs. ${getAreaDeliveryFee(area)}`,
-      `Address: ${address}`,
-      '',
-      'ORDER:',
-      ...cartItems.map((item) => `${item.qty} x ${item.name} — Rs. ${item.price * item.qty}`),
-      '',
-      `Subtotal: Rs. ${cartSubtotal}`,
-      `Delivery: Rs. ${getAreaDeliveryFee(area)}`,
-      `TOTAL: Rs. ${cartTotal}`,
-    ];
-    if (notes) msgLines.push('', `Notes: ${notes}`);
-    const url = `https://wa.me/923110992288?text=${encodeURIComponent(msgLines.join('\n'))}`;
-    window.open(url, '_blank');
-    setCheckoutMode(false);
-    resetCheckoutForm();
-    showToast('Order opened in WhatsApp');
+
+    const orderItems = buyNowItem ? [buyNowItem] : cartItems;
+    if (!customCakeData && orderItems.length === 0) {
+      showToast('Your cart is empty');
+      return;
+    }
+
+    openOrderReview({ name, phone, area, address, notes });
   };
 
   return (
@@ -292,7 +442,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/deals"
-            element={<Deals deals={DEALS} onAdd={addToCart} onShowToast={showToast} />}
+            element={<Deals deals={DEALS} onAdd={addToCart} onBuyNow={buyNow} onShowToast={showToast} />}
           />
           <Route
             path="/menu"
@@ -302,6 +452,7 @@ function App() {
                 regularFlavors={REGULAR_FLAVORS}
                 onFlavorClick={openProductModal}
                 onAdd={addToCart}
+                onBuyNow={buyNow}
                 onShowToast={showToast}
                 onImageClick={openLightbox}
               />
@@ -310,8 +461,11 @@ function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/bar" element={<Bar onFlavorClick={openProductModal} />} />
-          <Route path="/lunch-mid-night-deals" element={<LunchMidNightDeals />} />
+          <Route path="/bar" element={<Bar onFlavorClick={openProductModal} onAdd={addToCart} onShowToast={showToast} onBuyNow={handleCustomCakeBuyNow} />} />
+          <Route
+            path="/lunch-mid-night-deals"
+            element={<LunchMidNightDeals onAdd={addToCart} onBuyNow={buyNow} onShowToast={showToast} />}
+          />
         </Routes>
       </main>
       <Footer />
@@ -322,11 +476,12 @@ function App() {
         onClose={() => {
           setCartOpen(false);
           setCheckoutMode(false);
+          setBuyNowItem(null);
         }}
-        items={cartItems}
-        subtotal={cartSubtotal}
+        items={checkoutItems}
+        subtotal={checkoutSubtotal}
         deliveryFee={deliveryFee}
-        total={cartTotal}
+        total={checkoutTotal}
         onRemove={removeFromCart}
         onChangeQty={changeItemQty}
         onCheckout={placeOrder}
@@ -334,6 +489,7 @@ function App() {
         checkoutMode={isCheckoutMode}
         checkoutData={checkoutData}
         onCheckoutFieldChange={handleCheckoutFieldChange}
+        deliveryAreas={DELIVERY_AREAS}
       />
       <ProductModal
         isOpen={isProductModalOpen}
@@ -351,6 +507,12 @@ function App() {
         onBuyNow={buyProductModalNow}
       />
       <Lightbox src={lightboxImage} onClose={closeLightbox} />
+      <OrderReviewModal
+        isOpen={Boolean(orderReview)}
+        onClose={() => setOrderReview(null)}
+        onConfirm={handleConfirmOrderReview}
+        order={orderReview}
+      />
       <Toast message={toastMessage} />
     </>
   );

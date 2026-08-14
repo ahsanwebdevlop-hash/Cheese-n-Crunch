@@ -12,6 +12,7 @@ function CartDrawer({
   checkoutMode,
   checkoutData,
   onCheckoutFieldChange,
+  deliveryAreas = [],
 }) {
   return (
     <>
@@ -57,9 +58,9 @@ function CartDrawer({
                   onChange={(e) => onCheckoutFieldChange('area', e.target.value)}
                 >
                   <option value="">Select area</option>
-                  <option value="Deen Garden">Deen Garden</option>
-                  <option value="Raichand">Raichand</option>
-                  <option value="Chahnbagar">Chahnbagar</option>
+                  {deliveryAreas.map((area) => (
+                    <option key={area.name} value={area.name}>{area.name}</option>
+                  ))}
                 </select>
               </div>
               <div className="field">

@@ -210,7 +210,7 @@ export const DEALS = [
     price: 1055,
     img: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?q=80&w=800&auto=format&fit=crop',
     items: [
-      { name: 'Cocktail Wrap', type: 'wrap', hasFlavorOption: true, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Cocktail Wrap', type: 'wrap', hasFlavorOption: false, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
       { name: 'Panini Tikka Sandwich', type: 'sandwich', hasFlavorOption: false, img: 'https://images.unsplash.com/photo-1553909092-d5960881ba35?q=80&w=600&auto=format&fit=crop' },
       { name: 'Half Liter Drink', type: 'drink', hasFlavorOption: true, img: 'https://images.unsplash.com/photo-1554866585-cd4628902094?q=80&w=600&auto=format&fit=crop' },
     ],
@@ -350,6 +350,17 @@ export const BROWNIE_FLAVORS = [
   { name: 'Caramel', desc: 'Sweet caramel brownie', img: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=600&auto=format&fit=crop' },
   { name: 'Chocolate', desc: 'Rich chocolate brownie', img: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=600&auto=format&fit=crop' },
   { name: 'Waswa', desc: 'Special waswa brownie', img: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=600&auto=format&fit=crop' },
+];
+
+export const ICE_CREAM_FLAVORS = [
+  { name: 'Vanilla', desc: 'Classic smooth vanilla ice cream', img: 'https://images.unsplash.com/photo-1563805042-7684c019e157?q=80&w=600&auto=format&fit=crop' },
+  { name: 'Chocolate', desc: 'Rich creamy chocolate ice cream', img: 'https://images.unsplash.com/photo-1564785564656-1fc51e2b5fcb?q=80&w=600&auto=format&fit=crop' },
+  { name: 'Strawberry', desc: 'Fresh strawberry ice cream', img: 'https://images.unsplash.com/photo-1563805042-7684c019e157?q=80&w=600&auto=format&fit=crop' },
+  { name: 'Mint Chocolate', desc: 'Refreshing mint with chocolate chips', img: 'https://images.unsplash.com/photo-1563805042-7684c019e157?q=80&w=600&auto=format&fit=crop' },
+  { name: 'Caramel', desc: 'Sweet and creamy caramel ice cream', img: 'https://images.unsplash.com/photo-1564785564656-1fc51e2b5fcb?q=80&w=600&auto=format&fit=crop' },
+  { name: 'Pistachio', desc: 'Nutty pistachio ice cream', img: 'https://images.unsplash.com/photo-1563805042-7684c019e157?q=80&w=600&auto=format&fit=crop' },
+  { name: 'Cookie Dough', desc: 'Vanilla with cookie dough pieces', img: 'https://images.unsplash.com/photo-1564785564656-1fc51e2b5fcb?q=80&w=600&auto=format&fit=crop' },
+  { name: 'Butter Pecan', desc: 'Buttery pecan flavored ice cream', img: 'https://images.unsplash.com/photo-1563805042-7684c019e157?q=80&w=600&auto=format&fit=crop' },
 ];
 
 export const WRAP_FLAVORS =

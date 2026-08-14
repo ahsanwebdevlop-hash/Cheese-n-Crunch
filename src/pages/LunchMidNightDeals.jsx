@@ -1,6 +1,6 @@
 import DealsSection from '../components/DealsSection.jsx';
 
-function LunchMidNightDeals() {
+function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
   const lunchDeals = [
     {
       n: 1,
@@ -93,8 +93,9 @@ function LunchMidNightDeals() {
   return (
     <DealsSection
       deals={lunchDeals}
-      onAdd={() => {}}
-      onShowToast={() => {}}
+      onAdd={onAdd}
+      onBuyNow={onBuyNow}
+      onShowToast={onShowToast}
       eyebrow="Fresh & Filling"
       title="Lunch & Mid Night"
       accentTitle="Deals"

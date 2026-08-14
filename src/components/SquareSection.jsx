@@ -2,7 +2,17 @@ import { useState } from 'react';
 import ProductModal from './ProductModal.jsx';
 import { SPECIAL_FLAVORS, REGULAR_FLAVORS, PIZZA_TOPPINGS } from '../data/siteData.js';
 
-function SquareSection({ onAdd, onShowToast }) {
+// Map tier labels to topping size keys
+function getToppingDefaultSize(tierLabel) {
+  const sizeMap = {
+    'Personal': 'Small',
+    'Premium': 'Medium',
+    'Grand': 'Large',
+  };
+  return sizeMap[tierLabel] || 'Medium';
+}
+
+function SquareSection({ onAdd, onBuyNow, onShowToast }) {
   const allFlavors = [...SPECIAL_FLAVORS, ...REGULAR_FLAVORS].map((flavor) => flavor.name);
 
   const pizzaTiers = [
@@ -127,7 +137,25 @@ function SquareSection({ onAdd, onShowToast }) {
     const flavor = modalState.selectedFlavor || modalState.flavorOptions[0];
     const chosenVariant = modalState.selectedVariant || modalState.tier.variants?.[0] || null;
     const topping = modalState.selectedTopping || null;
-    handleAdd(modalState.tier, flavor, chosenVariant, modalState.qty, topping);
+
+    const basePrice = modalState.tier.variants && modalState.tier.variants.length > 0
+      ? Number(chosenVariant?.price ?? modalState.tier.variants[0]?.price ?? 0)
+      : Number(modalState.tier.price ?? 0);
+
+    let toppingPrice = 0;
+    if (topping) {
+      const toppingItem = PIZZA_TOPPINGS.find((t) => t.name === topping);
+      const sizeLabel = modalState.tier.variants && modalState.tier.variants.length > 0
+        ? chosenVariant?.size || modalState.tier.variants[0]?.size
+        : 'Medium';
+      toppingPrice = toppingItem?.prices?.[sizeLabel] || 0;
+    }
+
+    const finalPrice = basePrice + toppingPrice;
+    const toppingLabel = topping ? ` + ${topping} (topping)` : '';
+    const itemName = `${modalState.tier.name} (${flavor})${toppingLabel}`;
+
+    onBuyNow?.({ name: itemName, price: finalPrice, qty: modalState.qty, img: modalState.tier.img });
     closeModal();
   };
 
@@ -210,9 +238,9 @@ function SquareSection({ onAdd, onShowToast }) {
             variants: modalState.tier.variants || [],
             selectedVariant: modalState.selectedVariant,
             selectedTopping: modalState.selectedTopping,
-            toppings: (modalState.category === 'special-square' || modalState.category === 'traditional-square') ? [] : PIZZA_TOPPINGS.map((t) => t.name),
+            toppings: PIZZA_TOPPINGS.map((t) => t.name),
             toppingPrices: PIZZA_TOPPINGS,
-            toppingDefaultSize: 'Medium',
+            toppingDefaultSize: getToppingDefaultSize(modalState.tier.label),
           }}
           onClose={closeModal}
           onFlavorChange={(flavor) => setModalState((prev) => ({ ...prev, selectedFlavor: flavor }))}

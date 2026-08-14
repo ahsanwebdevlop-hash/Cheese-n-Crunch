@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ProductModal from './ProductModal.jsx';
 import { PIZZA_TOPPINGS } from '../data/siteData.js';
 
-function SignatureSection({ onAdd, onShowToast }) {
+function SignatureSection({ onAdd, onBuyNow, onShowToast }) {
   const tiers = [
     {
       name: "C'n C Signature - Med",
@@ -77,7 +77,19 @@ function SignatureSection({ onAdd, onShowToast }) {
     if (!modalState) return;
     const crustName = modalState.selectedCrust || crustOptions[0].name;
     const topping = modalState.selectedTopping || null;
-    handleAdd(modalState.tier, crustName, modalState.qty, topping);
+
+    let toppingPrice = 0;
+    if (topping) {
+      const toppingItem = PIZZA_TOPPINGS.find((t) => t.name === topping);
+      const sizeLabel = modalState.tier.label === 'Large' ? 'Large' : modalState.tier.label === 'X-Large' ? 'X-Large' : 'Medium';
+      toppingPrice = toppingItem?.prices?.[sizeLabel] || 0;
+    }
+
+    const toppingLabel = topping ? ` + ${topping} (topping)` : '';
+    const itemName = `${modalState.tier.name} (${crustName})${toppingLabel}`;
+    const finalPrice = modalState.tier.price + toppingPrice;
+
+    onBuyNow?.({ name: itemName, price: finalPrice, qty: modalState.qty, img: modalState.tier.img });
     closeModal();
   };
 

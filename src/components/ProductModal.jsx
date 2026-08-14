@@ -6,6 +6,11 @@ function ProductModal({ isOpen, state, onClose, onFlavorChange, onVariantChange,
     price: Number(v.price ?? v.amount ?? 0),
   }));
   const hasVariants = variants.length > 0;
+  
+  // Detect if this is a pound-based product (cakes)
+  const isPoundVariant = hasVariants && variants.every((v) => v.size.includes('Pound'));
+  const displayTitle = isPoundVariant ? 'Choose pound' : variantTitle;
+  
   const flavorOptions = Array.isArray(state.flavorOptions) ? state.flavorOptions : [];
   const toppings = Array.isArray(state.toppings) ? state.toppings : [];
   const toppingPrices = Array.isArray(state.toppingPrices) ? state.toppingPrices : [];
@@ -50,7 +55,7 @@ function ProductModal({ isOpen, state, onClose, onFlavorChange, onVariantChange,
           <p className="desc">{state.desc}</p>
           {hasVariants ? (
             <div className="pm-group">
-              <label>{variantTitle}</label>
+              <label>{displayTitle}</label>
               <div className="opt-row">
                 {sizesForFlavor.map((v) => (
                   <button

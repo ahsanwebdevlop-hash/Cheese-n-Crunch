@@ -1,9 +1,25 @@
 import { useState } from 'react';
 import DealsModal from './DealsModal.jsx';
+import { PIZZA_TOPPINGS } from '../data/siteData.js';
+
+// Helper functions for pizza topping system
+function isPizzaItem(itemType) {
+  return itemType === 'pizza';
+}
+
+function extractPizzaSize(itemName) {
+  if (itemName.includes('Small')) return 'Small';
+  if (itemName.includes('Regular')) return 'Medium';
+  if (itemName.includes('Large')) return 'Large';
+  if (itemName.includes('XL') || itemName.includes('X-Large')) return 'X-Large';
+  if (itemName.includes('Grand')) return 'Large';
+  return 'Medium'; // default
+}
 
 function DealsSection({
   deals,
   onAdd,
+  onBuyNow,
   onShowToast,
   eyebrow = 'Limited Time',
   title = 'Hot',
@@ -21,38 +37,74 @@ function DealsSection({
     setOpenDealId(null);
   };
 
-  const getDealDisplayName = (deal, selectedFlavors) => {
+  const getDealDisplayName = (deal, selectedFlavors, selectedToppings = {}) => {
     const unitFlavors = selectedFlavors && selectedFlavors.unit1 ? selectedFlavors.unit1 : selectedFlavors;
     const displayItems = deal.items.map((item, index) => {
       const chosenFlavor = unitFlavors && unitFlavors[index];
+      const chosenTopping = selectedToppings && selectedToppings[index];
+      
+      let itemDisplay = item.name;
       if (item.hasFlavorOption && chosenFlavor) {
-        return `${item.name} ${chosenFlavor}`;
+        itemDisplay = `${item.name} ${chosenFlavor}`;
       }
-      return item.name;
+      if (isPizzaItem(item.type) && chosenTopping) {
+        itemDisplay += ` + ${chosenTopping}`;
+      }
+      
+      return itemDisplay;
     });
 
     return displayItems.join(', ');
   };
 
-  const handleAddDeal = (deal, qty, selectedFlavors) => {
+  const calculateDealPrice = (deal, selectedFlavors, selectedToppings = {}) => {
+    let price = deal.price;
+    
+    deal.items.forEach((item, idx) => {
+      if (isPizzaItem(item.type) && selectedToppings[idx]) {
+        const toppingSize = extractPizzaSize(item.name);
+        const topping = PIZZA_TOPPINGS.find((t) => t.name === selectedToppings[idx]);
+        if (topping) {
+          price += topping.prices[toppingSize] || 0;
+        }
+      }
+    });
+    
+    return price;
+  };
+
+  const handleAddDeal = (deal, qty, selectedFlavors, selectedToppings = {}) => {
     const cartItem = {
-      name: getDealDisplayName(deal, selectedFlavors),
-      price: deal.price,
+      name: getDealDisplayName(deal, selectedFlavors, selectedToppings),
+      price: calculateDealPrice(deal, selectedFlavors, selectedToppings),
       qty: qty,
       img: deal.img,
       is_deal: true,
       dealId: deal.n,
       items: deal.items,
       selectedFlavors: selectedFlavors,
+      selectedToppings: selectedToppings,
     };
     onAdd(cartItem);
     onShowToast(`Added ${deal.title} (x${qty}) to cart`);
     handleCloseModal();
   };
 
-  const handleBuyNow = (deal) => {
-    // Placeholder for future "Buy Now" functionality
+  const handleBuyNow = (deal, qty, selectedFlavors, selectedToppings = {}) => {
+    const cartItem = {
+      name: getDealDisplayName(deal, selectedFlavors, selectedToppings),
+      price: calculateDealPrice(deal, selectedFlavors, selectedToppings),
+      qty: qty,
+      img: deal.img,
+      is_deal: true,
+      dealId: deal.n,
+      items: deal.items,
+      selectedFlavors: selectedFlavors,
+      selectedToppings: selectedToppings,
+    };
+    onBuyNow?.(cartItem);
     onShowToast(`Buy Now for ${deal.title}`);
+    handleCloseModal();
   };
 
   const getItemsPreview = (items) => {
