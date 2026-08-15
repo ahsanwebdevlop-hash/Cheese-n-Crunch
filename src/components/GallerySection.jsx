@@ -9,8 +9,8 @@ function GallerySection({ images, onImageClick }) {
         </div>
         <div className="gallery-grid reveal">
           {images.map((src, index) => (
-            <button key={src} type="button" className={`gallery-item g${index + 1}`} onClick={() => onImageClick(src)}>
-              <img src={src} alt={`Gallery item ${index + 1}`} />
+            <button key={src} type="button" className={`gallery-item g${index + 1}`} onClick={() => onImageClick(src)} aria-label={`View gallery image ${index + 1}`}>
+              <img src={src} alt="" />
             </button>
           ))}
         </div>

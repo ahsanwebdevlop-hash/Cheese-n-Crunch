@@ -7,25 +7,25 @@
 export const MENU_BY_CATEGORY = [
   {
     id: 'appetizer',
-    title: 'appetizer',
+    title: 'Appetizers',
     items: [
       { name: 'French Fries', description: 'Toasted bread with grilled chicken and signature sauce.', price: 265, img: 'https://example.com' },
       { name: 'Mayo Fries', description: 'Creamy barbecue chicken malai boti with onions.', price: 345, img: 'https://example.com' },
       { name: 'Loaded Fries', description: 'Pressed panini stuffed with spicy chicken tikka.', price: 645, img: 'https://example.com' },
-      { name: 'Oven Backed Wings 12/6 pcs', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 695 }], img: 'https://example.com' },
-      { name: 'Malai Boti Wings 12/6 pcs', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 695 }], img: 'https://example.com' },
+      { name: 'Oven Baked Wings (6 / 12 pcs)', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 695 }], img: 'https://example.com' },
+      { name: 'Malai Boti Wings (6 / 12 pcs)', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 695 }], img: 'https://example.com' },
       { name: 'Stick', description: 'Pressed panini with juicy chicken malai boti.', price: 545, img: 'https://example.com' },
       { name: 'Fish & Chips', description: 'Crispy fried fish fillet served with chips.', price: 1195, img: 'https://example.com' },
     ]
   },
   {
     id: 'fried',
-    title: 'Frieds',
+    title: 'Fries',
     items: [
-      { name: 'Fried Wings 12/6 pcs', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 745 }], img: 'https://example.com' },
+      { name: 'Fried Wings (6 / 12 pcs)', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 745 }], img: 'https://example.com' },
       { name: 'Fried Chicken', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: 'Half', price: 795 }, { size: 'Full', price: 1545 }], img: 'https://example.com' },
       { name: 'Nuggets', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: 'pcs', price: 265 }, { size: '12pcs', price: 545 }], img: 'https://example.com' },
-      { name: 'Hot Shots 12pcs', description: 'Bite-sized crispy chicken hot shots fried golden.', price: 595, img: 'https://example.com' },
+      { name: 'Hot Shots (12 pcs)', description: 'Bite-sized crispy chicken hot shots fried golden.', price: 595, img: 'https://example.com' },
     ]
   },
   {
@@ -46,7 +46,7 @@ export const MENU_BY_CATEGORY = [
   },
   {
     id: 'sandwich',
-    title: 'Sandwich',
+    title: 'Sandwiches',
     items: [
       { name: 'Supreme Sandwich', description: 'Toasted bread with grilled chicken and signature sauce.', price: 745, img: 'https://example.com' },
       { name: 'Malai Boti Sandwich', description: 'Creamy barbecue chicken malai boti with onions.', price: 795, img: 'https://example.com' },
@@ -56,7 +56,7 @@ export const MENU_BY_CATEGORY = [
   },
   {
     id: 'bread',
-    title: 'Bread',
+    title: 'Bread & Baked',
     items: [
       { name: 'Garlic Bread', description: 'Toasted baguette slices brushed with garlic butter.', price: 195, img: 'https://example.com' },
       { name: 'Garlic Supreme Bread', description: 'Baked garlic bread layered with melted mozzarella cheese.', price: 295, img: 'https://example.com' },
@@ -67,9 +67,9 @@ export const MENU_BY_CATEGORY = [
     id: 'pasta',
     title: 'Pasta',
     items: [
-      { name: 'Lasgna Pasta', description: 'Baked layers of pasta, minced chicken, and cheese.', price: 195, img: 'https://example.com' },
+      { name: 'Lasagna Pasta', description: 'Baked layers of pasta, minced chicken, and cheese.', price: 195, img: 'https://example.com' },
       { name: 'Fettuccine Pasta', description: 'Fettuccine pasta tossed in creamy white Alfredo sauce.', price: 295, img: 'https://example.com' },
-      { name: 'Maccaroni Pasta', description: 'Stir-fried macaroni with chicken and mixed vegetables.', price: 395, img: 'https://example.com' },
+      { name: 'Macaroni Pasta', description: 'Stir-fried macaroni with chicken and mixed vegetables.', price: 395, img: 'https://example.com' },
     ]
   },
   {
@@ -95,97 +95,40 @@ export const MENU_BY_CATEGORY = [
   },
   {
     id: 'platter',
-    title: 'Platter',
+    title: 'Platters',
     items: [
-      { name: 'CnC Speacial Platter', description: 'Signature assortment of premium fast food items.', price: 545, img: 'https://example.com' },
+      { name: 'CnC Special Platter', description: 'Signature assortment of premium fast food items.', price: 545, img: 'https://example.com' },
       { name: 'Malai Boti Platter', description: 'Creamy grilled chicken boti served with sides.', price: 495, img: 'https://example.com' },
     ]
   },
   {
-    id: 'pizza',
-    title: 'Pizza',
+    id: 'bevrages',
+    title: 'Beverages',
     items: [
       {
-        name: 'Special Square - Chicken Tikka',
-        description: 'Square cut pizza with premium Chicken Tikka toppings',
-        varient: [
-          { size: 'Small', price: 595 },
-          { size: 'Large', price: 895 },
+        name: 'Mineral Water',
+        description: 'Fresh mineral water bottle for a quick refreshment.',
+        price: 85,
+        variants: [
+          { size: 'Small', price: 85 },
+          { size: 'Large', price: 130 },
         ],
-        img: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=600&auto=format&fit=crop',
+        img: 'https://example.com',
       },
       {
-        name: 'Special Square - Behari Kabab',
-        description: 'Square cut pizza with smoky Behari Kabab pieces',
-        varient: [
-          { size: 'Small', price: 645 },
-          { size: 'Large', price: 945 },
+        name: 'Drink',
+        description: 'Cold beverage option available in assorted flavors.',
+        price: 75,
+        variants: [
+          { size: '350ml', price: 75 },
+          { size: '500ml', price: 130 },
+          { size: '1 Liter', price: 190 },
+          { size: '1.5 Liter', price: 220 },
         ],
-        img: 'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?q=80&w=600&auto=format&fit=crop',
+        flavorOptions: ['Coca Cola', 'Sprite'],
+        img: 'https://example.com',
       },
-      {
-        name: 'Special Square - Peri Peri',
-        description: 'Square cut pizza with fiery Peri Peri chicken',
-        varient: [
-          { size: 'Small', price: 595 },
-          { size: 'Large', price: 895 },
-        ],
-        img: 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Traditional Square - Margherita',
-        description: 'Classic square pizza with fresh mozzarella and basil',
-        varient: [
-          { size: 'Small', price: 445 },
-          { size: 'Large', price: 695 },
-        ],
-        img: 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Traditional Square - Chicken Fajita',
-        description: 'Square pizza with zesty chicken fajita and peppers',
-        varient: [
-          { size: 'Small', price: 495 },
-          { size: 'Large', price: 795 },
-        ],
-        img: 'https://images.unsplash.com/photo-1590534247854-e97d5e3feef6?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'Traditional Square - Veggie Lover',
-        description: 'Square pizza loaded with garden-fresh vegetables',
-        varient: [
-          { size: 'Small', price: 445 },
-          { size: 'Large', price: 695 },
-        ],
-        img: 'https://images.unsplash.com/photo-1511689660979-10d2b1aada49?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'CnC Signature - Premium Feast',
-        description: 'Our signature square pizza loaded with premium toppings and secret sauce',
-        varient: [
-          { size: 'Small', price: 745 },
-          { size: 'Large', price: 1095 },
-        ],
-        img: 'https://images.unsplash.com/photo-1600628421066-f6bda6a7b976?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'CnC Signature - Malai Boti Deluxe',
-        description: 'Signature creamy malai boti chicken on premium square crust',
-        varient: [
-          { size: 'Small', price: 695 },
-          { size: 'Large', price: 1045 },
-        ],
-        img: 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?q=80&w=600&auto=format&fit=crop',
-      },
-      {
-        name: 'CnC Signature - Steak Supreme',
-        description: 'Loaded steak strips with supreme cheese and signature toppings',
-        varient: [
-          { size: 'Small', price: 745 },
-          { size: 'Large', price: 1095 },
-        ],
-        img: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?q=80&w=600&auto=format&fit=crop',
-      },
+      { name: 'Tin Pack', description: 'Premium canned beverage served chilled.', price: 130,flavorOptions: ['Coca Cola', 'Sprite'], img: 'https://example.com' },
     ]
   }
 ]
@@ -255,9 +198,6 @@ export const DEALS = [
     img: 'https://images.unsplash.com/photo-1590534247854-e97d5e3feef6?q=80&w=800&auto=format&fit=crop',
     items: [
       { name: '4 Zinger Burger', type: 'burger', hasFlavorOption: false, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600&auto=format&fit=crop' },
-      // { name: 'Zinger Burger', type: 'burger', hasFlavorOption: false, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600&auto=format&fit=crop' },
-      // { name: 'Zinger Burger', type: 'burger', hasFlavorOption: false, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600&auto=format&fit=crop' },
-      // { name: 'Zinger Burger', type: 'burger', hasFlavorOption: false, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600&auto=format&fit=crop' },
       { name: 'One Liter Drink', type: 'drink', hasFlavorOption: true, img: 'https://images.unsplash.com/photo-1554866585-cd4628902094?q=80&w=600&auto=format&fit=crop' },
     ],
   },
@@ -431,6 +371,7 @@ export function normalizeProduct(item) {
     img: item.img || 'placeholder-food.svg',
     // original single price (fallback for fixed-price items)
     price: item.price,
+    flavorOptions: Array.isArray(item.flavorOptions) ? item.flavorOptions : [],
     // per-product variants preserved exactly: { name, size, price }
     variants,
     // derived display price: minimum variant price when variants exist, otherwise use fixed price or undefined

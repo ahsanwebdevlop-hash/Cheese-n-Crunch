@@ -21,6 +21,7 @@ function Header({ onBurgerClick, onCartClick, cartCount, isHeaderScrolled, isMob
             <li><NavLink to="/deals">Hot Deals</NavLink></li>
             <li><NavLink to="/menu">Menu</NavLink></li>
             <li><NavLink to="/reviews">Reviews</NavLink></li>
+            <li><NavLink to="/faq">FAQ</NavLink></li>
             <li><NavLink to="/about">About</NavLink></li>
             <li><NavLink to="/contact">Contact</NavLink></li>
           </ul>
@@ -35,6 +36,7 @@ function Header({ onBurgerClick, onCartClick, cartCount, isHeaderScrolled, isMob
             onClick={onBurgerClick}
             aria-label="Toggle menu"
             aria-expanded={isMobileNavOpen}
+            aria-controls="mobile-navigation"
           >
             <span />
             <span />

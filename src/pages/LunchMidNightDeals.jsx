@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import DealsSection from '../components/DealsSection.jsx';
+import HotDealsPreviewSection from '../components/CustomerFavoritesSection.jsx';
 
-function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
-  const lunchDeals = [
+export const LUNCH_MIDNIGHT_DEALS = [
     {
       n: 1,
       title: 'Deal 1',
@@ -90,18 +91,62 @@ function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
     },
   ];
 
+function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
+  const lunchDeals = LUNCH_MIDNIGHT_DEALS;
+
   return (
-    <DealsSection
-      deals={lunchDeals}
-      onAdd={onAdd}
-      onBuyNow={onBuyNow}
-      onShowToast={onShowToast}
-      eyebrow="Fresh & Filling"
-      title="Lunch & Mid Night"
-      accentTitle="Deals"
-      tagline="Great value for every hour of the day."
-      sectionId="lunch-mid-night-deals"
-    />
+    <>
+      <section className="hero" id="lunch-midnight-hero">
+        <div className="container hero-grid">
+          <div>
+            <span className="eyebrow hero-badge">Lunch &amp; Midnight Specials</span>
+            <h1 style={{ FontSize: '92px'}}>
+              <span className="brand-cheese">Lunch &amp; Midnight</span>
+              <span className="brand-n">Deals</span>
+            </h1>
+            <p className="desc">Enjoy our signature lunch and late-night value packs with pizza, burgers, wraps, and more. These special deals are available during both of our most popular time windows.</p>
+            <div style={{ display: 'grid', gap: '10px', marginTop: '18px', maxWidth: '420px' }}>
+              <div className="eyebrow" style={{ width: 'fit-content', background: 'rgba(232,183,63,0.06)' }}>Lunch: 1 PM – 4 PM</div>
+              <div className="eyebrow" style={{ width: 'fit-content', background: 'rgba(232,183,63,0.06)' }}>Midnight: 11 PM – 3 AM</div>
+            </div>
+            <div className="hero-ctas">
+              <Link to="/menu" className="btn btn-gold">View All Menu →</Link>
+              <Link to="/deals" className="btn btn-outline">Explore Hot Deals →</Link>
+            </div>
+          </div>
+
+          <div className="hero-visual" aria-hidden="true">
+            <div className="plate-glow" />
+            <img
+              className="food-img"
+              src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=900&auto=format&fit=crop"
+              alt="Lunch and midnight deal pizza and fast food spread"
+            />
+            <div className="crumb" />
+            <div className="crumb" />
+            <div className="crumb" />
+          </div>
+        </div>
+      </section>
+
+      <DealsSection
+        deals={lunchDeals}
+        onAdd={onAdd}
+        onBuyNow={onBuyNow}
+        onShowToast={onShowToast}
+        eyebrow="Available 24/7"
+        title="Lunch & Mid Night Deals"
+        accentTitle=""
+        tagline="Late-night cravings and lunch breaks call for special deals. Order your favorite pizza, burgers, and fast food from Cheese 'n Crunch in Chiniot."
+        sectionId="lunch-mid-night-deals"
+      />
+
+      <HotDealsPreviewSection
+        onAdd={onAdd}
+        onBuyNow={onBuyNow}
+        onShowToast={onShowToast}
+      />
+    </>
   );
 }
 

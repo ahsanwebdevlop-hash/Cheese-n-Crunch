@@ -1,5 +1,5 @@
-﻿import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+﻿import { useMemo, useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { OTHER_CATEGORIES, normalizeProduct } from '../data/siteData.js';
 import ProductCard from './ProductCard.jsx';
 
@@ -7,6 +7,8 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
   const special = (specialFlavors || []).map(normalizeProduct);
   const regular = (regularFlavors || []).map(normalizeProduct);
   const otherCats = OTHER_CATEGORIES || [];
+  const [searchParams] = useSearchParams();
+  const [showAnimation, setShowAnimation] = useState(false);
 
   const premiumStrip = useMemo(() => [
     { label: 'Hot Deals', to: '/deals', kind: 'link' },
@@ -21,15 +23,44 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
   const categoryList = useMemo(() => {
     return otherCats.reduce((acc, c) => {
       if (!acc.some((item) => item.label === c.title)) {
-        acc.push({ label: c.title, kind: 'category' });
+        acc.push({ label: c.title, kind: 'category', id: c.id });
       }
       return acc;
     }, []);
   }, [otherCats]);
 
   const [activeCategory, setActiveCategory] = useState(() => {
+    // Check if category parameter exists in URL
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      const foundCategory = otherCats.find((c) => c.id === categoryParam);
+      if (foundCategory) {
+        return foundCategory.title;
+      }
+    }
+    // Default to first category
     return otherCats[0]?.title || 'Burgers';
   });
+
+  // Update active category when URL parameter changes
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      const foundCategory = otherCats.find((c) => c.id === categoryParam);
+      if (foundCategory) {
+        setActiveCategory(foundCategory.title);
+      }
+    }
+  }, [searchParams, otherCats]);
+
+  // Trigger animation when category changes
+  useEffect(() => {
+    setShowAnimation(false);
+    const timer = setTimeout(() => {
+      setShowAnimation(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [activeCategory]);
 
   const handleNavClick = (item) => {
     if (item.kind === 'scroll' && item.targetId) {
@@ -56,11 +87,45 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
 
   return (
     <section className="section-pad" id="menu-nav">
+      <style>{`
+        .flavor-grid.animating > * {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        .flavor-grid.animating-in > * {
+          animation: revealItem 0.5s ease-out forwards;
+        }
+
+        @keyframes revealItem {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .flavor-grid.animating-in > :nth-child(1) { animation-delay: 0s; }
+        .flavor-grid.animating-in > :nth-child(2) { animation-delay: 0.05s; }
+        .flavor-grid.animating-in > :nth-child(3) { animation-delay: 0.1s; }
+        .flavor-grid.animating-in > :nth-child(4) { animation-delay: 0.15s; }
+        .flavor-grid.animating-in > :nth-child(5) { animation-delay: 0.2s; }
+        .flavor-grid.animating-in > :nth-child(6) { animation-delay: 0.25s; }
+        .flavor-grid.animating-in > :nth-child(7) { animation-delay: 0.3s; }
+        .flavor-grid.animating-in > :nth-child(8) { animation-delay: 0.35s; }
+        .flavor-grid.animating-in > :nth-child(9) { animation-delay: 0.4s; }
+        .flavor-grid.animating-in > :nth-child(10) { animation-delay: 0.45s; }
+      `}</style>
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">The Main Event</span>
-          <h2>Cheese 'n Crunch <em>Pizza</em></h2>
-          <p>Fresh dough. Bold flavors. Serious cravings.</p>
+          <div className="section-head reveal">
+            <h2>Cheese 'n Crunch Menu</h2>
+          </div>
+          <p>Explore the Cheese 'n Crunch menu in Chiniot featuring pizza, fast food, juices and desserts for every craving.</p>
         </div>
 
         {/* Per-product variants are defined in `siteData.js` on each product. */}
@@ -112,7 +177,7 @@ function MenuSection({ specialFlavors, regularFlavors, onFlavorClick }) {
           <div className="line" />
         </div>
 
-        <div className="flavor-grid stagger">
+        <div className={`flavor-grid stagger ${showAnimation ? 'animating-in' : 'animating'}`}>
           {itemsForCategory.map((product) => (
             <ProductCard key={product.name} product={product} onFlavorClick={onFlavorClick} />
           ))}

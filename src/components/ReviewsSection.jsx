@@ -25,7 +25,7 @@ function ReviewsSection({ reviews }) {
       <div className="container">
         <div className="section-head reveal" style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto' }}>
           <span className="eyebrow">Customer Love</span>
-          <h2>What Our <em>Customers</em> Say</h2>
+          <h2>Customer Reviews</h2>
           <p style={{ marginLeft: 'auto', marginRight: 'auto' }}>Straight from Chiniot — real cravings, real reactions.</p>
         </div>
 

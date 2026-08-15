@@ -6,12 +6,16 @@ function Hero() {
       <div className="container hero-grid">
         <div>
           <span className="eyebrow hero-badge">Fast Food & Juices</span>
-          <h1>CHEESE 'n<span>CRUNCH</span></h1>
+          <h1>
+            <span className="brand-cheese">Cheese</span> <span className="brand-n">'n</span>
+            <br />
+            <span className="brand-crunch">Crunch</span>
+          </h1>
           <div className="sub">"Say yes to pizza..."</div>
-          <p className="desc">Fresh flavors, loaded pizzas, irresistible deals and fast food made to satisfy every craving.</p>
+          <p className="desc">Cheese 'n Crunch serves fast food, pizza, juices and desserts in Chiniot, with dine-in, takeaway, delivery and booking area for up to 10 people. Open daily from 11 AM to 3 AM.</p>
           <div className="hero-ctas">
-            <Link to="/about" className="btn btn-gold">About C'n C</Link>
-            <Link to="/menu" className="btn btn-outline">Explore Menu</Link>
+            <Link to="/deals" className="btn btn-gold">Hot Deals</Link>
+            <Link to="/menu" className="btn btn-outline">View Menu</Link>
           </div>
           <div className="hero-free"><span className="dot" /> Free Delivery in Chiniot</div>
         </div>

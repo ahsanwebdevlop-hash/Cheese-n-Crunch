@@ -1,49 +1,39 @@
 function ContactSection() {
+  const locationAddress = 'Yasir Plaza, Near DHQ Hospital, Sargodha Road, Chiniot';
+  const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationAddress + ', Pakistan')}`;
+
   return (
-    <section className="section-pad" id="contact" style={{ background: 'var(--green-950)' }}>
+    <section className="section-pad find-us-section" id="find-us">
       <div className="container">
-        <div className="section-head reveal">
-          <span className="eyebrow">Get In Touch</span>
-          <h2>Location <em>&amp;</em> Contact</h2>
-          <p>Order directly on WhatsApp or reach out with any questions.</p>
-        </div>
-        <div className="contact-grid stagger">
-          <div className="contact-card">
-            <div className="contact-row">
-              <div className="ic">🍕</div>
-              <div className="t">
-                <small>Restaurant</small>
-                <strong>Cheese 'n Crunch — Fast Food & Juices</strong>
-              </div>
+        <div className="find-us-grid">
+          <div className="find-us-copy">
+            <span className="eyebrow">FIND US</span>
+            <h2>COME VISIT CHEESE &apos;N CRUNCH</h2>
+            <p>
+              Looking for us? Find our restaurant in Chiniot and visit us for your favorite food.
+            </p>
+
+            <div className="find-us-address" aria-label="Restaurant address">
+              <strong>Cheese &apos;n Crunch</strong>
+              <span>Yasir Plaza, Near DHQ Hospital</span>
+              <span>Sargodha Road, Chiniot</span>
+              <span>Punjab, Pakistan</span>
             </div>
-            <div className="contact-row">
-              <div className="ic">💬</div>
-              <div className="t">
-                <small>WhatsApp</small>
-                <strong>0311-0992288</strong>
-              </div>
-            </div>
-            <div className="contact-row">
-              <div className="ic">🚚</div>
-              <div className="t">
-                <small>Delivery</small>
-                <strong>Free delivery, all of Chiniot</strong>
-              </div>
-            </div>
-            <div className="contact-row">
-              <div className="ic">🕒</div>
-              <div className="t">
-                <small>Opening Hours</small>
-                <strong>Coming soon</strong>
-              </div>
-            </div>
-            <a href="https://wa.me/923110992288" target="_blank" rel="noopener" className="btn btn-gold" style={{ marginTop: '18px', width: '100%' }}>
-              Chat on WhatsApp
+
+            <a
+              href={directionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-gold find-us-cta"
+            >
+              GET DIRECTIONS →
             </a>
           </div>
-          <div className="map-placeholder">
-            <div className="ic">📍</div>
-            <p>Map location will be added once the exact address is confirmed.</p>
+
+          <div className="find-us-map" aria-label="Map area for Cheese 'n Crunch location">
+            <div className="find-us-map-grid" aria-hidden="true" />
+            <div className="find-us-map-pin" aria-hidden="true">📍</div>
+            <div className="find-us-map-label">Cheese &apos;n Crunch</div>
           </div>
         </div>
       </div>

@@ -18,6 +18,7 @@ import Reviews from './pages/Reviews.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Bar from './pages/Bar.jsx';
+import FAQ from './pages/FAQ.jsx';
 import LunchMidNightDeals from './pages/LunchMidNightDeals.jsx';
 import { DEALS, SPECIAL_FLAVORS, REGULAR_FLAVORS } from './data/siteData.js';
 import placeholderImg from './assets/placeholder-food.svg';
@@ -109,7 +110,7 @@ function App() {
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.15, rootMargin: '0px 0px -15% 0px' }
     );
 
     // Observe currently present reveal/stagger elements
@@ -178,6 +179,8 @@ function App() {
     setCheckoutMode(true);
   };
 
+  const isValidPakistaniPhone = (value) => /^03\d{9}$/.test(String(value || '').trim());
+
   const handleCheckoutFieldChange = (field, value) => {
     setCheckoutData((prev) => ({ ...prev, [field]: value }));
   };
@@ -226,12 +229,13 @@ function App() {
     // product is expected to be normalized (see normalizeProduct)
     const variants = product.variants || [];
     const defaultVariant = variants.length ? variants[0] : null;
-    const defaultFlavor = defaultVariant ? defaultVariant.name : null;
+    const defaultFlavor = product.flavorOptions?.[0] || (defaultVariant ? defaultVariant.name : null);
     setProductModalState({
       name: product.name,
       desc: product.desc,
       img: product.img,
       variants,
+      flavorOptions: product.flavorOptions || [],
       selectedFlavor: defaultFlavor,
       selectedVariant: defaultVariant,
       price: product.price,
@@ -412,6 +416,10 @@ function App() {
       showToast('Please select a delivery area');
       return;
     }
+    if (!isValidPakistaniPhone(phone)) {
+      showToast('Please enter a valid Pakistani mobile number (e.g., 03110992288)');
+      return;
+    }
     if (!address) {
       showToast('Please fill in your address');
       return;
@@ -439,7 +447,10 @@ function App() {
       <ScrollToTop />
       <main id="main">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route 
+            path="/" 
+            element={<Home onFlavorClick={openProductModal} onAdd={addToCart} onBuyNow={handleCustomCakeBuyNow} onShowToast={showToast} />} 
+          />
           <Route
             path="/deals"
             element={<Deals deals={DEALS} onAdd={addToCart} onBuyNow={buyNow} onShowToast={showToast} />}
@@ -461,6 +472,7 @@ function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/bar" element={<Bar onFlavorClick={openProductModal} onAdd={addToCart} onShowToast={showToast} onBuyNow={handleCustomCakeBuyNow} />} />
           <Route
             path="/lunch-mid-night-deals"

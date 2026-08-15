@@ -47,7 +47,10 @@ function CartDrawer({
                   type="tel"
                   value={checkoutData.phone}
                   onChange={(e) => onCheckoutFieldChange('phone', e.target.value)}
-                  placeholder="03XX-XXXXXXX"
+                  placeholder="03XXXXXXXXX"
+                  inputMode="numeric"
+                  pattern="03\\d{9}"
+                  title="Please enter a valid Pakistani mobile number (e.g., 03110992288)"
                 />
               </div>
               <div className="field">

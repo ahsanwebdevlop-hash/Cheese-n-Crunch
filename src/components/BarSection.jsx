@@ -1,8 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { normalizeProduct } from '../data/siteData.js';
 import ProductCard from './ProductCard.jsx';
 
 function BarSection({ onFlavorClick }) {
+  const [searchParams] = useSearchParams();
+  const [showAnimation, setShowAnimation] = useState(false);
+  
   // Sample data for beverages and desserts
   const barCategories = useMemo(() => [
      {
@@ -402,9 +406,27 @@ function BarSection({ onFlavorClick }) {
     }));
   }, [barCategories]);
 
-  const [activeCategory, setActiveCategory] = useState(() => {
-    return barCategories[0]?.title || 'Cold Coffee';
-  });
+  const [activeCategory, setActiveCategory] = useState('Cold Coffee');
+
+  // Update active category when URL parameter changes
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      const foundCategory = barCategories.find((c) => c.id === categoryParam);
+      if (foundCategory) {
+        setActiveCategory(foundCategory.title);
+      }
+    }
+  }, [searchParams, barCategories]);
+
+  // Trigger animation when category changes
+  useEffect(() => {
+    setShowAnimation(false);
+    const timer = setTimeout(() => {
+      setShowAnimation(true);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [activeCategory]);
 
   const handleCategoryClick = (label) => {
     setActiveCategory(label);
@@ -420,6 +442,38 @@ function BarSection({ onFlavorClick }) {
 
   return (
     <section className="section-pad" id="bar-nav" style={{ background: 'var(--green-950)' }}>
+      <style>{`
+        .flavor-grid.animating > * {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        .flavor-grid.animating-in > * {
+          animation: revealItem 0.5s ease-out forwards;
+        }
+
+        @keyframes revealItem {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .flavor-grid.animating-in > :nth-child(1) { animation-delay: 0s; }
+        .flavor-grid.animating-in > :nth-child(2) { animation-delay: 0.05s; }
+        .flavor-grid.animating-in > :nth-child(3) { animation-delay: 0.1s; }
+        .flavor-grid.animating-in > :nth-child(4) { animation-delay: 0.15s; }
+        .flavor-grid.animating-in > :nth-child(5) { animation-delay: 0.2s; }
+        .flavor-grid.animating-in > :nth-child(6) { animation-delay: 0.25s; }
+        .flavor-grid.animating-in > :nth-child(7) { animation-delay: 0.3s; }
+        .flavor-grid.animating-in > :nth-child(8) { animation-delay: 0.35s; }
+        .flavor-grid.animating-in > :nth-child(9) { animation-delay: 0.4s; }
+        .flavor-grid.animating-in > :nth-child(10) { animation-delay: 0.45s; }
+      `}</style>
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">Refresh & Indulge</span>
@@ -448,7 +502,7 @@ function BarSection({ onFlavorClick }) {
           <div className="line" />
         </div>
 
-        <div className="flavor-grid stagger">
+        <div className={`flavor-grid stagger ${showAnimation ? 'animating-in' : 'animating'}`}>
           {itemsForCategory.map((product) => (
             <ProductCard key={product.name} product={product} onFlavorClick={onFlavorClick} />
           ))}

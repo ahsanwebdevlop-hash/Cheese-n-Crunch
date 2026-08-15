@@ -1,9 +1,9 @@
 function TrustStrip() {
   const items = [
-    { icon: '🍕', label: 'Fresh & Delicious' },
+    { icon: '🍕', label: 'Pizza & Fast Food in Chiniot' },
     { icon: '🔥', label: 'Hot Deals' },
     { icon: '🚚', label: 'Free Delivery in Chiniot' },
-    { icon: '💬', label: 'Easy WhatsApp Ordering' },
+    { icon: '💬', label: 'Order on WhatsApp' },
   ];
 
   return (

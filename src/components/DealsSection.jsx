@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import DealsModal from './DealsModal.jsx';
 import { PIZZA_TOPPINGS } from '../data/siteData.js';
 
@@ -22,16 +23,38 @@ function DealsSection({
   onBuyNow,
   onShowToast,
   eyebrow = 'Limited Time',
-  title = 'Hot',
-  accentTitle = 'Deals',
+  title = 'Food Deals in Chiniot',
+  accentTitle = '',
   tagline = 'Big cravings deserve bigger deals.',
   sectionId = 'deals',
 }) {
   const [openDealId, setOpenDealId] = useState(null);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const dealIdParam = searchParams.get('dealId');
 
   const handleOpenModal = (dealId) => {
     setOpenDealId(dealId);
   };
+
+  const handleViewDeal = (dealId) => {
+    setOpenDealId(dealId);
+  };
+
+  useEffect(() => {
+    if (dealIdParam) {
+      const dealElement = document.getElementById(`deal-${dealIdParam}`);
+      if (dealElement) {
+        setTimeout(() => {
+          dealElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          dealElement.style.boxShadow = '0 0 0 3px rgba(234, 184, 72, 0.4)';
+          setTimeout(() => {
+            dealElement.style.boxShadow = '';
+          }, 2000);
+        }, 300);
+      }
+    }
+  }, [dealIdParam]);
 
   const handleCloseModal = () => {
     setOpenDealId(null);
@@ -112,19 +135,48 @@ function DealsSection({
     return items.slice(0, 2).map((item) => item.name).join(', ') + (items.length > 2 ? '...' : '');
   };
 
+  useEffect(() => {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            sectionObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -15% 0px' }
+    );
+
+    const section = document.getElementById(sectionId);
+    if (section) {
+      sectionObserver.observe(section);
+    }
+
+    return () => sectionObserver.disconnect();
+  }, [sectionId]);
+
   return (
     <section className="section-pad" id={sectionId}>
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">{eyebrow}</span>
           <h2>
-            {title} <em>{accentTitle}</em>
+            {title}
+            {accentTitle ? <em>{accentTitle}</em> : null}
           </h2>
           <p>{tagline}</p>
         </div>
         <div className="deals-grid stagger">
-          {deals.map((deal) => (
-            <article key={deal.n} className="card">
+          {deals.map((deal, index) => (
+            <article
+              key={deal.n}
+              id={`deal-${deal.n}`}
+              className="card deal-card-item"
+              data-index={index}
+              onClick={() => handleViewDeal(deal.n)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="card-img-wrap">
                 <img src={deal.img} alt={deal.title} />
                 <div className="deal-num">Deal {deal.n}</div>
@@ -136,15 +188,56 @@ function DealsSection({
                   <div className="price">Rs. {deal.price}</div>
                   <button
                     className="add-btn"
-                    onClick={() => handleOpenModal(deal.n)}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleViewDeal(deal.n);
+                    }}
+                    style={{ cursor: 'pointer', marginRight: '0.5rem' }}
                   >
-                    Add to Cart
+                    VIEW DEAL
                   </button>
                 </div>
               </div>
             </article>
           ))}
         </div>
+        
+        <style>{`
+          #${sectionId} .deal-card-item {
+            opacity: 0;
+            transform: scale(0.1);
+            transition: opacity 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+          }
+
+          #${sectionId} .deal-card-item[data-index="0"] {
+            transition-delay: 0s;
+          }
+
+          #${sectionId} .deal-card-item[data-index="1"] {
+            transition-delay: 0.2s;
+          }
+
+          #${sectionId} .deal-card-item[data-index="2"] {
+            transition-delay: 0.4s;
+          }
+
+          #${sectionId} .deal-card-item[data-index="3"] {
+            transition-delay: 0.6s;
+          }
+
+          #${sectionId} .deal-card-item[data-index="4"] {
+            transition-delay: 0.8s;
+          }
+
+          #${sectionId} .deal-card-item[data-index="5"] {
+            transition-delay: 1.0s;
+          }
+
+          #${sectionId}.is-visible .deal-card-item {
+            opacity: 1;
+            transform: scale(1);
+          }
+        `}</style>
       </div>
 
       {/* Render DealsModal for the open deal */}
