@@ -29,9 +29,9 @@ function Bar({ onFlavorClick, onAdd, onShowToast, onBuyNow }) {
       <CustomCakesSection onBuyNow={onBuyNow} onShowToast={onShowToast} />
       <BrownieIceCreamSection onAdd={onAdd} onShowToast={onShowToast} />
       <DessertsSection onFlavorClick={onFlavorClick} />
-      <section className="section-pad">
+      <section className="section-pad section-surface-flat">
         <div className="container">
-          <div className="section-ctas reveal" style={{ textAlign: 'center' }}>
+          <div className="section-ctas reveal">
             <a href="https://wa.me/923110992288" target="_blank" rel="noopener" className="btn btn-gold">Order on WhatsApp</a>
             <Link to="/menu" className="btn btn-outline">View Full Menu</Link>
           </div>

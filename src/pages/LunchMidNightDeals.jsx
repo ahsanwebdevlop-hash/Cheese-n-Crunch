@@ -100,7 +100,7 @@ function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
         <div className="container hero-grid">
           <div>
             <span className="eyebrow hero-badge">Lunch &amp; Midnight Specials</span>
-            <h1 style={{ FontSize: '92px'}}>
+            <h1>
               <span className="brand-cheese">Lunch &amp; Midnight</span>
               <span className="brand-n">Deals</span>
             </h1>

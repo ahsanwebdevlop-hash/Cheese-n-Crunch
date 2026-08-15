@@ -161,7 +161,7 @@ function SquareSection({ onAdd, onBuyNow, onShowToast }) {
 
   return (
     <>
-      <section className="section-pad" id="pizza" style={{ background: 'var(--green-950)' }}>
+      <section className="section-pad" id="pizza">
         <div className="container">
           <div className="section-head reveal">
             <span className="eyebrow">Classic</span>

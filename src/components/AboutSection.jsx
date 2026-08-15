@@ -1,6 +1,6 @@
 function AboutSection() {
   return (
-    <section className="section-pad about-story-section" id="about" style={{ background: 'var(--green-950)' }}>
+    <section className="section-pad about-story-section section-surface" id="about">
       <div className="container about-grid">
         <div className="about-img reveal about-visual">
           <img

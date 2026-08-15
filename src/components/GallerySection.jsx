@@ -1,6 +1,6 @@
 function GallerySection({ images, onImageClick }) {
   return (
-    <section className="section-pad" style={{ background: 'var(--green-950)' }}>
+    <section className="section-pad section-surface-flat">
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">Fresh & Loaded</span>

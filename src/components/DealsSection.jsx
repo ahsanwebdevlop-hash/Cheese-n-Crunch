@@ -157,7 +157,7 @@ function DealsSection({
   }, [sectionId]);
 
   return (
-    <section className="section-pad" id={sectionId}>
+    <section className="section-pad deals-animate-section" id={sectionId}>
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">{eyebrow}</span>
@@ -201,46 +201,8 @@ function DealsSection({
             </article>
           ))}
         </div>
-        
-        <style>{`
-          #${sectionId} .deal-card-item {
-            opacity: 0;
-            transform: scale(0.1);
-            transition: opacity 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
-          }
-
-          #${sectionId} .deal-card-item[data-index="0"] {
-            transition-delay: 0s;
-          }
-
-          #${sectionId} .deal-card-item[data-index="1"] {
-            transition-delay: 0.2s;
-          }
-
-          #${sectionId} .deal-card-item[data-index="2"] {
-            transition-delay: 0.4s;
-          }
-
-          #${sectionId} .deal-card-item[data-index="3"] {
-            transition-delay: 0.6s;
-          }
-
-          #${sectionId} .deal-card-item[data-index="4"] {
-            transition-delay: 0.8s;
-          }
-
-          #${sectionId} .deal-card-item[data-index="5"] {
-            transition-delay: 1.0s;
-          }
-
-          #${sectionId}.is-visible .deal-card-item {
-            opacity: 1;
-            transform: scale(1);
-          }
-        `}</style>
       </div>
 
-      {/* Render DealsModal for the open deal */}
       {openDealId && (
         <>
           <div className="modal-overlay open" onClick={handleCloseModal} />

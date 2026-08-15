@@ -78,7 +78,7 @@ function CustomCakesSection({ onBuyNow, onShowToast }) {
   };
 
   return (
-    <section className="section-pad" id="custom-cakes" style={{ background: 'var(--green-950)' }}>
+    <section className="section-pad section-surface-flat" id="custom-cakes">
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">Design Your Own</span>

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero.jsx';
 import { SAMPLE_REVIEWS } from '../data/siteData.js';
-import PopularCategoriesSection from '../components/PopularCategoriesSection.jsx';
 import HotDealsPreviewSection from '../components/CustomerFavoritesSection.jsx';
 import LunchMidnightDealsSection from '../components/LunchMidnightDealsSection.jsx';
 import MenuCategoriesSection from '../components/MenuCategoriesSection.jsx';

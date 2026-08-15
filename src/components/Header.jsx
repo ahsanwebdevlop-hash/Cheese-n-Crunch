@@ -26,7 +26,7 @@ function Header({ onBurgerClick, onCartClick, cartCount, isHeaderScrolled, isMob
             <li><NavLink to="/contact">Contact</NavLink></li>
           </ul>
         </nav>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }} className="header-actions">
           <button className="cart-icon-btn" onClick={onCartClick} aria-label="Open cart">
             🛒<span className="badge">{cartCount}</span>
           </button>
