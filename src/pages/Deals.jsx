@@ -11,7 +11,7 @@ function Deals({ deals, onAdd, onBuyNow, onShowToast }) {
       <section className="hero deals-page-hero" id="hot-deals-hero">
         <div className="container hero-grid deals-hero-grid">
           <div className="deals-hero-copy">
-            <span className="eyebrow hero-badge">Limited Time Offers</span>
+            <span className="eyebrow hero-badge">Special Offers</span>
             <h1>
               <span className="brand-cheese">Hot</span> <span className="brand-n">Deals</span>
             </h1>
@@ -42,7 +42,7 @@ function Deals({ deals, onAdd, onBuyNow, onShowToast }) {
         onBuyNow={onBuyNow}
         onShowToast={onShowToast}
         title="Food Deals in Chiniot"
-        eyebrow="Limited Time Offers"
+        eyebrow="Special Offers"
         tagline="Cheese 'n Crunch offers special food deals featuring pizza, fast food, and more in Chiniot. Browse our deals and order on WhatsApp."
       />
 

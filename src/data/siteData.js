@@ -9,96 +9,96 @@ export const MENU_BY_CATEGORY = [
     id: 'appetizer',
     title: 'Appetizers',
     items: [
-      { name: 'French Fries', description: 'Toasted bread with grilled chicken and signature sauce.', price: 265, img: 'https://example.com' },
-      { name: 'Mayo Fries', description: 'Creamy barbecue chicken malai boti with onions.', price: 345, img: 'https://example.com' },
-      { name: 'Loaded Fries', description: 'Pressed panini stuffed with spicy chicken tikka.', price: 645, img: 'https://example.com' },
-      { name: 'Oven Baked Wings (6 / 12 pcs)', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 695 }], img: 'https://example.com' },
-      { name: 'Malai Boti Wings (6 / 12 pcs)', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 695 }], img: 'https://example.com' },
-      { name: 'Stick', description: 'Pressed panini with juicy chicken malai boti.', price: 545, img: 'https://example.com' },
-      { name: 'Fish & Chips', description: 'Crispy fried fish fillet served with chips.', price: 1195, img: 'https://example.com' },
+      { name: 'French Fries', description: 'Crispy golden fries with light seasoning.', price: 265, img: 'https://example.com' },
+      { name: 'Mayo Fries', description: 'Crispy fries topped with creamy mayo.', price: 345, img: 'https://example.com' },
+      { name: 'Loaded Fries', description: 'Fries loaded with chicken, cheese and sauce.', price: 645, img: 'https://example.com' },
+      { name: 'Oven Baked Wings (6 / 12 pcs)', description: 'Juicy chicken wings baked until golden.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 695 }], img: 'https://example.com' },
+      { name: 'Malai Boti Wings (6 / 12 pcs)', description: 'Juicy wings with creamy malai boti flavor.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 695 }], img: 'https://example.com' },
+      { name: 'Stick', description: 'Crispy chicken sticks with a tasty coating.', price: 545, img: 'https://example.com' },
+      { name: 'Fish & Chips', description: 'Crispy fish served with golden fries.', price: 1195, img: 'https://example.com' },
     ]
   },
   {
     id: 'fried',
-    title: 'Fries',
+    title: 'Frieds',
     items: [
-      { name: 'Fried Wings (6 / 12 pcs)', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 745 }], img: 'https://example.com' },
-      { name: 'Fried Chicken', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: 'Half', price: 795 }, { size: 'Full', price: 1545 }], img: 'https://example.com' },
-      { name: 'Nuggets', description: 'Pressed panini with juicy chicken malai boti.', varient: [{ size: 'pcs', price: 265 }, { size: '12pcs', price: 545 }], img: 'https://example.com' },
-      { name: 'Hot Shots (12 pcs)', description: 'Bite-sized crispy chicken hot shots fried golden.', price: 595, img: 'https://example.com' },
+      { name: 'Fried Wings (6 / 12 pcs)', description: 'Crispy fried chicken wings with tasty seasoning.', varient: [{ size: '6pcs', price: 395 }, { size: '12pcs', price: 745 }], img: 'https://example.com' },
+      { name: 'Fried Chicken', description: 'Crispy fried chicken with juicy meat inside.', varient: [{ size: 'Half', price: 795 }, { size: 'Full', price: 1545 }], img: 'https://example.com' },
+      { name: 'Nuggets', description: 'Crispy chicken nuggets with a soft center.', varient: [{ size: 'pcs', price: 265 }, { size: '12pcs', price: 545 }], img: 'https://example.com' },
+      { name: 'Hot Shots (12 pcs)', description: 'Small crispy chicken bites with tasty spices.', price: 595, img: 'https://example.com' },
     ]
   },
   {
     id: 'burgers',
     title: 'Burgers',
     items: [
-      { name: 'CnC Special Burger', description: 'Signature crispy chicken patty with secret sauce.', price: 695, img: 'https://example.com/burger.jpg' },
-      { name: 'Tower Burger', description: 'Double stacked crispy chicken fillets with cheese.', price: 795, img: 'https://example.com/cheese-burger.jpg' },
-      { name: 'Zinger Burger', description: 'Classic crunchy zinger fillet with premium mayo.', price: 495, img: 'https://example.com/burger.jpg' },
-      { name: 'Petty Burger', description: 'Traditional fried chicken patty with sweet cream sauce.', price: 395, img: 'https://example.com/burger.jpg' },
-      { name: 'Chappli Kabab Burger', description: 'Spiced chappli kabab patty with mint chutney.', price: 395, img: 'https://example.com/burger.jpg' },
-      { name: 'Peri Peri Burger', description: 'Flame-grilled chicken coated in fiery Peri Peri spice.', price: 545, img: 'https://example.com/burger.jpg' },
-      { name: 'Cheesy Beef Burger', description: 'Juicy beef patty loaded with double cheddar cheese.', price: 695, img: 'https://example.com/burger.jpg' },
-      { name: 'Grilled Burger', description: 'Charcoal-grilled chicken fillet with mild herbs.', price: 645, img: 'https://example.com/burger.jpg' },
-      { name: 'Pizza Burger', description: 'Oven-baked burger stuffed with pizza sauce and mozzarella.', price: 745, img: 'https://example.com/burger.jpg' },
-      { name: 'Fish Burger', description: 'Crispy fried fish fillet with tartar sauce.', price: 595, img: 'https://example.com/burger.jpg' },
+      { name: 'CnC Special Burger', description: 'Crispy chicken burger with special creamy sauce.', price: 695, img: 'https://example.com/burger.jpg' },
+      { name: 'Tower Burger', description: 'Double chicken burger with cheese and sauce.', price: 795, img: 'https://example.com/cheese-burger.jpg' },
+      { name: 'Zinger Burger', description: 'Crispy chicken zinger with creamy mayo.', price: 495, img: 'https://example.com/burger.jpg' },
+      { name: 'Petty Burger', description: 'Crispy chicken patty with creamy sauce.', price: 395, img: 'https://example.com/burger.jpg' },
+      { name: 'Chappli Kabab Burger', description: 'Chappli kabab burger with fresh mint chutney.', price: 395, img: 'https://example.com/burger.jpg' },
+      { name: 'Peri Peri Burger', description: 'Spicy chicken burger with peri peri flavor.', price: 545, img: 'https://example.com/burger.jpg' },
+      { name: 'Cheesy Beef Burger', description: 'Juicy beef burger loaded with melted cheese.', price: 695, img: 'https://example.com/burger.jpg' },
+      { name: 'Grilled Burger', description: 'Grilled chicken burger with mild tasty spices.', price: 645, img: 'https://example.com/burger.jpg' },
+      { name: 'Pizza Burger', description: 'Burger with pizza sauce and melted cheese.', price: 745, img: 'https://example.com/burger.jpg' },
+      { name: 'Fish Burger', description: 'Crispy fish burger with creamy tartar sauce.', price: 595, img: 'https://example.com/burger.jpg' },
     ]
   },
   {
     id: 'sandwich',
     title: 'Sandwiches',
     items: [
-      { name: 'Supreme Sandwich', description: 'Toasted bread with grilled chicken and signature sauce.', price: 745, img: 'https://example.com' },
-      { name: 'Malai Boti Sandwich', description: 'Creamy barbecue chicken malai boti with onions.', price: 795, img: 'https://example.com' },
-      { name: 'Panini Tikka Sandwich', description: 'Pressed panini stuffed with spicy chicken tikka.', price: 545, img: 'https://example.com' },
-      { name: 'Panini Malai Boti Sandwich', description: 'Pressed panini with juicy chicken malai boti.', price: 595, img: 'https://example.com' },
+      { name: 'Supreme Sandwich', description: 'Grilled chicken sandwich with special creamy sauce.', price: 745, img: 'https://example.com' },
+      { name: 'Malai Boti Sandwich', description: 'Creamy malai boti with onions in bread.', price: 795, img: 'https://example.com' },
+      { name: 'Panini Tikka Sandwich', description: 'Grilled chicken tikka inside soft panini bread.', price: 545, img: 'https://example.com' },
+      { name: 'Panini Malai Boti Sandwich', description: 'Juicy malai boti served inside soft panini.', price: 595, img: 'https://example.com' },
     ]
   },
   {
     id: 'bread',
     title: 'Bread & Baked',
     items: [
-      { name: 'Garlic Bread', description: 'Toasted baguette slices brushed with garlic butter.', price: 195, img: 'https://example.com' },
-      { name: 'Garlic Supreme Bread', description: 'Baked garlic bread layered with melted mozzarella cheese.', price: 295, img: 'https://example.com' },
-      { name: 'Chicken Supreme Bread', description: 'Baked bread loaded with seasoned chicken and cheese.', price: 395, img: 'https://example.com' },
+      { name: 'Garlic Bread', description: 'Soft bread with garlic butter and herbs.', price: 195, img: 'https://example.com' },
+      { name: 'Garlic Supreme Bread', description: 'Garlic bread topped with melted mozzarella cheese.', price: 295, img: 'https://example.com' },
+      { name: 'Chicken Supreme Bread', description: 'Baked bread topped with chicken and cheese.', price: 395, img: 'https://example.com' },
     ]
   },
   {
     id: 'pasta',
     title: 'Pasta',
     items: [
-      { name: 'Lasagna Pasta', description: 'Baked layers of pasta, minced chicken, and cheese.', price: 195, img: 'https://example.com' },
-      { name: 'Fettuccine Pasta', description: 'Fettuccine pasta tossed in creamy white Alfredo sauce.', price: 295, img: 'https://example.com' },
-      { name: 'Macaroni Pasta', description: 'Stir-fried macaroni with chicken and mixed vegetables.', price: 395, img: 'https://example.com' },
+      { name: 'Lasagna Pasta', description: 'Baked pasta layers with chicken and cheese.', price: 195, img: 'https://example.com' },
+      { name: 'Fettuccine Pasta', description: 'Fettuccine pasta with creamy white sauce.', price: 295, img: 'https://example.com' },
+      { name: 'Macaroni Pasta', description: 'Macaroni with chicken and fresh mixed vegetables.', price: 395, img: 'https://example.com' },
     ]
   },
   {
     id: 'wrap',
     title: 'Wraps',
     items: [
-      { name: 'Cocktail Wrap', description: 'Crispy chicken with tangy cocktail sauce wrap.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
-      { name: 'Chatkhara Wrap', description: 'Spicy chicken with traditional tangy chatkhara spices.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
-      { name: 'Hari Bhari Wrap', description: 'Fresh green herb marinated chicken wrapped tightly.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
-      { name: 'Malai Boti Wrap', description: 'Creamy barbecue chicken malai boti wrapped smoothly.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
-      { name: 'Turkish Wrap', description: 'Authentic Turkish style grilled chicken wrap.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Cocktail Wrap', description: 'Crispy chicken wrap with creamy cocktail sauce.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Chatkhara Wrap', description: 'Spicy chicken wrap with tasty chatkhara flavor.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Hari Bhari Wrap', description: 'Chicken wrap with fresh green herbs and sauce.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Malai Boti Wrap', description: 'Creamy malai boti wrapped with fresh salad.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Turkish Wrap', description: 'Grilled chicken wrap with Turkish style flavors.', price: 495, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop' },
     ]
   },
   {
     id: 'roll',
     title: 'Rolls',
     items: [
-      { name: 'Spin Roll', description: 'Crispy paratha roll stuffed with spiced chicken.', price: 545, img: 'https://example.com' },
-      { name: 'Shawarma Roll', description: 'Traditional middle eastern style chicken roll.', price: 495, img: 'https://example.com' },
-      { name: 'Malai Boti Roll', description: 'Creamy charcoal grilled chicken boti in paratha.', price: 545, img: 'https://example.com' },
-      { name: 'Kabab Roll', description: 'Spiced grilled chicken kabab rolled in paratha.', price: 545, img: 'https://example.com' },
+      { name: 'Spin Roll', description: 'Crispy paratha roll filled with spicy chicken.', price: 545, img: 'https://example.com' },
+      { name: 'Shawarma Roll', description: 'Chicken shawarma roll with fresh salad and sauce.', price: 495, img: 'https://example.com' },
+      { name: 'Malai Boti Roll', description: 'Creamy grilled malai boti wrapped in paratha.', price: 545, img: 'https://example.com' },
+      { name: 'Kabab Roll', description: 'Grilled chicken kabab wrapped in soft paratha.', price: 545, img: 'https://example.com' },
     ]
   },
   {
     id: 'platter',
     title: 'Platters',
     items: [
-      { name: 'CnC Special Platter', description: 'Signature assortment of premium fast food items.', price: 545, img: 'https://example.com' },
-      { name: 'Malai Boti Platter', description: 'Creamy grilled chicken boti served with sides.', price: 495, img: 'https://example.com' },
+      { name: 'CnC Special Platter', description: 'A tasty mix of our favorite items.', price: 545, img: 'https://example.com' },
+      { name: 'Malai Boti Platter', description: 'Creamy grilled malai boti served with sides.', price: 495, img: 'https://example.com' },
     ]
   },
   {
@@ -107,7 +107,7 @@ export const MENU_BY_CATEGORY = [
     items: [
       {
         name: 'Mineral Water',
-        description: 'Fresh mineral water bottle for a quick refreshment.',
+        description: 'Fresh mineral water for a quick refresh.',
         price: 85,
         variants: [
           { size: 'Small', price: 85 },
@@ -117,7 +117,7 @@ export const MENU_BY_CATEGORY = [
       },
       {
         name: 'Drink',
-        description: 'Cold beverage option available in assorted flavors.',
+        description: 'Cold soft drink available in different sizes.',
         price: 75,
         variants: [
           { size: '350ml', price: 75 },
@@ -128,7 +128,7 @@ export const MENU_BY_CATEGORY = [
         flavorOptions: ['Coca Cola', 'Sprite'],
         img: 'https://example.com',
       },
-      { name: 'Tin Pack', description: 'Premium canned beverage served chilled.', price: 130,flavorOptions: ['Coca Cola', 'Sprite'], img: 'https://example.com' },
+      { name: 'Tin Pack', description: 'Cold canned drink served in your favorite flavor.', price: 130, flavorOptions: ['Coca Cola', 'Sprite'], img: 'https://example.com' },
     ]
   }
 ]
@@ -392,12 +392,13 @@ export const GALLERY = [
 ];
 
 export const SAMPLE_REVIEWS = [
-  { name: 'Ahmed', loc: 'Chiniot', stars: 5, text: 'Cheese \u2019n Crunch ka large pizza order kiya tha, cheese bilkul loaded tha aur crust perfect crispy. Ab yehi apna go-to pizza place ban gaya hai.' },
-  { name: 'Sana', loc: 'Chiniot', stars: 5, text: 'Deal 6 li thi for the whole family and honestly itni value kahin aur nahi milti. Do large pizza aur drink itnay mein — bohat reasonable!' },
-  { name: 'Bilal', loc: null, stars: 4.5, text: 'The wings were so crispy, best fried chicken I\'ve had in a while. Thoda spicy tha jo mujhe pasand aaya, will order again for sure.' },
-  { name: 'Hina', loc: 'Chiniot', stars: 5, text: 'Food quality is genuinely consistent every time I order. Fresh lagta hai, oily nahi hota, aur portion bhi acha hota hai.' },
-  { name: 'Usman', loc: null, stars: 4.5, text: 'Delivery was faster than I expected and the rider was polite. Pizza garam garam pohnchi, packaging bhi neat thi.' },
-  { name: 'Mahnoor', loc: 'Chiniot', stars: 5, text: 'Itni saari flavors mein se choose karna mushkil hota hai — Peri Peri aur Malai Boti dono try ki, dono hi zabardast thi.' },
-  { name: 'Fahad', loc: null, stars: 5, text: 'Overall bohat achi experience rahi, order se leke delivery tak sab smooth tha. Cheese \u2019n Crunch is now our regular Friday night order.' },
+  { name: 'Danish Farooq', loc: 'Chiniot', stars: 5, text: 'Had a great dining experience at Cheese ’n Crunch. The Square Grand Pizza was enjoyable, with good service and a welcoming atmosphere. The staff was friendly, and the restaurant offers a wide variety of fast food and desserts. Overall, a pleasant experience for dining in.' },
+  { name: 'Najaf Ali', loc: 'Chiniot', stars: 5, text: 'Everything we ordered was fresh, flavorful, and well prepared. From burgers and fries to pasta and other items, the food was delicious. The staff was friendly, the service was quick, and the complimentary gesture made the experience even more enjoyable. A great choice for fast food in Chiniot.' },
+  { name: 'Rida Sabir', loc: 'Chiniot', stars: 5, text: 'An amazing experience from start to finish. The food was delicious, the service was excellent, and the atmosphere made the visit even more enjoyable. Definitely a place worth visiting again!' },
+  { name: 'Naeem Ul Hassan', loc: 'Chiniot', stars: 4, text: 'Cheese N Crunch offers a wonderful ambience with a cozy and inviting atmosphere, especially for dinner. The taste stands out and feels superior to many other options. A comfortable place to enjoy quality food with a great dining environment.' },
+  { name: 'captain shah', loc: 'Chiniot', stars: 5, text: 'An outstanding fast food experience at Cheese N Crunch. The CNC Special Burger, Fish n Fries, and Oven Baked Wings were all excellent. The food quality, service, and atmosphere were exceptional. A highly recommended spot for enjoying great fast food with friends and family.' },
+  { name: 'Usama Sabir', loc: 'Chiniot', stars: 5, text: 'Cheese N Crunch is a great place to enjoy delicious food with friends and family. With a variety of options including pizzas, burgers, sandwiches, and more, there is something for everyone. A great spot to enjoy good food and quality time together.' },
+  { name: 'lilly', loc: 'Chiniot', stars: 5, text: 'An amazing experience with delicious food and excellent service. The taste was impressive, and the staff’s behavior made the visit even more enjoyable. Overall, a wonderful dining experience that I would happily recommend.' },
+  { name: 'Abeera Tul Qadar', loc: 'Chiniot', stars: 5, text: 'Had a wonderful experience at Cheese N Crunch. The ambience was beautiful, the atmosphere was welcoming, and the taste of the food was truly impressive. Everything came together to make the dining experience memorable and enjoyable.' }
 ];
 

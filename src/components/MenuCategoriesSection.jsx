@@ -22,7 +22,7 @@ function MenuCategoriesSection() {
         </div>
 
         <div className="cat-nav-wrap reveal">
-          <div className="cat-nav cat-nav-center">
+          <div className="cat-nav">
             {MENU_BY_CATEGORY.map((category) => (
               <Link
                 key={category.id}
@@ -36,7 +36,7 @@ function MenuCategoriesSection() {
         </div>
 
         <div className="cat-nav-wrap reveal">
-          <div className="cat-nav cat-nav-center">
+          <div className="cat-nav">
             {barCategories.map((category) => (
               <Link
                 key={category.id}

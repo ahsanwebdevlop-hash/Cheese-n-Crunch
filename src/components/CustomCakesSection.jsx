@@ -53,10 +53,10 @@ function CustomCakesSection({ onBuyNow, onShowToast }) {
       return;
     }
 
-    if (!uploadedImage) {
-      onShowToast('Please upload your cake design');
-      return;
-    }
+    // if (!uploadedImage) {
+    //   onShowToast('Please upload your cake design');
+    //   return;
+    // }
 
     const weightLabel = weightType === 'custom' ? `${customWeight} Pound` : `${weightType} Pound`;
     const orderLabel = `Custom Cake (${weightLabel})`;
@@ -151,7 +151,7 @@ function CustomCakesSection({ onBuyNow, onShowToast }) {
                 <label htmlFor="cake-design-upload" className="image-upload-label">
                   <div className="upload-icon">📸</div>
                   <div className="upload-text">
-                    <p className="upload-main">Click to upload or drag & drop</p>
+                    <p className="upload-main">Click to upload or drag & drop (optional)</p>
                     <p className="upload-sub">PNG, JPG, GIF up to 10MB</p>
                   </div>
                 </label>
@@ -200,7 +200,7 @@ function CustomCakesSection({ onBuyNow, onShowToast }) {
           {/* Buy Now Button */}
           <div className="cc-action">
             <button
-              className="btn btn-gold btn-large"
+              className="btn btn-gold btn"
               onClick={handleBuyNow}
             >
               Buy Now

@@ -99,7 +99,7 @@ function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
       <section className="hero" id="lunch-midnight-hero">
         <div className="container hero-grid">
           <div>
-            <span className="eyebrow hero-badge">Lunch &amp; Midnight Specials</span>
+            <span className="eyebrow hero-badge">LUNCH & MIDNIGHT SPECIALS</span>
             <h1>
               <span className="brand-cheese">Lunch &amp; Midnight</span>
               <span className="brand-n">Deals</span>

@@ -26,10 +26,10 @@ function ReviewsSection({ reviews }) {
         <div className="section-head reveal" style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto' }}>
           <span className="eyebrow">Customer Love</span>
           <h2>Customer Reviews</h2>
-          <p style={{ marginLeft: 'auto', marginRight: 'auto' }}>Straight from Chiniot — real cravings, real reactions.</p>
+          <p style={{ marginLeft: 'auto', marginRight: 'auto',marginBottom:'40px' }}>Straight from Chiniot — real cravings, real reactions.</p>
         </div>
 
-        <div className="review-carousel-3d reveal">
+        <div className="review-carousel-3d reveal" style={{overflow:'visible'}}>
           <div className="review-stage" role="region" aria-label="Customer testimonials" aria-roledescription="carousel">
             {reviews.map((review, index) => (
               <article key={review.name} className={`review-card-3d ${positions[index]}`}>
@@ -50,9 +50,6 @@ function ReviewsSection({ reviews }) {
             <button type="button" id="revPrev" onClick={goPrev} aria-label="Previous review">‹</button>
             <button type="button" id="revNext" onClick={goNext} aria-label="Next review">›</button>
           </div>
-          <p style={{ textAlign: 'center', fontSize: '11.5px', color: 'var(--white-faint)', marginTop: '16px' }}>
-            Sample customer-style testimonials — not verified reviews.
-          </p>
         </div>
       </div>
     </section>

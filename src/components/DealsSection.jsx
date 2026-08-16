@@ -160,7 +160,7 @@ function DealsSection({
     <section className="section-pad deals-animate-section" id={sectionId}>
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">{eyebrow}</span>
+          {/* <span className="eyebrow">{eyebrow}</span> */}
           <h2>
             {title}
             {accentTitle ? <em>{accentTitle}</em> : null}
