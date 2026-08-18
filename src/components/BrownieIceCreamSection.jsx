@@ -5,25 +5,15 @@ function BrownieIceCreamSection({ onAdd, onShowToast }) {
   const brownies = BROWNIE_FLAVORS.map((f) => f.name);
   const iceCreamFlavors = ICE_CREAM_FLAVORS.map((f) => f.name);
 
-  const sizeOptions = [
-    { label: 'Small', price: 600 },
-    { label: 'Medium', price: 850 },
-    { label: 'Large', price: 1200 },
-  ];
+  const FIXED_PRICE = 350;
 
   const [selectedBrownie, setSelectedBrownie] = useState(brownies[0]);
   const [selectedIceCream, setSelectedIceCream] = useState(iceCreamFlavors[0]);
-  const [size, setSize] = useState(sizeOptions[0].price);
 
-  const selectedSize = useMemo(
-    () => sizeOptions.find((option) => option.price === size) || sizeOptions[0],
-    [size]
-  );
-
-  const total = useMemo(() => size, [size]);
+  const total = useMemo(() => FIXED_PRICE, []);
 
   const handleAdd = () => {
-    const label = `${selectedBrownie} + ${selectedIceCream} (${selectedSize.label})`;
+    const label = `${selectedBrownie} + ${selectedIceCream}`;
     onAdd({
       name: label,
       price: total,
@@ -45,28 +35,18 @@ function BrownieIceCreamSection({ onAdd, onShowToast }) {
           <span className="hh-note">🍫 Warm brownie with cold ice cream — Pure bliss!</span>
           <div className="hh-row">
             <div className="field">
-              <label htmlFor="brownie">Choose Brownie</label>
-              <select id="brownie" value={selectedBrownie} onChange={(e) => setSelectedBrownie(e.target.value)}>
+              <label htmlFor="brownie-select">Choose Brownie</label>
+              <select id="brownie-select" value={selectedBrownie} onChange={(e) => setSelectedBrownie(e.target.value)}>
                 {brownies.map((brownie) => (
                   <option key={brownie} value={brownie}>{brownie}</option>
                 ))}
               </select>
             </div>
             <div className="field">
-              <label htmlFor="iceCream">Choose Ice Cream</label>
-              <select id="iceCream" value={selectedIceCream} onChange={(e) => setSelectedIceCream(e.target.value)}>
+              <label htmlFor="ice-cream-select">Choose Ice Cream</label>
+              <select id="ice-cream-select" value={selectedIceCream} onChange={(e) => setSelectedIceCream(e.target.value)}>
                 {iceCreamFlavors.map((flavor) => (
                   <option key={flavor} value={flavor}>{flavor}</option>
-                ))}
-              </select>
-            </div>
-            <div className="field">
-              <label htmlFor="bieSize">Size</label>
-              <select id="bieSize" value={size} onChange={(e) => setSize(Number(e.target.value))}>
-                {sizeOptions.map((option) => (
-                  <option key={option.price} value={option.price}>
-                    {option.label} — Rs. {option.price}
-                  </option>
                 ))}
               </select>
             </div>

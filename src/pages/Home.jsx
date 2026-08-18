@@ -4,7 +4,7 @@ import { SAMPLE_REVIEWS } from '../data/siteData.js';
 import HotDealsPreviewSection from '../components/CustomerFavoritesSection.jsx';
 import LunchMidnightDealsSection from '../components/LunchMidnightDealsSection.jsx';
 import MenuCategoriesSection from '../components/MenuCategoriesSection.jsx';
-import CustomCakesSection from '../components/CustomCakesSection.jsx';
+import BarFeaturedItemsSection from '../components/BarFeaturedItemsSection.jsx';
 import WhyChooseUsSection from '../components/WhyChooseUsSection.jsx';
 import HomeFAQPreview from '../components/HomeFAQPreview.jsx';
 import LocationCTASection from '../components/LocationCTASection.jsx';
@@ -25,7 +25,7 @@ function Home({ onFlavorClick, onAdd, onBuyNow, onShowToast }) {
         onShowToast={handleShowToast}
       />
       <LunchMidnightDealsSection />
-      <CustomCakesSection onBuyNow={handleBuyNow} onShowToast={handleShowToast} />
+      <BarFeaturedItemsSection />
       <WhyChooseUsSection />
       <ReviewsSection reviews={SAMPLE_REVIEWS} />
       <HomeFAQPreview />

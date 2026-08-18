@@ -1272,7 +1272,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   overflow-x: hidden;
   width: 100%;
 }
@@ -1457,7 +1457,7 @@ select:focus-visible {
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(45px);
   transition: opacity .8s var(--ease), transform .8s var(--ease);
 }
 
@@ -1466,10 +1466,51 @@ select:focus-visible {
   transform: translateY(0);
 }
 
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+
+.reveal-left {
+  transform: translateX(-120px);
+}
+
+.reveal-right {
+  transform: translateX(120px);
+}
+
+.reveal-left.in,
+.reveal-right.in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .stagger>* {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+
+.preview-cards-row.reveal-right > * {
+  opacity: 0;
+  transform: translateX(42px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+
+.preview-cards-row.reveal-right.in > * {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.preview-split__copy.reveal-left {
+  opacity: 0;
+  transform: translateX(-120px);
+}
+
+.preview-split__copy.reveal-left.in {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .stagger.in>* {
@@ -3317,8 +3358,28 @@ textarea:focus {
   background: linear-gradient(180deg, rgba(17, 48, 30, .96), rgba(9, 30, 22, .94));
   border: var(--border-default);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .02), var(--shadow-deep);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  transition: opacity .75s var(--ease), transform .75s var(--ease), box-shadow var(--transition-normal), border-color var(--transition-normal);
   overflow: hidden;
+  opacity: 0;
+}
+
+.promise-card.reveal {
+  transform: translateY(45px);
+}
+
+.promise-card.reveal-left {
+  transform: translateX(-120px) translateY(40px);
+}
+
+.promise-card.reveal-right {
+  transform: translateX(120px) translateY(40px);
+}
+
+.promise-card.reveal.in,
+.promise-card.reveal-left.in,
+.promise-card.reveal-right.in {
+  opacity: 1;
+  transform: translate(0, 0);
 }
 
 .promise-card::before {
@@ -5160,7 +5221,7 @@ footer ul a:hover {
   margin-bottom: var(--space-md);
   font-weight: 700;
 }
-
+.reveal
 .weight-btn {
   padding: var(--space-md) var(--space-md);
   background: var(--green-950);

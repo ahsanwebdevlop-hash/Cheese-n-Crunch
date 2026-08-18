@@ -23,15 +23,22 @@ function OurPromiseSection() {
         </div>
 
         <div className="our-promise-grid">
-          {promises.map((promise, idx) => (
-            <div
-              key={idx}
-              className="promise-card"
-            >
-              <h3 className="promise-card-title">{promise.title}</h3>
-              <p className="promise-card-copy">{promise.description}</p>
-            </div>
-          ))}
+          {promises.map((promise, idx) => {
+            const cardClass =
+              idx === 0 ? 'promise-card reveal-left' :
+              idx === 1 ? 'promise-card reveal' :
+              'promise-card reveal-right';
+
+            return (
+              <div
+                key={idx}
+                className={cardClass}
+              >
+                <h3 className="promise-card-title">{promise.title}</h3>
+                <p className="promise-card-copy">{promise.description}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MENU_BY_CATEGORY } from '../data/siteData.js';
+import ArrowIcon from './ArrowIcon.jsx';
 
 function MenuCategoriesSection() {
   const barCategories = [
@@ -51,10 +52,10 @@ function MenuCategoriesSection() {
 
         <div className="section-ctas reveal">
           <Link to="/menu" className="btn btn-gold">
-            View Full Menu <span className="btn-arrow" aria-hidden="true">→</span>
+            View Full Menu <ArrowIcon className="btn-arrow" size={16} />
           </Link>
           <Link to="/bar" className="btn btn-outline">
-            Explore Bar &amp; Desserts <span className="btn-arrow" aria-hidden="true">→</span>
+            Explore Bar &amp; Desserts <ArrowIcon className="btn-arrow" size={16} />
           </Link>
         </div>
       </div>

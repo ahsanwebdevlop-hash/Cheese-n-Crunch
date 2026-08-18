@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import DealsSection from '../components/DealsSection.jsx';
 import HotDealsPreviewSection from '../components/CustomerFavoritesSection.jsx';
+import BarFeaturedItemsSection from '../components/BarFeaturedItemsSection.jsx';
+import ArrowIcon from '../components/ArrowIcon.jsx';
 
 export const LUNCH_MIDNIGHT_DEALS = [
     {
@@ -96,7 +98,7 @@ function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
 
   return (
     <>
-      <section className="hero" id="lunch-midnight-hero">
+      <section className="hero reveal" id="lunch-midnight-hero">
         <div className="container hero-grid">
           <div>
             <span className="eyebrow hero-badge">LUNCH & MIDNIGHT SPECIALS</span>
@@ -110,8 +112,8 @@ function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
               <div className="eyebrow" style={{ width: 'fit-content', background: 'rgba(232,183,63,0.06)' }}>Midnight: 11 PM – 3 AM</div>
             </div>
             <div className="hero-ctas">
-              <Link to="/menu" className="btn btn-gold">View All Menu →</Link>
-              <Link to="/deals" className="btn btn-outline">Explore Hot Deals →</Link>
+              <Link to="/menu" className="btn btn-gold">View All Menu <ArrowIcon className="btn-arrow" size={16} /></Link>
+              <Link to="/deals" className="btn btn-outline">Explore Hot Deals <ArrowIcon className="btn-arrow" size={16} /></Link>
             </div>
           </div>
 
@@ -141,6 +143,7 @@ function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
         sectionId="lunch-mid-night-deals"
       />
 
+      <BarFeaturedItemsSection />
       <HotDealsPreviewSection
         onAdd={onAdd}
         onBuyNow={onBuyNow}

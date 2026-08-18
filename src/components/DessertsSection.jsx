@@ -49,7 +49,7 @@ function DessertsSection({ onFlavorClick }) {
   }, [cakeItems]);
 
   return (
-    <section className="section-pad" id="desserts-nav" style={{ background: 'var(--green-950)' }}>
+    <section className="section-pad" id="cakes" style={{ background: 'var(--green-950)' }}>
       <div className="container">
         <div className="section-head reveal">
           <h2>Cakes</h2>

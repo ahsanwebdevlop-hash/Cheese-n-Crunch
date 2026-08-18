@@ -7,7 +7,7 @@ function TrustStrip() {
   ];
 
   return (
-    <section className="trust-strip" aria-label="Highlights">
+    <section className="trust-strip reveal" aria-label="Highlights">
       <div className="container">
         {items.map((item) => (
           <div key={item.label} className="trust-item">

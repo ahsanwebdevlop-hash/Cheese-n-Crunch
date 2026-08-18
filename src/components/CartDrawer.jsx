@@ -66,6 +66,20 @@ function CartDrawer({
                   ))}
                 </select>
               </div>
+              {checkoutData.area === 'Chanab Nagar' && (
+                <div className="field">
+                  <label htmlFor="custChanabArea">Chanab Nagar Area</label>
+                  <select
+                    id="custChanabArea"
+                    value={checkoutData.chanabArea || 'Area 1'}
+                    onChange={(e) => onCheckoutFieldChange('chanabArea', e.target.value)}
+                  >
+                    <option value="Area 1">Area 1</option>
+                    <option value="Area 2">Area 2</option>
+                    <option value="Area 3">Area 3</option>
+                  </select>
+                </div>
+              )}
               <div className="field">
                 <label htmlFor="custAddress">Delivery Address</label>
                 <textarea
@@ -129,7 +143,11 @@ function CartDrawer({
             <span className="amt">Rs. {total}</span>
           </div>
           {checkoutMode ? (
-            <button className="btn btn-gold" disabled={!checkoutData.area} onClick={() => onCheckout(checkoutData)}>
+            <button
+              className="btn btn-gold"
+              disabled={!checkoutData.area || (checkoutData.area === 'Chanab Nagar' && !checkoutData.chanabArea)}
+              onClick={() => onCheckout(checkoutData)}
+            >
               Place Order on WhatsApp
             </button>
           ) : (

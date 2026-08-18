@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import ArrowIcon from './ArrowIcon.jsx';
 
 function ContactHeroSection() {
   return (
@@ -6,14 +7,14 @@ function ContactHeroSection() {
       <div className="container">
         <div className="content-hero-grid">
           <div className="content-hero-copy reveal">
-            <span className="eyebrow">Get In Touch</span>
+            <span className="eyebrow" style={{alignSelf:'flex-start'}}>Get In Touch</span>
             <h1 className="content-hero-title">We&apos;d Love to Hear from You.</h1>
             <p className="text-lead" style={{ marginTop: 'var(--space-xl)' }}>
               Have a question, need help with your order, or want to get in touch with Cheese &apos;n Crunch? We&apos;re here to help.
             </p>
             <div className="content-hero-actions">
               <Link to="/menu" className="btn btn-gold">
-                Order Now <span className="btn-arrow" aria-hidden="true">→</span>
+                Order Now <ArrowIcon className="btn-arrow" size={16} />
               </Link>
               <a
                 href="https://wa.me/923110992288"
@@ -21,7 +22,7 @@ function ContactHeroSection() {
                 rel="noopener noreferrer"
                 className="btn btn-outline"
               >
-                WhatsApp Us <span className="btn-arrow" aria-hidden="true">→</span>
+                WhatsApp Us <ArrowIcon className="btn-arrow" size={16} />
               </a>
             </div>
           </div>

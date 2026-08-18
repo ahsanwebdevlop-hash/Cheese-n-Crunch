@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function Hero() {
   return (
-    <section className="hero" id="home">
+    <section className="hero reveal" id="home">
       <div className="container hero-grid">
         <div>
           <span className="eyebrow hero-badge">Fast Food & Juices</span>

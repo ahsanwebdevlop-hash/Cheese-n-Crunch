@@ -1,3 +1,4 @@
+import { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 
 function BookingAreaSection() {
@@ -27,5 +28,4 @@ function BookingAreaSection() {
     </section>
   );
 }
-
 export default BookingAreaSection;

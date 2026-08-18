@@ -33,7 +33,18 @@ const DELIVERY_AREAS = [
   { name: 'Iqbal Rice', fee: 100 },
 ];
 
-const getAreaDeliveryFee = (area) => {
+const CHANAB_NAGAR_AREAS = [
+  { label: 'Area 1', fee: 200 },
+  { label: 'Area 2', fee: 250 },
+  { label: 'Area 3', fee: 350 },
+];
+
+const getAreaDeliveryFee = (area, chanabArea = '') => {
+  if (area === 'Chanab Nagar') {
+    const match = CHANAB_NAGAR_AREAS.find((item) => item.label === chanabArea);
+    return match ? match.fee : 200;
+  }
+
   const match = DELIVERY_AREAS.find((item) => item.name === area);
   return match ? match.fee : 0;
 };
@@ -42,7 +53,7 @@ function App() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const [isCartOpen, setCartOpen] = useState(false);
   const [isCheckoutMode, setCheckoutMode] = useState(false);
-  const [checkoutData, setCheckoutData] = useState({ name: '', phone: '', area: '', address: '', notes: '' });
+  const [checkoutData, setCheckoutData] = useState({ name: '', phone: '', area: '', chanabArea: '', address: '', notes: '' });
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [buyNowItem, setBuyNowItem] = useState(null);
@@ -65,7 +76,10 @@ function App() {
 
   const cartCount = useMemo(() => cartItems.reduce((sum, item) => sum + item.qty, 0), [cartItems]);
   const cartSubtotal = useMemo(() => cartItems.reduce((sum, item) => sum + item.qty * item.price, 0), [cartItems]);
-  const deliveryFee = useMemo(() => getAreaDeliveryFee(checkoutData.area), [checkoutData.area]);
+  const deliveryFee = useMemo(
+    () => getAreaDeliveryFee(checkoutData.area, checkoutData.chanabArea),
+    [checkoutData.area, checkoutData.chanabArea]
+  );
   const cartTotal = useMemo(() => cartSubtotal + deliveryFee, [cartSubtotal, deliveryFee]);
 
   const checkoutItems = buyNowItem ? [buyNowItem] : cartItems;
@@ -115,7 +129,7 @@ function App() {
 
     // Observe currently present reveal/stagger elements
     const observeAll = () => {
-      document.querySelectorAll('.reveal, .stagger').forEach((el) => {
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger').forEach((el) => {
         // avoid observing elements already revealed
         if (!el.classList.contains('in')) revealObserver.observe(el);
       });
@@ -182,11 +196,25 @@ function App() {
   const isValidPakistaniPhone = (value) => /^03\d{9}$/.test(String(value || '').trim());
 
   const handleCheckoutFieldChange = (field, value) => {
-    setCheckoutData((prev) => ({ ...prev, [field]: value }));
+    setCheckoutData((prev) => {
+      if (field === 'area') {
+        return {
+          ...prev,
+          area: value,
+          chanabArea: value === 'Chanab Nagar' ? (prev.chanabArea || 'Area 1') : '',
+        };
+      }
+
+      if (field === 'chanabArea') {
+        return { ...prev, chanabArea: value };
+      }
+
+      return { ...prev, [field]: value };
+    });
   };
 
   const resetCheckoutForm = () => {
-    setCheckoutData({ name: '', phone: '', area: '', address: '', notes: '' });
+    setCheckoutData({ name: '', phone: '', area: '', chanabArea: '', address: '', notes: '' });
   };
 
   const addToCart = (item) => {
@@ -291,7 +319,7 @@ function App() {
       : (buyNowItem ? [buyNowItem] : cartItems).map((item) => ({ ...item }));
 
     const subtotal = items.reduce((sum, item) => sum + item.qty * item.price, 0);
-    const deliveryFeeValue = getAreaDeliveryFee(customer.area);
+    const deliveryFeeValue = getAreaDeliveryFee(customer.area, customer.chanabArea);
     const total = subtotal + deliveryFeeValue;
 
     return {
@@ -332,6 +360,11 @@ function App() {
       return;
     }
 
+    if (review.customer.area === 'Chanab Nagar' && !review.customer.chanabArea) {
+      showToast('Please select a Chanab Nagar area option');
+      return;
+    }
+
     setOrderReview(review);
   };
 
@@ -352,7 +385,7 @@ function App() {
         'Customer Information:',
         `Name: ${customer.name}`,
         `Phone: ${customer.phone}`,
-        `Delivery Area: ${customer.area}`,
+        `Delivery Area: ${customer.area}${customer.chanabArea ? ` (${customer.chanabArea})` : ''}`,
         `Delivery Fee: Rs. ${deliveryFee}`,
         `Address: ${customer.address}`,
         '',
@@ -384,7 +417,7 @@ function App() {
       '',
       `Customer: ${customer.name}`,
       `Phone: ${customer.phone}`,
-      `Delivery Area: ${customer.area}`,
+      `Delivery Area: ${customer.area}${customer.chanabArea ? ` (${customer.chanabArea})` : ''}`,
       `Delivery Fee: Rs. ${deliveryFee}`,
       `Address: ${customer.address}`,
       '',
@@ -411,9 +444,13 @@ function App() {
     showToast('Order opened in WhatsApp');
   };
 
-  const placeOrder = ({ name, phone, area, address, notes }) => {
+  const placeOrder = ({ name, phone, area, chanabArea, address, notes }) => {
     if (!name || !phone || !area) {
       showToast('Please select a delivery area');
+      return;
+    }
+    if (area === 'Chanab Nagar' && !chanabArea) {
+      showToast('Please select a Chanab Nagar area option');
       return;
     }
     if (!isValidPakistaniPhone(phone)) {
@@ -431,7 +468,7 @@ function App() {
       return;
     }
 
-    openOrderReview({ name, phone, area, address, notes });
+    openOrderReview({ name, phone, area, chanabArea, address, notes });
   };
 
   return (

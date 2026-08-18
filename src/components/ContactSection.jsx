@@ -1,3 +1,5 @@
+import ArrowIcon from './ArrowIcon.jsx';
+
 function ContactSection() {
   const locationAddress = 'Yasir Plaza, Near DHQ Hospital, Sargodha Road, Chiniot';
   const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationAddress + ', Pakistan')}`;
@@ -26,7 +28,7 @@ function ContactSection() {
               rel="noopener noreferrer"
               className="btn btn-gold find-us-cta"
             >
-              GET DIRECTIONS →
+              GET DIRECTIONS <ArrowIcon className="btn-arrow" size={16} />
             </a>
           </div>
 

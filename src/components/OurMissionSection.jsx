@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import ArrowIcon from './ArrowIcon.jsx';
 
 function OurMissionSection() {
   return (
-    <section className="section-pad our-mission-section" id="our-mission" style={{ background: 'var(--green-950)' }}>
+    <section className="section-pad our-mission-section reveal" id="our-mission" style={{ background: 'var(--green-950)' }}>
       <div className="container">
         <div className="our-mission-wrap">
           <div className="our-mission-line our-mission-line-top" />
@@ -22,11 +23,11 @@ function OurMissionSection() {
               to="/menu" 
               className="btn btn-gold our-mission-cta"
             >
-              Explore Our Menu <span style={{ fontSize: '1.2em' }}>→</span>
+              Explore Our Menu <ArrowIcon className="btn-arrow" size={16} />
             </Link>
           </div>
 
-          <div className="our-mission-line our-mission-line-bottom" />
+          <div className="our-mission-line our-mission-line-bottom " />
         </div>
       </div>
     </section>

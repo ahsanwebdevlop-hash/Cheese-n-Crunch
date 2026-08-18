@@ -407,7 +407,7 @@ function BarSection({ onFlavorClick }) {
     }));
   }, [barCategories]);
 
-  const [activeCategory, setActiveCategory] = useState('Cold Coffee');
+  const [activeCategory, setActiveCategory] = useState('Brownies');
 
   // Update active category when URL parameter changes
   useEffect(() => {
@@ -416,6 +416,12 @@ function BarSection({ onFlavorClick }) {
       const foundCategory = barCategories.find((c) => c.id === categoryParam);
       if (foundCategory) {
         setActiveCategory(foundCategory.title);
+        const categoryButton = document.querySelector(`[data-category-id="${foundCategory.id}"]`);
+        if (categoryButton) {
+          setTimeout(() => {
+            categoryButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 80);
+        }
       }
     }
   }, [searchParams, barCategories]);
@@ -490,6 +496,7 @@ function BarSection({ onFlavorClick }) {
               <button
                 key={item.label}
                 type="button"
+                data-category-id={barCategories.find((c) => c.title === item.label)?.id || item.label}
                 className={`btn ${activeCategory === item.label ? 'active' : ''}`}
                 onClick={() => handleCategoryClick(item.label)}
               >

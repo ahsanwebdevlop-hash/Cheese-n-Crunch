@@ -12,7 +12,7 @@ function LunchMidnightDealsSection() {
       <div className="container">
         <span className='eyebrow' style={{ marginBottom: '20px',maxWidth: 'fit-content',padding:'12px',display:'block',marginInline:'auto' }}>Lunch &amp; Midnight Deals</span>
         <div className="preview-split preview-split--reverse">
-          <div className="preview-cards-row stagger">
+          <div className="preview-cards-row stagger reveal-left">
             {previewDeals.map((deal) => (
               <article key={deal.n} className="card card-compact reveal">
                 <div className="card-img-wrap">
@@ -31,7 +31,7 @@ function LunchMidnightDealsSection() {
             ))}
           </div>
 
-          <div className="preview-split__copy reveal">
+          <div className="preview-split__copy reveal-right">
             <div className="section-head section-head--left reveal dis-block">
               <h2 className='text-left'>Lunch &amp; Midnight Deals</h2>
             </div>

@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import ArrowIcon from './ArrowIcon.jsx';
 
 function FinalCTASection() {
   return (
-    <section className="section-pad about-final-cta-section section-surface-flat" id="final-cta">
+    <section className="section-pad about-final-cta-section section-surface-flat reveal" id="final-cta">
       <div className="container">
         <div className="about-final-cta-box">
           <div className="about-final-cta-line about-final-cta-line-top" />
@@ -18,11 +19,11 @@ function FinalCTASection() {
           </p>
 
           <div className="about-final-cta-actions">
-            <Link to="/menu" className="btn btn-gold">
-              View Our Menu <span className="btn-arrow" aria-hidden="true">→</span>
+            <Link to="/menu" className="btn btn-gold reveal-left">
+              View Our Menu <ArrowIcon className="btn-arrow" size={16} />
             </Link>
-            <Link to="/contact" className="btn btn-outline">
-              Contact Us <span className="btn-arrow" aria-hidden="true">→</span>
+            <Link to="/contact" className="btn btn-outline reveal-right">
+              Contact Us <ArrowIcon className="btn-arrow" size={16} />
             </Link>
           </div>
 

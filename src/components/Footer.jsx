@@ -6,7 +6,7 @@ function Footer() {
     <footer>
 
       {/* Social & Location Stripe */}
-      <div className="footer-social-strip">
+      <div className="footer-social-strip reveal">
         <div className="container">
           <div className="footer-social-links" >
 
@@ -70,7 +70,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container reveal">
         <div className="footer-grid" style={{paddingTop: 'clamp(30px, 4vw, 50px)'}}>
 
           <div>

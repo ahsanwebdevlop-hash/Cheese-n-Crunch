@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
+import ArrowIcon from './ArrowIcon.jsx';
 
 function BarCategoriesPreviewSection() {
     const barCategories = useMemo(() => [
@@ -43,7 +44,7 @@ function BarCategoriesPreviewSection() {
                 </div>
 
                 <div className="section-ctas reveal" style={{ marginTop: '2rem', textAlign: 'center' }}>
-                    <Link to="/bar" className="btn btn-gold">Explore Bar & Desserts →</Link>
+                    <Link to="/bar" className="btn btn-gold">Explore Bar &amp; Desserts <ArrowIcon className="btn-arrow" size={16} /></Link>
                 </div>
             </div>
         </section>

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import DealsSection from '../components/DealsSection.jsx';
 import LunchMidnightDealsSection from '../components/LunchMidnightDealsSection.jsx';
+import BarFeaturedItemsSection from '../components/BarFeaturedItemsSection.jsx';
+import ArrowIcon from '../components/ArrowIcon.jsx';
 import { DEALS } from '../data/siteData.js';
 
 function Deals({ deals, onAdd, onBuyNow, onShowToast }) {
@@ -8,7 +10,7 @@ function Deals({ deals, onAdd, onBuyNow, onShowToast }) {
 
   return (
     <>
-      <section className="hero deals-page-hero" id="hot-deals-hero">
+      <section className="hero deals-page-hero reveal" id="hot-deals-hero">
         <div className="container hero-grid deals-hero-grid">
           <div className="deals-hero-copy">
             <span className="eyebrow hero-badge">Special Offers</span>
@@ -17,8 +19,8 @@ function Deals({ deals, onAdd, onBuyNow, onShowToast }) {
             </h1>
             <p className="desc">Cheese 'n Crunch offers special food deals featuring pizza, fast food, and more in Chiniot. Browse our deals and order on WhatsApp.</p>
             <div className="hero-ctas">
-              <Link to="/menu" className="btn btn-gold">View All Menu →</Link>
-              <Link to="/lunch-mid-night-deals" className="btn btn-outline">Explore Lunch &amp; Midnight Deals →</Link>
+              <Link to="/menu" className="btn btn-gold">View All Menu <ArrowIcon className="btn-arrow" size={16} /></Link>
+              <Link to="/lunch-mid-night-deals" className="btn btn-outline">Explore Lunch &amp; Midnight Deals <ArrowIcon className="btn-arrow" size={16} /></Link>
             </div>
           </div>
 
@@ -46,6 +48,7 @@ function Deals({ deals, onAdd, onBuyNow, onShowToast }) {
         tagline="Cheese 'n Crunch offers special food deals featuring pizza, fast food, and more in Chiniot. Browse our deals and order on WhatsApp."
       />
 
+      <BarFeaturedItemsSection />
       <LunchMidnightDealsSection />
     </>
   );

@@ -63,7 +63,7 @@ function HotDealsPreviewSection({ onAdd, onBuyNow, onShowToast }) {
       <section className="section-pad section-surface" id="home-hot-deals">
         <div className="container">
           <div className="preview-split">
-            <div className="preview-split__copy reveal">
+            <div className="preview-split__copy reveal-left">
               <div className="section-head section-head--left reveal dis-block">
                 <h2  className='text-left'>hot deals</h2>
               </div>
@@ -77,7 +77,7 @@ function HotDealsPreviewSection({ onAdd, onBuyNow, onShowToast }) {
               </div>
             </div>
 
-            <div className="preview-cards-row stagger">
+            <div className="preview-cards-row stagger reveal-right">
               {featuredDeals.map((deal) => (
                 <article key={deal.n} className="card card-compact reveal">
                   <div className="card-img-wrap">
