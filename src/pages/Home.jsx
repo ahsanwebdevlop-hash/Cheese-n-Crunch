@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import Hero from '../components/Hero.jsx';
+// import Hero from '../components/Hero.jsx';
+import CinematicHero from '../components/CinematicHero.jsx';
 import { SAMPLE_REVIEWS } from '../data/siteData.js';
 import HotDealsPreviewSection from '../components/CustomerFavoritesSection.jsx';
 import LunchMidnightDealsSection from '../components/LunchMidnightDealsSection.jsx';
@@ -17,7 +18,8 @@ function Home({ onFlavorClick, onAdd, onBuyNow, onShowToast }) {
 
   return (
     <>
-      <Hero />
+      <CinematicHero />
+      {/* <Hero /> */}
       <MenuCategoriesSection />
       <HotDealsPreviewSection
         onAdd={handleAdd}

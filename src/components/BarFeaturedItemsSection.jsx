@@ -46,6 +46,7 @@ function BarFeaturedItemsSection() {
   return (
     <section className="section-pad section-surface" id="bar-featured-items">
       <div className="container">
+        <span className='eyebrow' style={{ marginBottom: '20px', maxWidth: 'fit-content', padding: '12px', display: 'block', marginInline: 'auto' }}>Bar & Deseart</span>
         <div className="preview-split">
           <div className="preview-split__copy reveal-left">
             <div className="section-head section-head--left reveal dis-block">

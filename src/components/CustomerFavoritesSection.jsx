@@ -62,10 +62,11 @@ function HotDealsPreviewSection({ onAdd, onBuyNow, onShowToast }) {
     <>
       <section className="section-pad section-surface" id="home-hot-deals">
         <div className="container">
+          <span className='eyebrow' style={{ marginBottom: '20px', maxWidth: 'fit-content', padding: '12px', display: 'block', marginInline: 'auto' }}>Hot Deals</span>
           <div className="preview-split">
             <div className="preview-split__copy reveal-left">
               <div className="section-head section-head--left reveal dis-block">
-                <h2  className='text-left'>hot deals</h2>
+                <h2 className='text-left'>hot deals</h2>
               </div>
               <p className="text-lead">
                 Enjoy our best deals on burgers, pizzas, pasta, and more.

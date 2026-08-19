@@ -73,7 +73,7 @@ function WhatMakesUsDifferentSection() {
   );
 
   return (
-    <section className="section-pad section-surface" id="what-makes-us-different">
+    <section className="section-pad wmud-section" id="what-makes-us-different">
       <div className="container">
         <div className="section-head reveal wmud-reveal">
           <h2>What Makes Us Different</h2>
@@ -84,13 +84,6 @@ function WhatMakesUsDifferentSection() {
         </p>
 
         <div className="wmud-layout wmud-reveal reveal">
-          <div className="wmud-visual">
-            <img
-              src="https://images.unsplash.com/photo-1565958011504-98d6effd2c40?q=80&w=600&auto=format&fit=crop"
-              alt="Premium dining at Cheese 'n Crunch restaurant in Chiniot"
-            />
-          </div>
-
           <div className="wmud-timeline">
             {benefits.map((benefit, idx) => (
               <div key={idx} className="wmud-item wmud-reveal">
