@@ -7,8 +7,7 @@ function ContactHeroSection() {
       <div className="container">
         <div className="content-hero-grid">
           <div className="content-hero-copy reveal">
-            <span className="eyebrow" style={{alignSelf:'flex-start'}}>Get In Touch</span>
-            <h1 className="content-hero-title">We&apos;d Love to Hear from You.</h1>
+            <h1 className="content-hero-title"><span>We&apos;d Love to Hear</span> <em>from You.</em></h1>
             <p className="text-lead" style={{ marginTop: 'var(--space-xl)' }}>
               Have a question, need help with your order, or want to get in touch with Cheese &apos;n Crunch? We&apos;re here to help.
             </p>

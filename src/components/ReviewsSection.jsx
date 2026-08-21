@@ -21,14 +21,11 @@ function ReviewsSection({ reviews }) {
   const goNext = () => setCurrentIndex((prev) => (prev + 1) % total);
 
   return (
-    <section className="section-pad" id="reviews">
-      <div className="container">
-        <div className="section-head reveal" style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto' }}>
-          <span className="eyebrow">Customer Love</span>
-          <h2>Customer Reviews</h2>
-          <p style={{ marginLeft: 'auto', marginRight: 'auto',marginBottom:'40px' }}>Straight from Chiniot — real cravings, real reactions.</p>
-        </div>
+    <>
+     
 
+      <section className="section-pad" id="reviews">
+      <div className="container">
         <div className="review-carousel-3d reveal" style={{overflow:'visible'}}>
           <div className="review-stage" role="region" aria-label="Customer testimonials" aria-roledescription="carousel">
             {reviews.map((review, index) => (
@@ -52,7 +49,8 @@ function ReviewsSection({ reviews }) {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
 

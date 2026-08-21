@@ -3,6 +3,7 @@ import DealsSection from '../components/DealsSection.jsx';
 import HotDealsPreviewSection from '../components/CustomerFavoritesSection.jsx';
 import BarFeaturedItemsSection from '../components/BarFeaturedItemsSection.jsx';
 import ArrowIcon from '../components/ArrowIcon.jsx';
+import FinalCTASection from '../components/FinalCTASection.jsx';
 
 export const LUNCH_MIDNIGHT_DEALS = [
     {
@@ -101,16 +102,11 @@ function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
       <section className="hero reveal" id="lunch-midnight-hero">
         <div className="container hero-grid">
           <div>
-            <span className="eyebrow hero-badge">LUNCH & MIDNIGHT SPECIALS</span>
             <h1>
               <span className="brand-cheese">Lunch &amp; Midnight</span>
               <span className="brand-n">Deals</span>
             </h1>
             <p className="desc">Enjoy our signature lunch and late-night value packs with pizza, burgers, wraps, and more. These special deals are available during both of our most popular time windows.</p>
-            <div style={{ display: 'grid', gap: '10px', marginTop: '18px', maxWidth: '420px' }}>
-              <div className="eyebrow" style={{ width: 'fit-content', background: 'rgba(232,183,63,0.06)' }}>Lunch: 1 PM – 4 PM</div>
-              <div className="eyebrow" style={{ width: 'fit-content', background: 'rgba(232,183,63,0.06)' }}>Midnight: 11 PM – 3 AM</div>
-            </div>
             <div className="hero-ctas">
               <Link to="/menu" className="btn btn-gold">View All Menu <ArrowIcon className="btn-arrow" size={16} /></Link>
               <Link to="/deals" className="btn btn-outline">Explore Hot Deals <ArrowIcon className="btn-arrow" size={16} /></Link>
@@ -149,6 +145,7 @@ function LunchMidNightDeals({ onAdd, onBuyNow, onShowToast }) {
         onBuyNow={onBuyNow}
         onShowToast={onShowToast}
       />
+      <FinalCTASection />
     </>
   );
 }

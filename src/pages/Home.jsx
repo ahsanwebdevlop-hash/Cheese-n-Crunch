@@ -10,6 +10,7 @@ import WhyChooseUsSection from '../components/WhyChooseUsSection.jsx';
 import HomeFAQPreview from '../components/HomeFAQPreview.jsx';
 import LocationCTASection from '../components/LocationCTASection.jsx';
 import ReviewsSection from '../components/ReviewsSection.jsx';
+import FinalCTASection from '../components/FinalCTASection.jsx';
 
 function Home({ onFlavorClick, onAdd, onBuyNow, onShowToast }) {
   const handleAdd = onAdd || (() => { });
@@ -32,6 +33,7 @@ function Home({ onFlavorClick, onAdd, onBuyNow, onShowToast }) {
       <ReviewsSection reviews={SAMPLE_REVIEWS} />
       <HomeFAQPreview />
       <LocationCTASection />
+      <FinalCTASection />
     </>
   );
 }

@@ -6,6 +6,9 @@ import DessertsSection from '../components/DessertsSection.jsx';
 import HotDealsPreviewSection from '../components/CustomerFavoritesSection.jsx';
 import LunchMidnightDealsSection from '../components/LunchMidnightDealsSection.jsx';
 import { useEffect } from 'react';
+import ArrowIcon from '../components/ArrowIcon.jsx';
+import FinalCTASection from '../components/FinalCTASection.jsx';
+
 
 function Bar({ onFlavorClick, onAdd, onShowToast, onBuyNow }) {
   const [searchParams] = useSearchParams();
@@ -50,6 +53,26 @@ function Bar({ onFlavorClick, onAdd, onShowToast, onBuyNow }) {
 
   return (
     <>
+      <section className="section-pad section-surface bar-page-hero" id="bar-page-hero">
+        <div className="container preview-split">
+          <div className="preview-split__copy reveal-left">
+            <div className="section-head section-head--left reveal">
+              <h1>Bar <em>&amp;</em> Desserts</h1>
+            </div>
+            <p className="text-lead">Cool drinks, sweet treats, and perfect refreshment for every craving.</p>
+            <div className="hero-ctas">
+              <Link to="/menu" className="btn btn-gold">View All Menu <ArrowIcon className="btn-arrow" size={16} /></Link>
+              <Link to="/lunch-mid-night-deals" className="btn btn-outline">Explore Lunch &amp; Midnight Deals <ArrowIcon className="btn-arrow" size={16} /></Link>
+            </div>
+          </div>
+          <div className="bar-page-hero__visual reveal-right">
+            <img
+              src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=85&w=1200&auto=format&fit=crop"
+              alt="Chocolate cake and desserts at Cheese 'n Crunch"
+            />
+          </div>
+        </div>
+      </section>
       <BarSection onFlavorClick={onFlavorClick} />
       <CustomCakesSection onBuyNow={onBuyNow} onShowToast={onShowToast} />
       <BrownieIceCreamSection onAdd={onAdd} onShowToast={onShowToast} />
@@ -64,6 +87,7 @@ function Bar({ onFlavorClick, onAdd, onShowToast, onBuyNow }) {
           </div>
         </div>
       </section>
+      <FinalCTASection />
     </>
   );
 }

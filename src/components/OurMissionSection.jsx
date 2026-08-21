@@ -6,7 +6,7 @@ function OurMissionSection() {
     <section className="section-pad our-mission-section reveal" id="our-mission" style={{ background: 'var(--green-950)' }}>
       <div className="container">
         <div className="our-mission-wrap">
-          <div className="our-mission-line our-mission-line-top" />
+          {/* <div className="our-mission-line our-mission-line-top" /> */}
 
           <span className="eyebrow our-mission-eyebrow">Our Mission</span>
 
@@ -27,7 +27,7 @@ function OurMissionSection() {
             </Link>
           </div>
 
-          <div className="our-mission-line our-mission-line-bottom " />
+          {/* <div className="our-mission-line our-mission-line-bottom " /> */}
         </div>
       </div>
     </section>

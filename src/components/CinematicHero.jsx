@@ -22,7 +22,6 @@ function CinematicHero({
       <div className="cinematic-hero__overlay" aria-hidden="true" />
 
       <div className="container cinematic-hero__content">
-        <span className="eyebrow cinematic-hero__eyebrow">Fast Food &amp; Juices</span>
         <h1 id="cinematic-hero-title">{restaurantName}</h1>
         <p>{description}</p>
         <div className="cinematic-hero__actions">

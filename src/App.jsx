@@ -129,9 +129,9 @@ function App() {
 
     // Observe currently present reveal/stagger elements
     const observeAll = () => {
-      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger').forEach((el) => {
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger, .wmud-reveal, .faq-reveal').forEach((el) => {
         // avoid observing elements already revealed
-        if (!el.classList.contains('in')) revealObserver.observe(el);
+        if (!el.classList.contains('in') && !el.classList.contains('is-visible')) revealObserver.observe(el);
       });
     };
 

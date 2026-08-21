@@ -4,6 +4,7 @@ import LunchMidnightDealsSection from '../components/LunchMidnightDealsSection.j
 import BarFeaturedItemsSection from '../components/BarFeaturedItemsSection.jsx';
 import ArrowIcon from '../components/ArrowIcon.jsx';
 import { DEALS } from '../data/siteData.js';
+import FinalCTASection from '../components/FinalCTASection.jsx';
 
 function Deals({ deals, onAdd, onBuyNow, onShowToast }) {
   const data = deals || DEALS;
@@ -13,7 +14,6 @@ function Deals({ deals, onAdd, onBuyNow, onShowToast }) {
       <section className="hero deals-page-hero reveal" id="hot-deals-hero">
         <div className="container hero-grid deals-hero-grid">
           <div className="deals-hero-copy">
-            <span className="eyebrow hero-badge">Special Offers</span>
             <h1>
               <span className="brand-cheese">Hot</span> <span className="brand-n">Deals</span>
             </h1>
@@ -50,6 +50,7 @@ function Deals({ deals, onAdd, onBuyNow, onShowToast }) {
 
       <BarFeaturedItemsSection />
       <LunchMidnightDealsSection />
+      <FinalCTASection />
     </>
   );
 }

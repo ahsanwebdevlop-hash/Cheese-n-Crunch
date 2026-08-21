@@ -5,7 +5,6 @@ function Hero() {
     <section className="hero reveal" id="home">
       <div className="container hero-grid">
         <div>
-          <span className="eyebrow hero-badge">Fast Food & Juices</span>
           <h1>
             <span className="brand-cheese">Cheese</span> <span className="brand-n">'n</span>
             <br />

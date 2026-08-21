@@ -6,7 +6,7 @@ function FinalCTASection() {
     <section className="section-pad about-final-cta-section section-surface-flat reveal" id="final-cta">
       <div className="container">
         <div className="about-final-cta-box">
-          <div className="about-final-cta-line about-final-cta-line-top" />
+          {/* <div className="about-final-cta-line about-final-cta-line-top" /> */}
 
           <span className="eyebrow about-final-cta-eyebrow">Ready for Your Next Craving?</span>
 
@@ -27,7 +27,7 @@ function FinalCTASection() {
             </Link>
           </div>
 
-          <div className="about-final-cta-line about-final-cta-line-bottom" />
+          {/* <div className="about-final-cta-line about-final-cta-line-bottom" /> */}
         </div>
       </div>
     </section>

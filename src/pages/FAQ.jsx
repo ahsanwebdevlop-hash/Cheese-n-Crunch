@@ -1,6 +1,15 @@
 import { useEffect, useState } from 'react';
+import FinalCTASection from '../components/FinalCTASection.jsx';
 
 function FAQ() {
+  const categoryBackgrounds = {
+    'Food & Menu': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1600&q=80',
+    'Deals & Offers': 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1600&q=80',
+    Delivery: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1600&q=80',
+    'Custom Cakes & Bookings': 'https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?auto=format&fit=crop&w=1600&q=80',
+    'Location & Restaurant': 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1600&q=80',
+  };
+
   const faqData = [
     {
       category: 'Food & Menu',
@@ -116,55 +125,75 @@ function FAQ() {
 
   return (
     <div className="faq-page page-shell faq-reveal">
+      <section className="faq-page-hero" aria-labelledby="faq-page-title">
+        <div className="container">
+          <div className="section-head faq-page-hero__content reveal faq-reveal">
+            <h1 id="faq-page-title"><span>Frequently Asked</span> <em>Questions</em></h1>
+            <p>
+              Find answers to common questions about Cheese &apos;n Crunch&apos;s menu, delivery, deals, custom cakes, bookings, and more. If you don&apos;t find what you&apos;re looking for, feel free to contact us at 0311 0992288 or reach out via WhatsApp.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="section-pad" id="faq-section">
         <div className="container">
-          <div className="section-head reveal faq-reveal">
-            <h2>Frequently Asked Questions</h2>
-          </div>
-
-          <p className="section-intro reveal faq-reveal">
-            Find answers to common questions about Cheese &apos;n Crunch&apos;s menu, delivery, deals, custom cakes, bookings, and more. If you don&apos;t find what you&apos;re looking for, feel free to contact us at 0311 0992288 or reach out via WhatsApp.
-          </p>
-
           <div className="faq-stack">
-            {faqData.map((section, sectionIdx) => (
-              <div key={sectionIdx} className="faq-category faq-reveal reveal">
-                <div className="faq-category-header">
-                  <h3>{section.category}</h3>
-                  <div className="faq-guide-line" aria-hidden="true" />
-                </div>
+            {faqData.map((section, sectionIdx) => {
+              const backgroundImage = categoryBackgrounds[section.category] || categoryBackgrounds['Food & Menu'];
 
-                <div className="faq-items">
-                  {section.questions.map((item, itemIdx) => {
-                    const itemKey = `${sectionIdx}-${itemIdx}`;
-                    const isExpanded = expandedItems[itemKey] || false;
+              return (
+                <div
+                  key={sectionIdx}
+                  className="faq-category faq-reveal reveal"
+                  style={{
+                    backgroundImage: `linear-gradient(rgba(10, 31, 24, 0.7), rgba(10, 31, 24, 0.8)), url('${backgroundImage}')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    borderRadius: '20px',
+                    padding: '1.5rem 1.5rem 1.25rem 1.5rem',
+                    border: '1px solid rgba(241, 199, 33, 0.28)',
+                    boxShadow: '0 18px 40px rgba(0, 0, 0, 0.18)'
+                  }}
+                >
+                  <div className="faq-category-header">
+                    <h3>{section.category}</h3>
+                    <div className="faq-guide-line" aria-hidden="true" />
+                  </div>
 
-                    return (
-                      <div key={itemKey} className="faq-item" data-index={itemIdx}>
-                        <button
-                          type="button"
-                          onClick={() => toggleExpanded(itemKey)}
-                          aria-expanded={isExpanded}
-                          aria-controls={`answer-${itemKey}`}
-                          className="faq-question-btn"
-                        >
-                          <span className="faq-question-text">{item.q}</span>
-                          <span className="faq-toggle" aria-hidden="true">{isExpanded ? '−' : '+'}</span>
-                        </button>
+                  <div className="faq-items">
+                    {section.questions.map((item, itemIdx) => {
+                      const itemKey = `${sectionIdx}-${itemIdx}`;
+                      const isExpanded = expandedItems[itemKey] || false;
 
-                        <div
-                          id={`answer-${itemKey}`}
-                          className={`faq-answer ${isExpanded ? 'open' : ''}`}
-                          aria-hidden={!isExpanded}
-                        >
-                          <div className="faq-answer-inner">{item.a}</div>
+                      return (
+                        <div key={itemKey} className="faq-item" data-index={itemIdx}>
+                          <button
+                            type="button"
+                            onClick={() => toggleExpanded(itemKey)}
+                            aria-expanded={isExpanded}
+                            aria-controls={`answer-${itemKey}`}
+                            className="faq-question-btn"
+                          >
+                            <span className="faq-question-text">{item.q}</span>
+                            <span className="faq-toggle" aria-hidden="true">{isExpanded ? '−' : '+'}</span>
+                          </button>
+
+                          <div
+                            id={`answer-${itemKey}`}
+                            className={`faq-answer ${isExpanded ? 'open' : ''}`}
+                            aria-hidden={!isExpanded}
+                          >
+                            <div className="faq-answer-inner">{item.a}</div>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="section-divider-top reveal faq-reveal">
@@ -182,6 +211,7 @@ function FAQ() {
           </div>
         </div>
       </section>
+      <FinalCTASection />
     </div>
   );
 }
