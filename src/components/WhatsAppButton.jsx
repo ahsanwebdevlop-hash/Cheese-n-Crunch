@@ -7,7 +7,12 @@ function WhatsAppButton() {
       className="fab-whatsapp"
       aria-label="Order on WhatsApp"
     >
-      💬
+      <img
+        className="fab-whatsapp-icon"
+        src="https://cdn.simpleicons.org/whatsapp/ffffff"
+        alt=""
+        aria-hidden="true"
+      />
       <span className="fab-tooltip">Order on WhatsApp</span>
     </a>
   );
